@@ -8,5 +8,13 @@
     <artifactId>DataAccesObject</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <dependencies>
+        <dependency>
+            <groupId>DataTransferObject</groupId>
+            <artifactId>DataTransferObject</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
 
 </project>
