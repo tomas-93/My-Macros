@@ -8,5 +8,7 @@ import com.mymacros.dto.entity.UserDto;
 public interface UserDao
 {
      void createUser(UserDto userDto);
-     void getUser(long id);
+     UserDto getUser(long id);
+     void updateUser(UserDto userDto);
+
 }

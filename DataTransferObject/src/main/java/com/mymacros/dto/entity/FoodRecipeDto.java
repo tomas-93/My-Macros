@@ -39,4 +39,5 @@ public class FoodRecipeDto
      public void setIdFood(long idFood) {
           this.idFood = idFood;
      }
+
 }

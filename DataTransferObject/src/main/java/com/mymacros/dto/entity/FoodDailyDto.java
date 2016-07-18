@@ -58,4 +58,5 @@ public class FoodDailyDto
      public void setNumberFood(short numberFood) {
           this.numberFood = numberFood;
      }
+
 }

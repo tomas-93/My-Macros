@@ -62,4 +62,5 @@ public class DailyDto
      public void setTotalCaloriesConsumend(int totalCaloriesConsumend) {
           this.totalCaloriesConsumend = totalCaloriesConsumend;
      }
+
 }

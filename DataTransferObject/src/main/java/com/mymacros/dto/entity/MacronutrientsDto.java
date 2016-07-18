@@ -104,4 +104,5 @@ public class MacronutrientsDto
      public void setPolyunsaturated(int polyunsaturated) {
           this.polyunsaturated = polyunsaturated;
      }
+
 }
