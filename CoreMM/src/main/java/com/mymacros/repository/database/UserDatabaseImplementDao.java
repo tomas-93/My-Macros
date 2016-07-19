@@ -25,19 +25,10 @@ public class UserDatabaseImplementDao implements UserDao
      }
      public synchronized UserDto getUser(long id)
      {
-          if (id == 0)
-               return null;
-          if (id > userDtoMapDatabase.size())
-               return null;
-
           return this.userDtoMapDatabase.get(id);
      }
      public synchronized void updateUser(UserDto userDto)
      {
-          if (userDto == null);
-          if (this.userDtoMapDatabase.containsKey(userDto.getId()));
-          else
-               this.userDtoMapDatabase.replace(userDto.getId(), userDto);
-
+          this.userDtoMapDatabase.replace(userDto.getId(), userDto);
      }
 }
