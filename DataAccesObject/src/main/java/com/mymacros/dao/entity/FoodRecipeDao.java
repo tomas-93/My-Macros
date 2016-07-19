@@ -11,7 +11,7 @@ public interface FoodRecipeDao
 {
      List<FoodRecipeDto> getAllFoodRecipe();
      FoodRecipeDto getFoodRecipe(long id);
-     void createFoodRecipe(FoodRecipeDto FoodRecipeDto);
-     void updateFoodRecipe(FoodRecipeDto FoodRecipeDto);
+     void createFoodRecipe(FoodRecipeDto foodRecipeDto);
+     void updateFoodRecipe(FoodRecipeDto foodRecipeDto);
      void deleteFoodRecipe(long id);
 }
