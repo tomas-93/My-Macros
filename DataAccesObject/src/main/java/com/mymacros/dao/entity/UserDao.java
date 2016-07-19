@@ -1,4 +1,4 @@
-package com.mymacros.dao;
+package com.mymacros.dao.entity;
 
 import com.mymacros.dto.entity.UserDto;
 

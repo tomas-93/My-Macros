@@ -1,6 +1,8 @@
 package com.mymacros.repository.database;
 
-import com.mymacros.dao.DailyDao;
+
+
+import com.mymacros.dao.entity.DailyDao;
 import com.mymacros.dto.entity.DailyDto;
 
 import java.util.List;

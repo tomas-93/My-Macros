@@ -1,6 +1,6 @@
 package com.mymacros.repository.database;
 
-import com.mymacros.dao.RecipeDao;
+import com.mymacros.dao.entity.RecipeDao;
 import com.mymacros.dto.entity.RecipeDto;
 
 import java.util.List;

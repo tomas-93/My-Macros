@@ -1,6 +1,6 @@
 package com.mymacros.repository.database;
 
-import com.mymacros.dao.FoodDailyDao;
+import com.mymacros.dao.entity.FoodDailyDao;
 import com.mymacros.dto.entity.FoodDailyDto;
 
 import java.util.List;

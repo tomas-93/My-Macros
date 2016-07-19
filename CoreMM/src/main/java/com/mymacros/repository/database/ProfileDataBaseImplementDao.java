@@ -1,6 +1,6 @@
 package com.mymacros.repository.database;
 
-import com.mymacros.dao.ProfileDao;
+import com.mymacros.dao.entity.ProfileDao;
 import com.mymacros.dto.entity.ProfileDto;
 
 import java.util.List;
@@ -8,7 +8,8 @@ import java.util.List;
 /**
  * Created by Tomas on 18/07/2016.
  */
-public class ProfileDataBaseImplementDao implements ProfileDao {
+public class ProfileDataBaseImplementDao implements ProfileDao
+{
      public List<ProfileDto> getAllProfiles() {
           return null;
      }

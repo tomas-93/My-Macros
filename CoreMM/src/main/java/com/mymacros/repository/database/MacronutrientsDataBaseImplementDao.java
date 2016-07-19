@@ -1,6 +1,6 @@
 package com.mymacros.repository.database;
 
-import com.mymacros.dao.MacronutrientsDao;
+import com.mymacros.dao.entity.MacronutrientsDao;
 import com.mymacros.dto.entity.MacronutrientsDto;
 
 import java.util.List;
