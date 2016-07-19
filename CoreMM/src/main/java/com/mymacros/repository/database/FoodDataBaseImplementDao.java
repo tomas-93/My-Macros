@@ -1,27 +1,38 @@
 package com.mymacros.repository.database;
 
-import com.mymacros.dao.entity.FoodDailyDao;
-import com.mymacros.dto.entity.FoodDailyDto;
+import com.mymacros.dao.entity.FoodDao;
+import com.mymacros.dto.entity.FoodDto;
 
 import java.util.List;
 
 /**
  * Created by Tomas on 18/07/2016.
  */
-public class FoodDataBaseImplementDao implements FoodDailyDao {
-     public List<FoodDailyDto> getAllFoodDaily() {
+public class FoodDataBaseImplementDao implements FoodDao
+{
+
+     public List<FoodDto> getAllFood()
+     {
           return null;
      }
 
-     public FoodDailyDto getFoodDaily(long id) {
+     public FoodDto getFood(long id)
+     {
           return null;
      }
 
-     public void crateFoodDaily(FoodDailyDto foodDailyDto) {
+     public void createFood(FoodDto foodDto)
+     {
 
      }
 
-     public void deleteFoodDaily(long id) {
+     public void updateFood(FoodDto foodDto)
+     {
+
+     }
+
+     public void deleteFood(long id)
+     {
 
      }
 }

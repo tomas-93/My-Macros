@@ -22,6 +22,7 @@ public class DailyDataBaseImplementDao implements DailyDao
       * <p>Se obtienen todos lo usuarios de la base de datso</p>
       * @return Retorna una lista del objecto DailyDto
       */
+     @Override
      public synchronized List<DailyDto> getAllDaily()
      {
           List<DailyDto> dailyDtoList = new ArrayList<DailyDto>();
@@ -38,6 +39,7 @@ public class DailyDataBaseImplementDao implements DailyDao
       * @param id Este parametro es el valor del id de objecto que se quiere obtener
       * @return El objecto que se obtuvo de la base detos
       */
+     @Override
      public synchronized DailyDto getDaily(long id)
      {
           return this.dailyDtoMapDatabase.get(id);
@@ -48,6 +50,7 @@ public class DailyDataBaseImplementDao implements DailyDao
       * <p>Se almacena un objeto DailyDto a la base de datos</p>
       * @param dailyDto entidad que sera almacenado en la base de datos
       */
+     @Override
      public synchronized void createDaily(DailyDto dailyDto)
      {
           if (!dailyDtoMapDatabase.isEmpty())
@@ -62,6 +65,7 @@ public class DailyDataBaseImplementDao implements DailyDao
       * <p>Elimina un objeto diario de la base de datos</p>
       * @param id indetificador de la entidad que sera eliminada
       */
+     @Override
      public synchronized void deleteDaily(long id)
      {
           this.dailyDtoMapDatabase.remove(id);
@@ -72,6 +76,7 @@ public class DailyDataBaseImplementDao implements DailyDao
       * <p>Actualiza un objeto de la base de datos</p>
       * @param dailyDto entidad que contendra los datos actualizados
       */
+     @Override
      public synchronized void updateDaily(DailyDto dailyDto)
      {
           this.dailyDtoMapDatabase.replace(dailyDto.getId(), dailyDto);
