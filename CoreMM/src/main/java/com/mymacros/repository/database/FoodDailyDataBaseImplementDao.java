@@ -21,6 +21,10 @@ public class FoodDailyDataBaseImplementDao implements FoodDailyDao {
 
      }
 
+     public void updateFoodDaily(FoodDailyDto foodDailyDto) {
+
+     }
+
      public void deleteFoodDaily(long id) {
 
      }
