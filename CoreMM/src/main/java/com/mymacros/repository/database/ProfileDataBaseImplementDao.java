@@ -24,7 +24,7 @@ public class ProfileDataBaseImplementDao implements ProfileDao
       * @return
       */
      @Override
-     public List<ProfileDto> getAllProfiles()
+     public synchronized List<ProfileDto> getAllProfiles()
      {
           List<ProfileDto> list = new ArrayList<>();
           for(Long id: this.profileDtoDatabase.keySet())
@@ -40,7 +40,7 @@ public class ProfileDataBaseImplementDao implements ProfileDao
       * @return Retorna el objeto con los valores obtenidos de la base de datos.
       */
      @Override
-     public ProfileDto getProfile(long id)
+     public synchronized ProfileDto getProfile(long id)
      {
           return this.profileDtoDatabase.get(id);
      }
@@ -52,7 +52,7 @@ public class ProfileDataBaseImplementDao implements ProfileDao
       * @param profileDto Objeto que encapsula la informacion a guardar
       */
      @Override
-     public void createProfile(ProfileDto profileDto)
+     public  synchronized void createProfile(ProfileDto profileDto)
      {
           if (!this.profileDtoDatabase.isEmpty())
                this.idProfile++;
@@ -66,7 +66,7 @@ public class ProfileDataBaseImplementDao implements ProfileDao
       * @param profileDto Objeto que tiene los elemetos actualizados de la base de datos.
       */
      @Override
-     public void updateProfile(ProfileDto profileDto)
+     public synchronized void updateProfile(ProfileDto profileDto)
      {
 
           this.profileDtoDatabase.replace(profileDto.getId(), profileDto);
@@ -78,7 +78,7 @@ public class ProfileDataBaseImplementDao implements ProfileDao
       * @param id Identificador que representa el elemto a eliminar.
       */
      @Override
-     public void deleteProfile(long id)
+     public synchronized void deleteProfile(long id)
      {
           this.profileDtoDatabase.remove(id);
      }

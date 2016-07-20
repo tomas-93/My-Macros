@@ -29,7 +29,7 @@ public class FoodDataBaseImplementDao implements FoodDao
       *
       */
      @Override
-     public List<FoodDto> getAllFood()
+     public synchronized List<FoodDto> getAllFood()
      {
           List<FoodDto> list = new ArrayList<FoodDto>();
           for(Long id: this.foodDataBase.keySet())
@@ -46,7 +46,7 @@ public class FoodDataBaseImplementDao implements FoodDao
       * @return retorna el objeto especificado por el parametro id.
       */
      @Override
-     public FoodDto getFood(long id)
+     public synchronized FoodDto getFood(long id)
      {
           return this.foodDataBase.get(id);
      }
@@ -57,7 +57,7 @@ public class FoodDataBaseImplementDao implements FoodDao
       * @param foodDto objeto que sera guardado en la base de datos
       */
      @Override
-     public void createFood(FoodDto foodDto)
+     public synchronized void createFood(FoodDto foodDto)
      {
           if(!this.foodDataBase.isEmpty())
                this.idFood++;
@@ -73,7 +73,7 @@ public class FoodDataBaseImplementDao implements FoodDao
       * @param foodDto es el objeto que encapsula lo datos actualizados en la base de datos
       */
      @Override
-     public void updateFood(FoodDto foodDto)
+     public synchronized void updateFood(FoodDto foodDto)
      {
           this.foodDataBase.replace(foodDto.getId(), foodDto);
      }
@@ -84,7 +84,7 @@ public class FoodDataBaseImplementDao implements FoodDao
       * @param id identificador el cual reprecenta el elemnto que se dea borrar
       */
      @Override
-     public void deleteFood(long id)
+     public synchronized void deleteFood(long id)
      {
           final long idMacros = this.foodDataBase.get(id).getId();
           this.foodDataBase.remove(id);

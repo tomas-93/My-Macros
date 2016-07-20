@@ -24,7 +24,7 @@ public class FoodDailyDataBaseImplementDao implements FoodDailyDao
       * @return Retorna una lista de todos los objetos de la base de datos
       */
      @Override
-     public List<FoodDailyDto> getAllFoodDaily()
+     public synchronized List<FoodDailyDto> getAllFoodDaily()
      {
           List<FoodDailyDto> list = new ArrayList<FoodDailyDto>();
           for(Long id: this.foodDailyDatabase.keySet())
@@ -39,7 +39,7 @@ public class FoodDailyDataBaseImplementDao implements FoodDailyDao
       * @return retorna el objeto buscado en la base de datos
       */
      @Override
-     public FoodDailyDto getFoodDaily(long id)
+     public synchronized FoodDailyDto getFoodDaily(long id)
      {
           return this.foodDailyDatabase.get(id);
      }
@@ -50,7 +50,7 @@ public class FoodDailyDataBaseImplementDao implements FoodDailyDao
       * @param foodDailyDto Objeto que tiene los datos que seran almacenados en la base de datos
       */
      @Override
-     public void crateFoodDaily(FoodDailyDto foodDailyDto)
+     public synchronized void crateFoodDaily(FoodDailyDto foodDailyDto)
      {
           if(!foodDailyDatabase.isEmpty())
                this.idFoodDaily++;
@@ -66,7 +66,7 @@ public class FoodDailyDataBaseImplementDao implements FoodDailyDao
       */
 
      @Override
-     public void updateFoodDaily(FoodDailyDto foodDailyDto)
+     public synchronized void updateFoodDaily(FoodDailyDto foodDailyDto)
      {
           this.foodDailyDatabase.replace(foodDailyDto.getId(), foodDailyDto);
      }
@@ -78,7 +78,7 @@ public class FoodDailyDataBaseImplementDao implements FoodDailyDao
       */
 
      @Override
-     public void deleteFoodDaily(long id)
+     public synchronized void deleteFoodDaily(long id)
      {
           this.foodDailyDatabase.remove(id);
      }
