@@ -1,7 +1,7 @@
 package com.mymacros.repository.database;
 
-import com.mymacros.repository.dao.entity.FoodDao;
-import com.mymacros.repository.dao.entity.MacronutrientsDao;
+import com.mymacros.repository.dao.entity.FoodRepositoryDao;
+import com.mymacros.repository.dao.entity.MacronutrientsRepositoryDao;
 import com.mymacros.dto.entity.FoodDto;
 import org.springframework.stereotype.Repository;
 
@@ -15,12 +15,12 @@ import java.util.Map;
  * Created by Tomas on 18/07/2016.
  */
 @Repository
-public class FoodDataBaseImplementDao implements FoodDao
+public class FoodDataBaseImplementDao implements FoodRepositoryDao
 {
      private Map<Long, FoodDto> foodDataBase = new Hashtable<Long, FoodDto>();
      private volatile long idFood = 1L;
      @Inject
-     private MacronutrientsDao macronutrientsDto;
+     private MacronutrientsRepositoryDao macronutrientsDto;
 
      /**
       * <h1>getAllFood</h1>

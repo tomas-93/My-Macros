@@ -1,6 +1,6 @@
 package com.mymacros.repository.database;
 
-import com.mymacros.repository.dao.entity.UserDao;
+import com.mymacros.repository.dao.entity.UserRepositoryDao;
 import com.mymacros.dto.entity.UserDto;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +11,7 @@ import java.util.Map;
  * Created by Tomas on 18/07/2016.
  */
 @Repository
-public class UserDatabaseImplementDao implements UserDao
+public class UserDatabaseImplementDao implements UserRepositoryDao
 {
 
      private final Map<Long, UserDto> userDtoMapDatabase = new Hashtable<Long, UserDto>();

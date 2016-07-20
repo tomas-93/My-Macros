@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Tomas on 17/07/2016.
  */
-public interface RecipeDao
+public interface RecipeRepositoryDao
 {
      List<RecipeDto> getAllRecipe();
      RecipeDto getRecipeDto(long id);

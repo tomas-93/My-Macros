@@ -1,8 +1,8 @@
 package com.mymacros.repository.database;
 
-import com.mymacros.repository.dao.entity.FoodRecipeDao;
-import com.mymacros.repository.dao.entity.MacronutrientsDao;
-import com.mymacros.repository.dao.entity.RecipeDao;
+import com.mymacros.repository.dao.entity.FoodRecipeRepositoryDao;
+import com.mymacros.repository.dao.entity.MacronutrientsRepositoryDao;
+import com.mymacros.repository.dao.entity.RecipeRepositoryDao;
 import com.mymacros.dto.entity.RecipeDto;
 import org.springframework.stereotype.Repository;
 
@@ -16,14 +16,14 @@ import java.util.stream.Collectors;
  * Created by Tomas on 18/07/2016.
  */
 @Repository
-public class RecipeDataBaseImplementDao implements RecipeDao
+public class RecipeDataBaseImplementDao implements RecipeRepositoryDao
 {
      private final Map<Long, RecipeDto> recipeDtoDatabase = new Hashtable<>();
      private volatile long idRecipe = 1L;
      @Inject
-     private MacronutrientsDao macronutrientsDao;
+     private MacronutrientsRepositoryDao macronutrientsDao;
      @Inject
-     private FoodRecipeDao foodRecipeDao;
+     private FoodRecipeRepositoryDao foodRecipeDao;
 
      /**
       * <h1>getAllRecipe</h1>

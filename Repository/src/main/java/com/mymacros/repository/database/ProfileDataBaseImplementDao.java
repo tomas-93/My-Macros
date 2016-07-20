@@ -1,6 +1,6 @@
 package com.mymacros.repository.database;
 
-import com.mymacros.repository.dao.entity.ProfileDao;
+import com.mymacros.repository.dao.entity.ProfileRepositoryDao;
 import com.mymacros.dto.entity.ProfileDto;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +13,7 @@ import java.util.Map;
  * Created by Tomas on 18/07/2016.
  */
 @Repository
-public class ProfileDataBaseImplementDao implements ProfileDao
+public class ProfileDataBaseImplementDao implements ProfileRepositoryDao
 {
      private final Map<Long, ProfileDto> profileDtoDatabase = new Hashtable<>();
      private volatile long idProfile = 1L;

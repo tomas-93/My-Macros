@@ -1,6 +1,6 @@
 package com.mymacros.repository.database;
 
-import com.mymacros.repository.dao.entity.FoodRecipeDao;
+import com.mymacros.repository.dao.entity.FoodRecipeRepositoryDao;
 import com.mymacros.dto.entity.FoodRecipeDto;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +13,7 @@ import java.util.Map;
  * Created by Tomas on 18/07/2016.
  */
 @Repository
-public class FoodRecipeDataBaseImplementDao implements FoodRecipeDao
+public class FoodRecipeDataBaseImplementDao implements FoodRecipeRepositoryDao
 {
      private final Map<Long, FoodRecipeDto> foodRecipeDatabase =
              new Hashtable<Long, FoodRecipeDto>();

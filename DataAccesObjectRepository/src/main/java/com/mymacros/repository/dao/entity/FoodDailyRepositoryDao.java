@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Tomas on 17/07/2016.
  */
-public interface FoodDailyDao
+public interface FoodDailyRepositoryDao
 {
      List<FoodDailyDto> getAllFoodDaily();
      FoodDailyDto getFoodDaily(long id);

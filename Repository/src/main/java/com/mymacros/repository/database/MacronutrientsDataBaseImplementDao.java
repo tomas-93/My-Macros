@@ -1,6 +1,6 @@
 package com.mymacros.repository.database;
 
-import com.mymacros.repository.dao.entity.MacronutrientsDao;
+import com.mymacros.repository.dao.entity.MacronutrientsRepositoryDao;
 import com.mymacros.dto.entity.MacronutrientsDto;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +14,7 @@ import java.util.Map;
  *
  */
 @Repository
-public class MacronutrientsDataBaseImplementDao implements MacronutrientsDao
+public class MacronutrientsDataBaseImplementDao implements MacronutrientsRepositoryDao
 {
      private final Map<Long, MacronutrientsDto> macronutrientsDtoDataBase = new Hashtable<Long, MacronutrientsDto>();
      private volatile long idMacros = 1L;

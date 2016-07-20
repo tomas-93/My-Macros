@@ -8,10 +8,12 @@ public class ProfileDto
      private long id, idUser;
      private int carbs, fat, protein, fiber, totalCalories;
 
-     public ProfileDto() {
+     public ProfileDto()
+     {
      }
 
-     public ProfileDto(long id, long idUser, int carbs, int fat, int protein, int fiber, int totalCalories) {
+     public ProfileDto(long id, long idUser, int carbs, int fat, int protein, int fiber, int totalCalories)
+     {
           this.id = id;
           this.idUser = idUser;
           this.carbs = carbs;
