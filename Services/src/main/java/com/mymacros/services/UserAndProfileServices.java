@@ -6,6 +6,7 @@ import com.mymacros.dto.entity.UserDto;
 import com.mymacros.repository.dao.entity.ProfileRepositoryDao;
 import com.mymacros.repository.dao.entity.UserRepositoryDao;
 import com.mymacros.services.dao.entity.UserAndProfileServiceDao;
+import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 /**
  * Created by Tomas on 20/07/2016.
  */
+@Service
 public class UserAndProfileServices implements UserAndProfileServiceDao
 {
 
