@@ -1,8 +1,11 @@
 package com.mymacros.repository.database;
 
 import com.mymacros.dao.entity.FoodDao;
+import com.mymacros.dao.entity.MacronutrientsDao;
 import com.mymacros.dto.entity.FoodDto;
+import org.springframework.stereotype.Repository;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -11,10 +14,13 @@ import java.util.Map;
 /**
  * Created by Tomas on 18/07/2016.
  */
+@Repository
 public class FoodDataBaseImplementDao implements FoodDao
 {
      private Map<Long, FoodDto> foodDataBase = new Hashtable<Long, FoodDto>();
      private volatile long idFood = 1L;
+     @Inject
+     private MacronutrientsDao macronutrientsDto;
 
      /**
       * <h1>getAllFood</h1>
@@ -80,6 +86,8 @@ public class FoodDataBaseImplementDao implements FoodDao
      @Override
      public void deleteFood(long id)
      {
+          final long idMacros = this.foodDataBase.get(id).getId();
           this.foodDataBase.remove(id);
+          this.macronutrientsDto.deleteMacronutrients(idMacros);
      }
 }

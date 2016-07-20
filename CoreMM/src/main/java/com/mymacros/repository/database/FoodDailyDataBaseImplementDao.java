@@ -2,6 +2,7 @@ package com.mymacros.repository.database;
 
 import com.mymacros.dao.entity.FoodDailyDao;
 import com.mymacros.dto.entity.FoodDailyDto;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -11,6 +12,7 @@ import java.util.Map;
 /**
  * Created by Tomas on 18/07/2016.
  */
+@Repository
 public class FoodDailyDataBaseImplementDao implements FoodDailyDao
 {
      private final Map<Long, FoodDailyDto> foodDailyDatabase = new Hashtable<Long, FoodDailyDto>();

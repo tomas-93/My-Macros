@@ -3,6 +3,7 @@ package com.mymacros.repository.database;
 
 import com.mymacros.dao.entity.DailyDao;
 import com.mymacros.dto.entity.DailyDto;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -12,6 +13,7 @@ import java.util.Map;
 /**
  * Created by Tomas on 18/07/2016.
  */
+@Repository
 public class DailyDataBaseImplementDao implements DailyDao
 {
      private final Map<Long, DailyDto> dailyDtoMapDatabase = new Hashtable<Long, DailyDto>();
