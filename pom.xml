@@ -9,10 +9,12 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>CoreMM</module>
-        <module>DataAccesObject</module>
+        <module>Repository</module>
+        <module>DataAccesObjectRepository</module>
         <module>DataTransferObject</module>
         <module>Web</module>
+        <module>Services</module>
+        <module>DataAccesObjectServices</module>
     </modules>
 
     <properties>
