@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Tomas on 17/07/2016.
  */
-public interface FoodRecipeRepositoryDao
+public interface FoodRecipeRepositoryDao extends IDBase
 {
      List<FoodRecipeDto> getAllFoodRecipe();
      FoodRecipeDto getFoodRecipe(long id);

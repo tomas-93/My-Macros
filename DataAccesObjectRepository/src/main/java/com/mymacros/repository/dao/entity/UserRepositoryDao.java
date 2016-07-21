@@ -5,7 +5,7 @@ import com.mymacros.dto.entity.UserDto;
 /**
  * Created by Tomas on 17/07/2016.
  */
-public interface UserRepositoryDao
+public interface UserRepositoryDao extends IDBase
 {
      void createUser(UserDto userDto);
      UserDto getUser(long id);

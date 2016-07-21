@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Tomas on 17/07/2016.
  */
-public interface ProfileRepositoryDao
+public interface ProfileRepositoryDao extends IDBase
 {
      List<ProfileDto> getAllProfiles();
      ProfileDto getProfile(long id);

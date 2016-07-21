@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Tomas on 17/07/2016.
  */
-public interface DailyRepositoryDao
+public interface DailyRepositoryDao extends IDBase
 {
      List<DailyDto> getAllDaily();
      DailyDto getDaily(long id);
