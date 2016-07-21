@@ -26,7 +26,7 @@ public class FoodDailyDataBaseImplementDao implements FoodDailyRepositoryDao
      @Override
      public List<FoodDailyDto> getAllFoodDaily()
      {
-          List<FoodDailyDto> list = new ArrayList<FoodDailyDto>();
+          List<FoodDailyDto> list = new ArrayList<>();
           for(Long id: this.foodDailyDatabase.keySet())
                list.add(this.foodDailyDatabase.get(id));
           return list;

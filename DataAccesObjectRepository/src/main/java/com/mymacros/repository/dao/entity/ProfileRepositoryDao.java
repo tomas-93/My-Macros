@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface ProfileRepositoryDao extends IDBase
 {
-     List<ProfileDto> getAllProfiles();
+     List<ProfileDto> getAllProfiles(long id);
      ProfileDto getProfile(long id);
      void createProfile(ProfileDto profileDto);
      void updateProfile(ProfileDto profileDto);

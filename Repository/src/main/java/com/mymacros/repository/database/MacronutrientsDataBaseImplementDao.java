@@ -25,7 +25,7 @@ public class MacronutrientsDataBaseImplementDao implements MacronutrientsReposit
       * @return Retorna una lista de una base de datos
       */
      @Override
-     public List<MacronutrientsDto> getAllMacronutrients()
+     public List<MacronutrientsDto> getAllMacronutrients(long idMacros)
      {
           List<MacronutrientsDto> list = new ArrayList<MacronutrientsDto>();
           for(Long id: this.macronutrientsDtoDataBase.keySet())

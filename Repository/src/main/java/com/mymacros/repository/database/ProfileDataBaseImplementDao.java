@@ -24,8 +24,9 @@ public class ProfileDataBaseImplementDao implements ProfileRepositoryDao
       * @return
       */
      @Override
-     public  List<ProfileDto> getAllProfiles()
+     public  List<ProfileDto> getAllProfiles(long idUser)
      {
+          //TODO recuperar la lista deacuerdo al idUser
           List<ProfileDto> list = new ArrayList<>();
           for(Long id: this.profileDtoDatabase.keySet())
                list.add(this.profileDtoDatabase.get(id));

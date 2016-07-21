@@ -60,6 +60,7 @@ public class RecipeServicesImplementDao implements RecipeServicesDao
      @Override
      public void addRecipe(RecipeDto recipeDto)
      {
+          recipeDto.setId(this.recipeRepositoryDao.getIncrementID());
           this.recipeRepositoryDao.createRecipe(recipeDto);
      }
 
@@ -96,6 +97,7 @@ public class RecipeServicesImplementDao implements RecipeServicesDao
      @Override
      public void addFoodRecipe(FoodRecipeDto foodRecipeDto)
      {
+          foodRecipeDto.setId(this.foodRecipeRepositoryDao.getIncrementID());
           this.foodRecipeRepositoryDao.createFoodRecipe(foodRecipeDto);
      }
 
@@ -156,6 +158,7 @@ public class RecipeServicesImplementDao implements RecipeServicesDao
      @Override
      public void addMacros(MacronutrientsDto macronutrientsDto)
      {
+          macronutrientsDto.setId(this.macronutrientsRepositoryDao.getIncrementID());
           this.macronutrientsRepositoryDao.createMacronutrients(macronutrientsDto);
      }
 
@@ -182,7 +185,7 @@ public class RecipeServicesImplementDao implements RecipeServicesDao
      @Override
      public List<MacronutrientsDto> getAllMacros(long id)
      {
-          return this.macronutrientsRepositoryDao.getAllMacronutrients();
+          return this.macronutrientsRepositoryDao.getAllMacronutrients(id);
      }
 
      /**

@@ -14,6 +14,12 @@ public interface DailyServicesDao
       * ======================================================> <Daily>
       */
      /**
+      * <h1>addDailyDto</h1>
+      * <p>Agrega un nuevo elemeto al repositorio</p>
+      * @param dailyDto Objeto que encapsula los nuevos datos.
+      */
+     void addDailyDto(DailyDto dailyDto);
+     /**
       * <h1>getDailyDto</h1>
       * <p>Se obtiene un elemto del repositoy</p>
       * @param id Indetificador que reprecenta el elemto a buscar
@@ -45,6 +51,12 @@ public interface DailyServicesDao
      /**
       *  ======================================================> <FoodDalily>
       */
+     /**
+      * <h1>addFoodDailyDto</h1>
+      * <p>Se agrega un nuevo elemeto al repositorio</p>
+      * @param foodDailyDto Objeto que en capsula la nueva informacion
+      */
+     void addFoodDailyDto(FoodDailyDto foodDailyDto);
      /**
       * <h1>getFoodDailyDto</h1>
       * <p>Se obtiene un elemto del repositoy</p>

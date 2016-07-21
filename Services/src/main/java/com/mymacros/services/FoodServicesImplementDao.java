@@ -35,15 +35,28 @@ public class FoodServicesImplementDao implements FoodServicesDao
      }
 
      /**
+      * <h1>addFoodDto</h1>
+      * <p>Se agrega un nuevo objeto FoodDto al repositorio</p>
+      *
+      * @param foodDto Objeto que encapsula la nueva informacion.
+      */
+     @Override
+     public void addFoodDto(FoodDto foodDto)
+     {
+          foodDto.setId(this.foodRepositoryDao.getIncrementID());
+          this.foodRepositoryDao.createFood(foodDto);
+     }
+
+     /**
       * <h1>getAllFoodDto</h1>
       * <p>Obtiene una lista de todos lo elemto FoodDto del Repositorio</p>
       *
       * @return retorna un objeto list con todos los elemetos
       */
      @Override
-     public List<FoodDto> getAllFoodDto()
+     public List<FoodDto> getAllFoodDto(long idFood)
      {
-          return this.foodRepositoryDao.getAllFood();
+          return this.foodRepositoryDao.getAllFood(idFood);
      }
 
      /**
@@ -79,6 +92,7 @@ public class FoodServicesImplementDao implements FoodServicesDao
      @Override
      public void addMacros(MacronutrientsDto macronutrientsDto)
      {
+          macronutrientsDto.setId(this.macronutrientsRepositoryDao.getIncrementID());
           this.macronutrientsRepositoryDao.createMacronutrients(macronutrientsDto);
      }
 
@@ -105,7 +119,7 @@ public class FoodServicesImplementDao implements FoodServicesDao
      @Override
      public List<MacronutrientsDto> getAllMacros(long id)
      {
-          return this.macronutrientsRepositoryDao.getAllMacronutrients();
+          return this.macronutrientsRepositoryDao.getAllMacronutrients(id);
      }
 
      /**

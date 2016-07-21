@@ -25,9 +25,10 @@ public class DailyDataBaseImplementDao implements DailyRepositoryDao
       * @return Retorna una lista del objecto DailyDto
       */
      @Override
-     public List<DailyDto> getAllDaily()
+     public List<DailyDto> getAllDaily(long idDaily)
      {
-          List<DailyDto> dailyDtoList = new ArrayList<DailyDto>();
+          //TODO buscar elemetos deacuerod al idDaily
+          List<DailyDto> dailyDtoList = new ArrayList<>();
           for(Long id: this.dailyDtoMapDatabase.keySet())
           {
                dailyDtoList.add(this.dailyDtoMapDatabase.get(id));

@@ -1,7 +1,7 @@
 package com.mymacros.services;
 
 import com.mymacros.dto.entity.ProfileDto;
-import com.mymacros.dto.entity.UserAndProfileDto;
+import com.mymacros.dto.entity.UserAndProfileFormDto;
 import com.mymacros.dto.entity.UserDto;
 import com.mymacros.repository.dao.entity.ProfileRepositoryDao;
 import com.mymacros.repository.dao.entity.UserRepositoryDao;
@@ -18,6 +18,7 @@ import java.util.List;
 public class UserAndProfileServicesImplementDao implements UserAndProfileServiceDao
 {
 
+     private long idUser;
      @Inject
      private UserRepositoryDao userRepositoryDao;
      @Inject
@@ -67,6 +68,8 @@ public class UserAndProfileServicesImplementDao implements UserAndProfileService
      @Override
      public void addProfile(ProfileDto profileDto)
      {
+          if (profileDto.getId() == 0)
+               profileDto.setId(this.profileRepositoryDao.getIncrementID());
           this.profileRepositoryDao.createProfile(profileDto);
      }
 
@@ -77,9 +80,9 @@ public class UserAndProfileServicesImplementDao implements UserAndProfileService
       * @return Retorna un objeto List con el contenido de la base de datos.
       */
      @Override
-     public List<ProfileDto> getAllProfile()
+     public List<ProfileDto> getAllProfile(long idUser)
      {
-          return this.profileRepositoryDao.getAllProfiles();
+          return this.profileRepositoryDao.getAllProfiles(idUser);
      }
 
      /**
@@ -118,16 +121,23 @@ public class UserAndProfileServicesImplementDao implements UserAndProfileService
           this.profileRepositoryDao.deleteProfile(id);
      }
 
-     public void addUserAndProfile(UserAndProfileDto userAndProfileDto)
+     /**
+      * <h1>addUserAndProfile</h1>
+      * <p>Este metodo es usado cuando se recibe los datos a traves del formulario </p>
+      * @param userAndProfileDto Reprecenta el objeto recibido del formulario
+      */
+     public void addUserAndProfile(UserAndProfileFormDto userAndProfileDto)
      {
-          this.addUser(new UserDto(0L,
+          long idUser = this.userRepositoryDao.getIncrementID();
+          long idProfile = this.profileRepositoryDao.getIncrementID();
+          this.addUser(new UserDto(idUser,
                                       userAndProfileDto.getName(),
                                       userAndProfileDto.getSurname(),
                                       userAndProfileDto.getHeigth(),
                                       userAndProfileDto.getWidth(),
                                       userAndProfileDto.getTimeDate()));
-          this.addProfile(new ProfileDto(0L,
-                                           0L,
+          this.addProfile(new ProfileDto(idProfile,
+                                           idUser,
                                            userAndProfileDto.getCarbs(),
                                            userAndProfileDto.getFat(),
                                            userAndProfileDto.getProtein(),

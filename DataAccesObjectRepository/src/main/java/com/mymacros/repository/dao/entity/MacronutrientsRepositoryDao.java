@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface MacronutrientsRepositoryDao extends IDBase
 {
-     List<MacronutrientsDto> getAllMacronutrients();
+     List<MacronutrientsDto> getAllMacronutrients(long id);
      MacronutrientsDto getMacronutrients(long id);
      void createMacronutrients(MacronutrientsDto macronutrientsDto);
      void updateMacronutrients(MacronutrientsDto macronutrientsDto);

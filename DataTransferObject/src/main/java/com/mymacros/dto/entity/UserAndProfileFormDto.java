@@ -5,7 +5,7 @@ import java.time.Instant;
 /**
  * Created by Tomas on 20/07/2016.
  */
-public class UserAndProfileDto
+public class UserAndProfileFormDto
 {
      private String name,
              surname,

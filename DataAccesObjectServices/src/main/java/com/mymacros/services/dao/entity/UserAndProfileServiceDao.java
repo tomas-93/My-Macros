@@ -43,7 +43,7 @@ public interface UserAndProfileServiceDao
       * <p>Se obtiene una lista de los perfiles</p>
       * @return Retorna un objeto List con el contenido de la base de datos.
       */
-     List<ProfileDto> getAllProfile();
+     List<ProfileDto> getAllProfile(long id);
 
      /**
       * <h1>updateUser</h1>

@@ -22,6 +22,18 @@ public class DailyServicesImplementDao implements DailyServicesDao
      private FoodDailyRepositoryDao foodDailyRepositoryDao;
 
      /**
+      * <h1>addDailyDto</h1>
+      * <p>Agrega un nuevo elemeto al repositorio</p>
+      *
+      * @param dailyDto Objeto que encapsula los nuevos datos.
+      */
+     @Override
+     public void addDailyDto(DailyDto dailyDto)
+     {
+          this.dailyRepositoryDao.createDaily(dailyDto);
+     }
+
+     /**
       * <h1>getDailyDto</h1>
       * <p>Se obtiene un elemto del repositoy</p>
       *
@@ -38,13 +50,13 @@ public class DailyServicesImplementDao implements DailyServicesDao
       * <h1>getAllDaily</h1>
       * <p>Obtiene una lista de objetos DailyDto relacionados con el usuario</p>
       *
-      * @param id Indetidicador que reprecenta la relacion entre el usuario y el entidad DailyDto
+      * @param idDaily Indetidicador que reprecenta la relacion entre el usuario y el entidad DailyDto
       * @return Retorna una lista de elemeto DailyDto relacionados con el usuario.
       */
      @Override
-     public List<DailyDto> getAllDaily(long id)
+     public List<DailyDto> getAllDaily(long idDaily)
      {
-          return this.dailyRepositoryDao.getAllDaily();
+          return this.dailyRepositoryDao.getAllDaily(idDaily);
      }
 
      /**
@@ -69,6 +81,18 @@ public class DailyServicesImplementDao implements DailyServicesDao
      public void deleteDailyDto(long id)
      {
           this.dailyRepositoryDao.deleteDaily(id);
+     }
+
+     /**
+      * <h1>addFoodDailyDto</h1>
+      * <p>Se agrega un nuevo elemeto al repositorio</p>
+      *
+      * @param foodDailyDto Objeto que en capsula la nueva informacion
+      */
+     @Override
+     public void addFoodDailyDto(FoodDailyDto foodDailyDto)
+     {
+          this.foodDailyRepositoryDao.crateFoodDaily(foodDailyDto);
      }
 
      /**
@@ -119,5 +143,16 @@ public class DailyServicesImplementDao implements DailyServicesDao
      public void deleteFoodDailyDto(long id)
      {
           this.foodDailyRepositoryDao.deleteFoodDaily(id);
+     }
+
+     public void addElement(DailyDto dailyDto, FoodDailyDto foodDailyDto)
+     {
+          dailyDto.setId(this.dailyRepositoryDao.getIncrementID());
+
+          foodDailyDto.setId(this.foodDailyRepositoryDao.getIncrementID());
+          foodDailyDto.setIdDaily(dailyDto.getId());
+
+          this.addDailyDto(dailyDto);
+          this.addFoodDailyDto(foodDailyDto);
      }
 }

@@ -18,11 +18,18 @@ public interface FoodServicesDao extends MacrosServicesDao
      FoodDto getFoodDto(long id);
 
      /**
+      * <h1>addFoodDto</h1>
+      * <p>Se agrega un nuevo objeto FoodDto al repositorio</p>
+      * @param foodDto Objeto que encapsula la nueva informacion.
+      */
+     void addFoodDto(FoodDto foodDto);
+
+     /**
       * <h1>getAllFoodDto</h1>
       * <p>Obtiene una lista de todos lo elemto FoodDto del Repositorio</p>
       * @return retorna un objeto list con todos los elemetos
       */
-     List<FoodDto> getAllFoodDto();
+     List<FoodDto> getAllFoodDto(long idFood);
 
      /**
       * <h1>updateFoodDto</h1>

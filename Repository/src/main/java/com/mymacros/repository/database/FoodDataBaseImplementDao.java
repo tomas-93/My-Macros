@@ -29,7 +29,7 @@ public class FoodDataBaseImplementDao implements FoodRepositoryDao
       *
       */
      @Override
-     public List<FoodDto> getAllFood()
+     public List<FoodDto> getAllFood(long idFood)
      {
           List<FoodDto> list = new ArrayList<FoodDto>();
           for(Long id: this.foodDataBase.keySet())

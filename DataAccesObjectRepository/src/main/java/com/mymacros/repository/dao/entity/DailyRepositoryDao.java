@@ -9,10 +9,9 @@ import java.util.List;
  */
 public interface DailyRepositoryDao extends IDBase
 {
-     List<DailyDto> getAllDaily();
+     List<DailyDto> getAllDaily(long idDaily);
      DailyDto getDaily(long id);
      void createDaily(DailyDto dailyDto);
      void deleteDaily(long id);
      void updateDaily(DailyDto dailyDto);
-
 }
