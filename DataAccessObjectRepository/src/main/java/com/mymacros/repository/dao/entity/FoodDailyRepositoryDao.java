@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface FoodDailyRepositoryDao extends IDBase
 {
-     List<FoodDailyDto> getAllFoodDaily();
+     List<FoodDailyDto> getAllFoodDaily(long idUser);
      FoodDailyDto getFoodDaily(long id);
      void crateFoodDaily(FoodDailyDto foodDailyDto);
      void updateFoodDaily(FoodDailyDto foodDailyDto);

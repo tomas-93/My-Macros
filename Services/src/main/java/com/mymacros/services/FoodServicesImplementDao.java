@@ -54,9 +54,9 @@ public class FoodServicesImplementDao implements FoodServicesDao
       * @return retorna un objeto list con todos los elemetos
       */
      @Override
-     public List<FoodDto> getAllFoodDto(long idFood)
+     public List<FoodDto> getAllFoodDto(long idUser)
      {
-          return this.foodRepositoryDao.getAllFood(idFood);
+          return this.foodRepositoryDao.getAllFood(idUser);
      }
 
      /**

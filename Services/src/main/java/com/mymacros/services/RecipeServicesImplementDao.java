@@ -123,7 +123,7 @@ public class RecipeServicesImplementDao implements RecipeServicesDao
      @Override
      public List<FoodRecipeDto> getAllFoodRecipe(long id)
      {
-          return this.foodRecipeRepositoryDao.getAllFoodRecipe();
+          return this.foodRecipeRepositoryDao.getAllFoodRecipe(id);
      }
 
      /**

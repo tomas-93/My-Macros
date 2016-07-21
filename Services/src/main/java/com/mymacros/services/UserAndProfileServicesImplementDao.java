@@ -17,8 +17,6 @@ import java.util.List;
 @Service
 public class UserAndProfileServicesImplementDao implements UserAndProfileServiceDao
 {
-
-     private long idUser;
      @Inject
      private UserRepositoryDao userRepositoryDao;
      @Inject

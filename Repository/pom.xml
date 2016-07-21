@@ -6,7 +6,6 @@
     <groupId>Repository</groupId>
     <artifactId>Repository</artifactId>
     <version>1.0-SNAPSHOT</version>
-
     <parent>
         <groupId>My-Macros</groupId>
         <artifactId>My-Macros</artifactId>
@@ -15,8 +14,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>DataAccesObjectRepository</groupId>
-            <artifactId>DataAccesObjectRepository</artifactId>
+            <groupId>DataAccessObjectRepository</groupId>
+            <artifactId>DataAccessObjectRepository</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

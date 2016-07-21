@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface FoodRecipeRepositoryDao extends IDBase
 {
-     List<FoodRecipeDto> getAllFoodRecipe();
+     List<FoodRecipeDto> getAllFoodRecipe(long idUser);
      FoodRecipeDto getFoodRecipe(long id);
      void createFoodRecipe(FoodRecipeDto foodRecipeDto);
      void updateFoodRecipe(FoodRecipeDto foodRecipeDto);

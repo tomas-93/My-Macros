@@ -13,12 +13,12 @@
     <dependencies>
         <dependency>
             <groupId>My-Macros</groupId>
-            <artifactId>DataAccesObjectServices</artifactId>
+            <artifactId>DataAccessObjectServices</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>DataAccesObjectRepository</groupId>
-            <artifactId>DataAccesObjectRepository</artifactId>
+            <groupId>DataAccessObjectRepository</groupId>
+            <artifactId>DataAccessObjectRepository</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
