@@ -25,7 +25,7 @@ public class DailyDataBaseImplementDao implements DailyRepositoryDao
       * @return Retorna una lista del objecto DailyDto
       */
      @Override
-     public synchronized List<DailyDto> getAllDaily()
+     public List<DailyDto> getAllDaily()
      {
           List<DailyDto> dailyDtoList = new ArrayList<DailyDto>();
           for(Long id: this.dailyDtoMapDatabase.keySet())
@@ -42,7 +42,7 @@ public class DailyDataBaseImplementDao implements DailyRepositoryDao
       * @return El objecto que se obtuvo de la base detos
       */
      @Override
-     public synchronized DailyDto getDaily(long id)
+     public DailyDto getDaily(long id)
      {
           return this.dailyDtoMapDatabase.get(id);
      }
@@ -53,12 +53,8 @@ public class DailyDataBaseImplementDao implements DailyRepositoryDao
       * @param dailyDto entidad que sera almacenado en la base de datos
       */
      @Override
-     public synchronized void createDaily(DailyDto dailyDto)
+     public void createDaily(DailyDto dailyDto)
      {
-          if (!dailyDtoMapDatabase.isEmpty())
-               this.idDaily ++;
-
-          dailyDto.setId(idDaily);
           this.dailyDtoMapDatabase.put(dailyDto.getId(), dailyDto);
      }
 
@@ -68,7 +64,7 @@ public class DailyDataBaseImplementDao implements DailyRepositoryDao
       * @param id indetificador de la entidad que sera eliminada
       */
      @Override
-     public synchronized void deleteDaily(long id)
+     public void deleteDaily(long id)
      {
           this.dailyDtoMapDatabase.remove(id);
      }
@@ -79,8 +75,14 @@ public class DailyDataBaseImplementDao implements DailyRepositoryDao
       * @param dailyDto entidad que contendra los datos actualizados
       */
      @Override
-     public synchronized void updateDaily(DailyDto dailyDto)
+     public void updateDaily(DailyDto dailyDto)
      {
           this.dailyDtoMapDatabase.replace(dailyDto.getId(), dailyDto);
+     }
+
+     @Override
+     public synchronized long getIncrementID()
+     {
+          return this.idDaily++;
      }
 }

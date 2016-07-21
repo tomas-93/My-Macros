@@ -29,7 +29,7 @@ public class FoodDataBaseImplementDao implements FoodRepositoryDao
       *
       */
      @Override
-     public synchronized List<FoodDto> getAllFood()
+     public List<FoodDto> getAllFood()
      {
           List<FoodDto> list = new ArrayList<FoodDto>();
           for(Long id: this.foodDataBase.keySet())
@@ -46,7 +46,7 @@ public class FoodDataBaseImplementDao implements FoodRepositoryDao
       * @return retorna el objeto especificado por el parametro id.
       */
      @Override
-     public synchronized FoodDto getFood(long id)
+     public FoodDto getFood(long id)
      {
           return this.foodDataBase.get(id);
      }
@@ -57,14 +57,9 @@ public class FoodDataBaseImplementDao implements FoodRepositoryDao
       * @param foodDto objeto que sera guardado en la base de datos
       */
      @Override
-     public synchronized void createFood(FoodDto foodDto)
+     public void createFood(FoodDto foodDto)
      {
-          if(!this.foodDataBase.isEmpty())
-               this.idFood++;
-
-          foodDto.setId(idFood);
           this.foodDataBase.put(foodDto.getId(), foodDto);
-
      }
 
      /**
@@ -73,7 +68,7 @@ public class FoodDataBaseImplementDao implements FoodRepositoryDao
       * @param foodDto es el objeto que encapsula lo datos actualizados en la base de datos
       */
      @Override
-     public synchronized void updateFood(FoodDto foodDto)
+     public void updateFood(FoodDto foodDto)
      {
           this.foodDataBase.replace(foodDto.getId(), foodDto);
      }
@@ -84,10 +79,16 @@ public class FoodDataBaseImplementDao implements FoodRepositoryDao
       * @param id identificador el cual reprecenta el elemnto que se dea borrar
       */
      @Override
-     public synchronized void deleteFood(long id)
+     public void deleteFood(long id)
      {
           final long idMacros = this.foodDataBase.get(id).getId();
           this.foodDataBase.remove(id);
           this.macronutrientsDto.deleteMacronutrients(idMacros);
+     }
+
+     @Override
+     public synchronized long getIncrementID()
+     {
+          return this.idFood++;
      }
 }

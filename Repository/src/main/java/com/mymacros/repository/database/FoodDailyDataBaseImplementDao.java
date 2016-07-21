@@ -24,7 +24,7 @@ public class FoodDailyDataBaseImplementDao implements FoodDailyRepositoryDao
       * @return Retorna una lista de todos los objetos de la base de datos
       */
      @Override
-     public synchronized List<FoodDailyDto> getAllFoodDaily()
+     public List<FoodDailyDto> getAllFoodDaily()
      {
           List<FoodDailyDto> list = new ArrayList<FoodDailyDto>();
           for(Long id: this.foodDailyDatabase.keySet())
@@ -39,7 +39,7 @@ public class FoodDailyDataBaseImplementDao implements FoodDailyRepositoryDao
       * @return retorna el objeto buscado en la base de datos
       */
      @Override
-     public synchronized FoodDailyDto getFoodDaily(long id)
+     public FoodDailyDto getFoodDaily(long id)
      {
           return this.foodDailyDatabase.get(id);
      }
@@ -50,12 +50,8 @@ public class FoodDailyDataBaseImplementDao implements FoodDailyRepositoryDao
       * @param foodDailyDto Objeto que tiene los datos que seran almacenados en la base de datos
       */
      @Override
-     public synchronized void crateFoodDaily(FoodDailyDto foodDailyDto)
+     public void crateFoodDaily(FoodDailyDto foodDailyDto)
      {
-          if(!foodDailyDatabase.isEmpty())
-               this.idFoodDaily++;
-
-          foodDailyDto.setId(idFoodDaily);
           this.foodDailyDatabase.put(foodDailyDto.getId(), foodDailyDto);
      }
 
@@ -66,7 +62,7 @@ public class FoodDailyDataBaseImplementDao implements FoodDailyRepositoryDao
       */
 
      @Override
-     public synchronized void updateFoodDaily(FoodDailyDto foodDailyDto)
+     public void updateFoodDaily(FoodDailyDto foodDailyDto)
      {
           this.foodDailyDatabase.replace(foodDailyDto.getId(), foodDailyDto);
      }
@@ -78,8 +74,14 @@ public class FoodDailyDataBaseImplementDao implements FoodDailyRepositoryDao
       */
 
      @Override
-     public synchronized void deleteFoodDaily(long id)
+     public void deleteFoodDaily(long id)
      {
           this.foodDailyDatabase.remove(id);
+     }
+
+     @Override
+     public synchronized long getIncrementID()
+     {
+          return this.idFoodDaily++;
      }
 }

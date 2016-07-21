@@ -16,7 +16,7 @@ import java.util.Map;
 public class FoodRecipeDataBaseImplementDao implements FoodRecipeRepositoryDao
 {
      private final Map<Long, FoodRecipeDto> foodRecipeDatabase =
-             new Hashtable<Long, FoodRecipeDto>();
+             new Hashtable<>();
      private volatile long idFoodRecipe = 1L;
 
      /**
@@ -26,7 +26,7 @@ public class FoodRecipeDataBaseImplementDao implements FoodRecipeRepositoryDao
       *
       */
      @Override
-     public synchronized List<FoodRecipeDto> getAllFoodRecipe()
+     public List<FoodRecipeDto> getAllFoodRecipe()
      {
           List<FoodRecipeDto> list = new ArrayList<FoodRecipeDto>();
           for(Long id: this.foodRecipeDatabase.keySet())
@@ -42,7 +42,7 @@ public class FoodRecipeDataBaseImplementDao implements FoodRecipeRepositoryDao
       * @return retorna el objeto encontrado de la base de datos.
       */
      @Override
-     public synchronized FoodRecipeDto getFoodRecipe(long id)
+     public FoodRecipeDto getFoodRecipe(long id)
      {
           return this.foodRecipeDatabase.get(id);
      }
@@ -54,12 +54,8 @@ public class FoodRecipeDataBaseImplementDao implements FoodRecipeRepositoryDao
       *
       */
      @Override
-     public synchronized void createFoodRecipe(FoodRecipeDto foodRecipeDto)
+     public void createFoodRecipe(FoodRecipeDto foodRecipeDto)
      {
-          if (!this.foodRecipeDatabase.isEmpty())
-               this.idFoodRecipe++;
-
-          foodRecipeDto.setId(this.idFoodRecipe);
           this.foodRecipeDatabase.put(foodRecipeDto.getId(), foodRecipeDto);
      }
 
@@ -69,7 +65,7 @@ public class FoodRecipeDataBaseImplementDao implements FoodRecipeRepositoryDao
       * @param foodRecipeDto objeto que encapsula el objeto a editar
       */
      @Override
-     public synchronized void updateFoodRecipe(FoodRecipeDto foodRecipeDto)
+     public void updateFoodRecipe(FoodRecipeDto foodRecipeDto)
      {
           this.foodRecipeDatabase.replace(foodRecipeDto.getId(),foodRecipeDto);
      }
@@ -80,8 +76,14 @@ public class FoodRecipeDataBaseImplementDao implements FoodRecipeRepositoryDao
       * @param id indetificador de la base de datos que representa el elemto a eliminar
       */
      @Override
-     public synchronized void deleteFoodRecipe(long id)
+     public void deleteFoodRecipe(long id)
      {
           this.foodRecipeDatabase.remove(id);
+     }
+
+     @Override
+     public synchronized long getIncrementID()
+     {
+          return this.idFoodRecipe++;
      }
 }

@@ -24,7 +24,7 @@ public class ProfileDataBaseImplementDao implements ProfileRepositoryDao
       * @return
       */
      @Override
-     public synchronized List<ProfileDto> getAllProfiles()
+     public  List<ProfileDto> getAllProfiles()
      {
           List<ProfileDto> list = new ArrayList<>();
           for(Long id: this.profileDtoDatabase.keySet())
@@ -40,7 +40,7 @@ public class ProfileDataBaseImplementDao implements ProfileRepositoryDao
       * @return Retorna el objeto con los valores obtenidos de la base de datos.
       */
      @Override
-     public synchronized ProfileDto getProfile(long id)
+     public  ProfileDto getProfile(long id)
      {
           return this.profileDtoDatabase.get(id);
      }
@@ -52,11 +52,8 @@ public class ProfileDataBaseImplementDao implements ProfileRepositoryDao
       * @param profileDto Objeto que encapsula la informacion a guardar
       */
      @Override
-     public  synchronized void createProfile(ProfileDto profileDto)
+     public  void createProfile(ProfileDto profileDto)
      {
-          if (!this.profileDtoDatabase.isEmpty())
-               this.idProfile++;
-          profileDto.setId(this.idProfile);
           this.profileDtoDatabase.put(profileDto.getId(), profileDto);
      }
 
@@ -66,7 +63,7 @@ public class ProfileDataBaseImplementDao implements ProfileRepositoryDao
       * @param profileDto Objeto que tiene los elemetos actualizados de la base de datos.
       */
      @Override
-     public synchronized void updateProfile(ProfileDto profileDto)
+     public void updateProfile(ProfileDto profileDto)
      {
 
           this.profileDtoDatabase.replace(profileDto.getId(), profileDto);
@@ -78,8 +75,14 @@ public class ProfileDataBaseImplementDao implements ProfileRepositoryDao
       * @param id Identificador que representa el elemto a eliminar.
       */
      @Override
-     public synchronized void deleteProfile(long id)
+     public void deleteProfile(long id)
      {
           this.profileDtoDatabase.remove(id);
+     }
+
+     @Override
+     public synchronized long getIncrementID()
+     {
+          return this.idProfile++;
      }
 }

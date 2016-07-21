@@ -32,7 +32,7 @@ public class RecipeDataBaseImplementDao implements RecipeRepositoryDao
       * @return Lista de todos los objetos de la base de datos
       */
      @Override
-     public synchronized List<RecipeDto> getAllRecipe()
+     public List<RecipeDto> getAllRecipe()
      {
           return this.recipeDtoDatabase.keySet()
                   .stream()
@@ -47,7 +47,7 @@ public class RecipeDataBaseImplementDao implements RecipeRepositoryDao
       * @return Retorna el objeto encotrnado en la base de datos
       */
      @Override
-     public synchronized RecipeDto getRecipeDto(long id)
+     public RecipeDto getRecipeDto(long id)
      {
           return this.recipeDtoDatabase.get(id);
      }
@@ -57,11 +57,8 @@ public class RecipeDataBaseImplementDao implements RecipeRepositoryDao
       * @param recipeDto Objeto que encapsula la informacion para alamcenar.
       */
      @Override
-     public synchronized void createRecipe(RecipeDto recipeDto)
+     public void createRecipe(RecipeDto recipeDto)
      {
-          if(!this.recipeDtoDatabase.isEmpty())
-               this.idRecipe++;
-          recipeDto.setId(this.idRecipe);
           this.recipeDtoDatabase.put(recipeDto.getId(), recipeDto);
      }
 
@@ -71,7 +68,7 @@ public class RecipeDataBaseImplementDao implements RecipeRepositoryDao
       * @param recipeDto Objeto que tiene los datos actualizados.
       */
      @Override
-     public synchronized void updateRecipe(RecipeDto recipeDto)
+     public void updateRecipe(RecipeDto recipeDto)
      {
           this.recipeDtoDatabase.replace(recipeDto.getId(), recipeDto);
      }
@@ -82,12 +79,18 @@ public class RecipeDataBaseImplementDao implements RecipeRepositoryDao
       * @param id Indetificador que especifica elemeto a eliminar.
       */
      @Override
-     public synchronized void deleteRecipe(long id)
+     public void deleteRecipe(long id)
      {
           final long idMacros = this.recipeDtoDatabase.get(id).getIdMacros();
           final long idFoodRecipe = this.recipeDtoDatabase.get(id).getIdFoodRecipe();
           this.foodRecipeDao.deleteFoodRecipe(idFoodRecipe);
           this.macronutrientsDao.deleteMacronutrients(idMacros);
           this.recipeDtoDatabase.remove(id);
+     }
+
+     @Override
+     public synchronized long getIncrementID()
+     {
+          return this.idRecipe++;
      }
 }

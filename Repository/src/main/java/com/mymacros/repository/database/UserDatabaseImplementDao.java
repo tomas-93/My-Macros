@@ -23,11 +23,8 @@ public class UserDatabaseImplementDao implements UserRepositoryDao
       * @param userDto entidad que sera guardado en la base de datos
       * @since
       */
-     public synchronized void createUser(UserDto userDto)
+     public void createUser(UserDto userDto)
      {
-          if(!userDtoMapDatabase.isEmpty())
-               this.idUser ++;
-          userDto.setId(this.idUser);
           this.userDtoMapDatabase.put(userDto.getId(), userDto);
      }
 
@@ -37,7 +34,7 @@ public class UserDatabaseImplementDao implements UserRepositoryDao
       * @param id identificador del usuario que se quiere obtiner
       * @return Retorna un objecto UserDto obtenida de la base de datos
       */
-     public synchronized UserDto getUser(long id)
+     public UserDto getUser(long id)
      {
           return this.userDtoMapDatabase.get(id);
      }
@@ -47,8 +44,15 @@ public class UserDatabaseImplementDao implements UserRepositoryDao
       * <p>Actualiza una entidad</p>
       * @param userDto Entidad que sera actualizado en la base de datos.
       */
-     public synchronized void updateUser(UserDto userDto)
+     public void updateUser(UserDto userDto)
      {
           this.userDtoMapDatabase.replace(userDto.getId(), userDto);
+     }
+
+
+     @Override
+     public synchronized long getIncrementID()
+     {
+          return this.idUser++;
      }
 }

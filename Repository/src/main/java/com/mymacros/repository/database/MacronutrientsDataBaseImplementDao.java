@@ -16,7 +16,7 @@ import java.util.Map;
 @Repository
 public class MacronutrientsDataBaseImplementDao implements MacronutrientsRepositoryDao
 {
-     private final Map<Long, MacronutrientsDto> macronutrientsDtoDataBase = new Hashtable<Long, MacronutrientsDto>();
+     private final Map<Long, MacronutrientsDto> macronutrientsDtoDataBase = new Hashtable<>();
      private volatile long idMacros = 1L;
 
      /**
@@ -25,7 +25,7 @@ public class MacronutrientsDataBaseImplementDao implements MacronutrientsReposit
       * @return Retorna una lista de una base de datos
       */
      @Override
-     public synchronized List<MacronutrientsDto> getAllMacronutrients()
+     public List<MacronutrientsDto> getAllMacronutrients()
      {
           List<MacronutrientsDto> list = new ArrayList<MacronutrientsDto>();
           for(Long id: this.macronutrientsDtoDataBase.keySet())
@@ -41,7 +41,7 @@ public class MacronutrientsDataBaseImplementDao implements MacronutrientsReposit
       * @return Retorna el objeto de la base de datos.
       */
      @Override
-     public synchronized MacronutrientsDto getMacronutrients(long id)
+     public MacronutrientsDto getMacronutrients(long id)
      {
           return this.macronutrientsDtoDataBase.get(id);
      }
@@ -52,11 +52,8 @@ public class MacronutrientsDataBaseImplementDao implements MacronutrientsReposit
       * @param macronutrientsDto Objeto que agrega un nuevo elemento a la base de datos
       */
      @Override
-     public synchronized void createMacronutrients(MacronutrientsDto macronutrientsDto)
+     public void createMacronutrients(MacronutrientsDto macronutrientsDto)
      {
-          if (!this.macronutrientsDtoDataBase.isEmpty())
-               this.idMacros++;
-          macronutrientsDto.setId(this.idMacros);
           this.macronutrientsDtoDataBase.put(macronutrientsDto.getId(), macronutrientsDto);
      }
 
@@ -66,7 +63,7 @@ public class MacronutrientsDataBaseImplementDao implements MacronutrientsReposit
       * @param macronutrientsDto Objeto que encapsula los elemtos actualizados
       */
      @Override
-     public synchronized void updateMacronutrients(MacronutrientsDto macronutrientsDto)
+     public  void updateMacronutrients(MacronutrientsDto macronutrientsDto)
      {
           this.macronutrientsDtoDataBase.put(macronutrientsDto.getId(), macronutrientsDto);
      }
@@ -77,8 +74,14 @@ public class MacronutrientsDataBaseImplementDao implements MacronutrientsReposit
       * @param id Identificador que especifica el elemto a eliminar.
       */
      @Override
-     public synchronized void deleteMacronutrients(long id)
+     public void deleteMacronutrients(long id)
      {
           this.macronutrientsDtoDataBase.remove(id);
+     }
+
+     @Override
+     public synchronized long getIncrementID()
+     {
+          return 0;
      }
 }

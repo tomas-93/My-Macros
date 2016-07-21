@@ -5,6 +5,5 @@ package com.mymacros.repository.dao.entity;
  */
 public interface IDBase
 {
-     long getID();
-     void incrementId();
+     long getIncrementID();
 }
