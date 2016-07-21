@@ -15,7 +15,7 @@ import java.util.List;
  * Created by Tomas on 20/07/2016.
  */
 @Service
-public class UserAndProfileServices implements UserAndProfileServiceDao
+public class UserAndProfileServicesImplementDao implements UserAndProfileServiceDao
 {
 
      @Inject

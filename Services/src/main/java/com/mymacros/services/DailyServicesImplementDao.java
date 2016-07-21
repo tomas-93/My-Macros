@@ -7,6 +7,6 @@ import org.springframework.stereotype.Service;
  * Created by Tomas on 20/07/2016.
  */
 @Service
-public class DailyServices implements DailyServicesDao
+public class DailyServicesImplementDao implements DailyServicesDao
 {
 }
