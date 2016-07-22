@@ -11,11 +11,32 @@ import java.util.List;
 public interface UserAndProfileServiceDao
 {
      /**
+      * ==================================================> <USER>
+      */
+     /**
       * <h1>getUser</h1>
       * <p>Busca un usuario en el respository</p>
       * @param id Indetificador del objeto a buscar
       */
      UserDto getUser(long id);
+     /**
+      * <h1>updateUser</h1>
+      * <p>Actualiza un nuevo elemento de la base de datos</p>
+      * @param formUser Datos obtenidos del formulario web
+      */
+     void updateUser(UserDto formUser);
+
+     /**
+      * <h1>loginUser</h1>
+      * <p>Envia un objeto UserDto para identificar si el usuario se encuentra en repositorio<</p>
+      *
+      * @param userDto
+      * @return
+      */
+     boolean loginUser(UserDto userDto);
+     /**
+      * ==================================================> <Profile>
+      */
      /**
       * <h1>getProfile</h1>
       * <p>Busca un usuario en el respository</p>
@@ -44,14 +65,6 @@ public interface UserAndProfileServiceDao
       * @return Retorna un objeto List con el contenido de la base de datos.
       */
      List<ProfileDto> getAllProfile(long id);
-
-     /**
-      * <h1>updateUser</h1>
-      * <p>Actualiza un nuevo elemento de la base de datos</p>
-      * @param formUser Datos obtenidos del formulario web
-      */
-     void updateUser(UserDto formUser);
-
      /**
       * <h1>updateProfile</h1>
       * <p>Actualiza un nuevo elemento de la base de datos</p>

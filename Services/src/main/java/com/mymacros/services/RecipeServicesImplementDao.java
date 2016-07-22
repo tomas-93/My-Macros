@@ -48,7 +48,7 @@ public class RecipeServicesImplementDao implements RecipeServicesDao
      @Override
      public List<RecipeDto> getAllRecipe(long id)
      {
-          return this.recipeRepositoryDao.getAllRecipe();
+          return this.recipeRepositoryDao.getAllRecipe(id);
      }
 
      /**

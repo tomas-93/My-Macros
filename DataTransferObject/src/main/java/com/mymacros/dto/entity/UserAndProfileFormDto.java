@@ -10,9 +10,27 @@ public class UserAndProfileFormDto
      private String name,
              surname,
              heigth,
-             width;
+             width,
+             userName,
+             password;
      private int carbs, fat, protein, fiber, totalCalories;
      private Instant timeDate;
+
+     public String getUserName() {
+          return userName;
+     }
+
+     public void setUserName(String userName) {
+          this.userName = userName;
+     }
+
+     public String getPassword() {
+          return password;
+     }
+
+     public void setPassword(String password) {
+          this.password = password;
+     }
 
      public String getName() {
           return name;

@@ -12,19 +12,43 @@ public class UserDto
      private String name,
                     surname,
                     heigth,
-                    width;
+                    width,
+                    userName,
+                    password;
      private Instant timeDate;
 
-     public UserDto() {
+     public UserDto()
+     {
      }
 
-     public UserDto(long id, String name, String surname, String heigth, String width, Instant timeDate) {
+
+     public UserDto(long id, String name, String surname, String heigth,
+                    String width, String userName, String password, Instant timeDate)
+     {
           this.id = id;
           this.name = name;
           this.surname = surname;
           this.heigth = heigth;
           this.width = width;
+          this.userName = userName;
+          this.password = password;
           this.timeDate = timeDate;
+     }
+
+     public String getUserName() {
+          return userName;
+     }
+
+     public void setUserName(String userName) {
+          this.userName = userName;
+     }
+
+     public String getPassword() {
+          return password;
+     }
+
+     public void setPassword(String password) {
+          this.password = password;
      }
 
      public long getId() {

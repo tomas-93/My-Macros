@@ -17,6 +17,7 @@ import java.util.List;
 @Service
 public class UserAndProfileServicesImplementDao implements UserAndProfileServiceDao
 {
+
      @Inject
      private UserRepositoryDao userRepositoryDao;
      @Inject
@@ -96,6 +97,19 @@ public class UserAndProfileServicesImplementDao implements UserAndProfileService
      }
 
      /**
+      * <h1>loginUser</h1>
+      * <p>Envia un objeto UserDto para identificar si el usuario se encuentra en repositorio<</p>
+      *
+      * @param userDto
+      * @return
+      */
+     @Override
+     public boolean loginUser(UserDto userDto)
+     {
+          return this.userRepositoryDao.loginUser(userDto);
+     }
+
+     /**
       * <h1>updateProfile</h1>
       * <p>Actualiza un nuevo elemento de la base de datos</p>
       *
@@ -133,6 +147,8 @@ public class UserAndProfileServicesImplementDao implements UserAndProfileService
                                       userAndProfileDto.getSurname(),
                                       userAndProfileDto.getHeigth(),
                                       userAndProfileDto.getWidth(),
+                                      userAndProfileDto.getUserName(),
+                                      userAndProfileDto.getPassword(),
                                       userAndProfileDto.getTimeDate()));
           this.addProfile(new ProfileDto(idProfile,
                                            idUser,

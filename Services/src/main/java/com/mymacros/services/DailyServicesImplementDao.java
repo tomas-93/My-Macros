@@ -118,7 +118,7 @@ public class DailyServicesImplementDao implements DailyServicesDao
      @Override
      public List<FoodDailyDto> getAllFoodDailyDto(long id)
      {
-          return this.foodDailyRepositoryDao.getAllFoodDaily();
+          return this.foodDailyRepositoryDao.getAllFoodDaily(id);
      }
 
      /**
