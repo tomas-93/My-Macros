@@ -1,5 +1,10 @@
 package com.mymacros.dto.entity;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.time.Instant;
 
 /**
@@ -7,13 +12,21 @@ import java.time.Instant;
  */
 public class UserAndProfileFormDto
 {
+     @NotNull
+     @NotEmpty
+     @Valid
      private String name,
              surname,
              heigth,
              width,
              userName,
              password;
-     private int carbs, fat, protein, fiber, totalCalories;
+     @NotNull
+     @Min(0)
+     @Valid
+     private Integer carbs, fat, protein, fiber, totalCalories;
+     @NotNull
+     @Valid
      private Instant timeDate;
 
      public String getUserName() {
@@ -64,7 +77,7 @@ public class UserAndProfileFormDto
           this.width = width;
      }
 
-     public int getCarbs() {
+     public Integer getCarbs() {
           return carbs;
      }
 
@@ -72,7 +85,7 @@ public class UserAndProfileFormDto
           this.carbs = carbs;
      }
 
-     public int getFat() {
+     public Integer getFat() {
           return fat;
      }
 
@@ -80,7 +93,7 @@ public class UserAndProfileFormDto
           this.fat = fat;
      }
 
-     public int getProtein() {
+     public Integer getProtein() {
           return protein;
      }
 
@@ -88,7 +101,7 @@ public class UserAndProfileFormDto
           this.protein = protein;
      }
 
-     public int getFiber() {
+     public Integer getFiber() {
           return fiber;
      }
 
@@ -96,7 +109,7 @@ public class UserAndProfileFormDto
           this.fiber = fiber;
      }
 
-     public int getTotalCalories() {
+     public Integer getTotalCalories() {
           return totalCalories;
      }
 

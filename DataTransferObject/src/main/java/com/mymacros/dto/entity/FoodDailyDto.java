@@ -1,12 +1,19 @@
 package com.mymacros.dto.entity;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by Tomas on 17/07/2016.
  */
 public class FoodDailyDto
 {
      private long id, idDaily, idFood, idRecipe;
-     private short numberFood;
+     @NotNull
+     @Min(0)
+     @Valid
+     private Short numberFood;
 
      public FoodDailyDto() {
      }
@@ -51,11 +58,11 @@ public class FoodDailyDto
           this.idRecipe = idRecipe;
      }
 
-     public short getNumberFood() {
+     public Short getNumberFood() {
           return numberFood;
      }
 
-     public void setNumberFood(short numberFood) {
+     public void setNumberFood(Short numberFood) {
           this.numberFood = numberFood;
      }
 

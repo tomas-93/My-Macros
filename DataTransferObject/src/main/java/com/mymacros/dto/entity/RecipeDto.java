@@ -1,11 +1,17 @@
 package com.mymacros.dto.entity;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by Tomas on 17/07/2016.
  */
 public class RecipeDto
 {
      private long id, idMacros, idFoodRecipe;
+     @NotNull
+     @NotEmpty
      private String name, description;
 
      public RecipeDto() {

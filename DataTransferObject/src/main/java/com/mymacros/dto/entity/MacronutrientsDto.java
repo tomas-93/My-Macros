@@ -1,12 +1,19 @@
 package com.mymacros.dto.entity;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by Tomas on 17/07/2016.
  */
 public class MacronutrientsDto
 {
      private long id;
-     private int totalCarbohydrates,
+     @NotNull
+     @Min(0)
+     @Valid
+     private Integer totalCarbohydrates,
                     totalProtein,
                     totalFats,
                     fiber,
@@ -41,15 +48,15 @@ public class MacronutrientsDto
           this.id = id;
      }
 
-     public int getTotalCarbohydrates() {
+     public Integer getTotalCarbohydrates() {
           return totalCarbohydrates;
      }
 
-     public void setTotalCarbohydrates(int totalCarbohydrates) {
+     public void setTotalCarbohydrates(Integer totalCarbohydrates) {
           this.totalCarbohydrates = totalCarbohydrates;
      }
 
-     public int getTotalProtein() {
+     public Integer getTotalProtein() {
           return totalProtein;
      }
 
@@ -57,7 +64,7 @@ public class MacronutrientsDto
           this.totalProtein = totalProtein;
      }
 
-     public int getTotalFats() {
+     public Integer getTotalFats() {
           return totalFats;
      }
 
@@ -65,7 +72,7 @@ public class MacronutrientsDto
           this.totalFats = totalFats;
      }
 
-     public int getFiber() {
+     public Integer getFiber() {
           return fiber;
      }
 
@@ -73,7 +80,7 @@ public class MacronutrientsDto
           this.fiber = fiber;
      }
 
-     public int getSugar() {
+     public Integer getSugar() {
           return sugar;
      }
 
@@ -81,7 +88,7 @@ public class MacronutrientsDto
           this.sugar = sugar;
      }
 
-     public int getSaturated() {
+     public Integer getSaturated() {
           return saturated;
      }
 
@@ -89,7 +96,7 @@ public class MacronutrientsDto
           this.saturated = saturated;
      }
 
-     public int getMonounsaturated() {
+     public Integer getMonounsaturated() {
           return monounsaturated;
      }
 
@@ -97,7 +104,7 @@ public class MacronutrientsDto
           this.monounsaturated = monounsaturated;
      }
 
-     public int getPolyunsaturated() {
+     public Integer getPolyunsaturated() {
           return polyunsaturated;
      }
 

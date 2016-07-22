@@ -1,6 +1,10 @@
 package com.mymacros.dto.entity;
 
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.time.Instant;
 
 /**
@@ -9,12 +13,17 @@ import java.time.Instant;
 public class UserDto
 {
      private long id;
+     @NotNull
+     @NotEmpty
+     @Valid
      private String name,
                     surname,
                     heigth,
                     width,
                     userName,
                     password;
+     @NotNull
+     @Valid
      private Instant timeDate;
 
      public UserDto()

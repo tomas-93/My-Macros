@@ -19,9 +19,18 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven-compiler-plugin>3.1</maven-compiler-plugin>
+        <maven-war-plugin>2.3</maven-war-plugin>
         <jackson.version>2.4.2</jackson.version>
         <log4j.version>2.0.2</log4j.version>
         <spring.framework.version>4.3.0.RELEASE</spring.framework.version>
+        <hibernate.version>5.2.4.Final</hibernate.version>
+        <javax.inject>1</javax.inject>
+        <javax.annotation-api>1.2</javax.annotation-api>
+        <javax.servlet-api>3.1.0</javax.servlet-api>
+        <javax.servlet.jsp-api>2.3.1</javax.servlet.jsp-api>
+        <javax.servlet.jsp.jstl-api>1.2.1</javax.servlet.jsp.jstl-api>
+        <javax.servlet.jsp.jstl.org.glassfish.web>1.2.2</javax.servlet.jsp.jstl.org.glassfish.web>
     </properties>
 
     <dependencies>
@@ -112,7 +121,7 @@
         <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
-            <version>1</version>
+            <version>${javax.inject}</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
@@ -121,7 +130,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <version>${maven-compiler-plugin}</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>

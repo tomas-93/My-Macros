@@ -1,5 +1,9 @@
 package com.mymacros.dto.entity;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 /**
@@ -8,19 +12,28 @@ import java.time.LocalDate;
 public class DailyDto
 {
      private long id, idUser;
+     @NotNull
+     @Valid
      private LocalDate localDate;
-     private short totalFood;
-     private int totalCaloriesConsumend;
+     @NotNull
+     @Min(0)
+     @Max(10)
+     @Valid
+     private Short totalFood;
+     @NotNull
+     @Min(0)
+     @Valid
+     private Integer totalCaloriesConsumed;
 
      public DailyDto() {
      }
 
-     public DailyDto(long id, long idUser, LocalDate localDate, short totalFood, int totalCaloriesConsumend) {
+     public DailyDto(long id, long idUser, LocalDate localDate, short totalFood, int totalCaloriesConsumed) {
           this.id = id;
           this.idUser = idUser;
           this.localDate = localDate;
           this.totalFood = totalFood;
-          this.totalCaloriesConsumend = totalCaloriesConsumend;
+          this.totalCaloriesConsumed = totalCaloriesConsumed;
      }
 
      public long getId() {
@@ -47,20 +60,20 @@ public class DailyDto
           this.localDate = localDate;
      }
 
-     public short getTotalFood() {
+     public Short getTotalFood() {
           return totalFood;
      }
 
-     public void setTotalFood(short totalFood) {
+     public void setTotalFood(Short totalFood) {
           this.totalFood = totalFood;
      }
 
-     public int getTotalCaloriesConsumend() {
-          return totalCaloriesConsumend;
+     public Integer getTotalCaloriesConsumed() {
+          return totalCaloriesConsumed;
      }
 
-     public void setTotalCaloriesConsumend(int totalCaloriesConsumend) {
-          this.totalCaloriesConsumend = totalCaloriesConsumend;
+     public void setTotalCaloriesConsumed(Integer totalCaloriesConsumed) {
+          this.totalCaloriesConsumed = totalCaloriesConsumed;
      }
 
 }

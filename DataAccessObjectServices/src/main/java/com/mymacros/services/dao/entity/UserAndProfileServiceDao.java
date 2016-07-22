@@ -30,8 +30,8 @@ public interface UserAndProfileServiceDao
       * <h1>loginUser</h1>
       * <p>Envia un objeto UserDto para identificar si el usuario se encuentra en repositorio<</p>
       *
-      * @param userDto
-      * @return
+      * @param userDto Objeto que contiene el surName y password a evaluar
+      * @return Retorna true si el usuario se encuentra en el respositorio
       */
      boolean loginUser(UserDto userDto);
      /**

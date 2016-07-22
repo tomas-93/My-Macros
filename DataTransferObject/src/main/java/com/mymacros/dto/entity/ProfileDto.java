@@ -1,12 +1,19 @@
 package com.mymacros.dto.entity;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by Tomas on 17/07/2016.
  */
 public class ProfileDto
 {
      private long id, idUser;
-     private int carbs, fat, protein, fiber, totalCalories;
+     @NotNull
+     @Min(0)
+     @Valid
+     private Integer carbs, fat, protein, fiber, totalCalories;
 
      public ProfileDto()
      {
@@ -39,7 +46,7 @@ public class ProfileDto
           this.idUser = idUser;
      }
 
-     public int getCarbs() {
+     public Integer getCarbs() {
           return carbs;
      }
 
@@ -47,7 +54,7 @@ public class ProfileDto
           this.carbs = carbs;
      }
 
-     public int getFat() {
+     public Integer getFat() {
           return fat;
      }
 
@@ -55,7 +62,7 @@ public class ProfileDto
           this.fat = fat;
      }
 
-     public int getProtein() {
+     public Integer getProtein() {
           return protein;
      }
 
@@ -63,7 +70,7 @@ public class ProfileDto
           this.protein = protein;
      }
 
-     public int getFiber() {
+     public Integer getFiber() {
           return fiber;
      }
 
@@ -71,7 +78,7 @@ public class ProfileDto
           this.fiber = fiber;
      }
 
-     public int getTotalCalories() {
+     public Integer getTotalCalories() {
           return totalCalories;
      }
 
