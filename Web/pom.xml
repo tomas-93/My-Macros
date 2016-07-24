@@ -16,6 +16,34 @@
     </parent>
     <dependencies>
         <!--
+            Modulos de app
+         -->
+        <dependency>
+            <groupId>Services</groupId>
+            <artifactId>Services</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>Repository</groupId>
+            <artifactId>Repository</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>DataTransferObject</groupId>
+            <artifactId>DataTransferObject</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>DataAccessObjectServices</groupId>
+            <artifactId>DataAccessObjectServices</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>DataAccessObjectRepository</groupId>
+            <artifactId>DataAccessObjectRepository</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!--
                     SpringFramework
          -->
         <dependency>
@@ -52,6 +80,15 @@
             <groupId>javax.servlet.jsp.jstl</groupId>
             <artifactId>javax.servlet.jsp.jstl-api</artifactId>
             <version>${javax.servlet.jsp.jstl-api}</version>
+            <scope>compile</scope>
+        </dependency>
+        <!--
+                        commons-lang3
+                 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.3.2</version>
             <scope>compile</scope>
         </dependency>
         <!--
