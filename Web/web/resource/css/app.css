@@ -2,16 +2,32 @@
 {
     margin: 0px;
     padding: 0px;
-    height: 100%;
+
 }
-h1
+html, body, div
+{
+    height: 100%;
+    padding: 0%;
+    margin: 0%;
+    width: 100%;
+}
+h1, h2, h3, h4, h5, h6
 {
     margin: 0;
 }
+input
+{
+    width: 100%;
+}
+#contApp
+{
+    height: 100%;
+}
 #conteinerLogin
 {
-    margin: 1%;
-    padding: 1%;
+    height: auto;
+    padding: 5%;
+    width: auto;
 }
 #conteinerLogin a
 {
@@ -32,4 +48,17 @@ h1
 #appC
 {
     height: 90%;
+}
+
+.form
+{
+    margin: 0%;
+    padding: 1%;
+}
+.componetsInput
+{
+    height: 10%;
+    float: left;
+    margin: 1%;
+    width: 40%;
 }

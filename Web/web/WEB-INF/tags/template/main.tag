@@ -8,29 +8,40 @@
 <html>
     <head>
         <title><c:out value="${htmlTitle}"/></title>
-        <!--Import Google Icon Font-->
-        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <!-- Compiled and minified CSS -->
-        <link rel="stylesheet"
-              href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
-        <!--Let browser know website is optimized for mobile-->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
+        <link rel="stylesheet" href="/resource/css/material.min.css">
         <link rel="stylesheet" href="/resource/css/app.css">
 
     </head>
     <body>
-        <div class="row" style="margin: 0; padding: 0;">
-            <div id="nav" class="col s2 m2 l1" style="margin: 0; padding: 0;">
-                <div id="icon" class="row s2 m2 l1 blue" style="margin: 0; padding: 0;">Icono</div>
-                <div id="menu" class="row s2 m2 l1 red" style="margin: 0; padding: 0;">Menu</div>
+    <!-- No header, and the drawer stays open on larger screens (fixed drawer). -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header ">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <h1 class="mdl-layout-title"><c:out value="${bodyTitle}"/></h1>
             </div>
-            <div id="app" class="col s10 m10 l11" style="margin: 0; padding: 0;">
-                <div id="title" class="row s10 m10 l11 red" style="margin: 0; padding: 0;"><c:out value="${bodyTitle}"/></div>
-                <div id="appC" class="row s10 m10 l11 blue" style="margin: 0; padding: 0;"><jsp:doBody /></div>
-            </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">Icono</span>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="">Diario</a>
+                <a class="mdl-navigation__link" href="">Alimentos</a>
+                <a class="mdl-navigation__link" href="">Receta</a>
+                <a class="mdl-navigation__link" href="">Perfil</a>
+                <a class="mdl-navigation__link" href="">Usurio</a>
+            </nav>
         </div>
-         <!-- Compiled and minified JavaScript -->
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+        <main class="mdl-layout__content">
+            <div class="page-content">
+                <div><jsp:doBody /></div>
+            </div>
+        </main>
+    </div>
+         <!-- Compiled and minified JavaScript --->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+
     </body>
 </html>

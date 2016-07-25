@@ -6,5 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <c:set var="variable" value="create"/>
+<c:set var="title" value="Crear Usuario"/>
 <%@ include file="form.jsp" %>
 
