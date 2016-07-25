@@ -10,6 +10,6 @@
 <%@ include file="/WEB-INF/jsp/base.jspf" %>
 <template:main htmlTitle="Index-BodyTitle" bodyTitle="Index">
     <jsp:body>
-        <h1>Diario</h1>
+        <h1>User</h1>
     </jsp:body>
 </template:main>

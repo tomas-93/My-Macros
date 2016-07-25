@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("daily")
 public class DailyController
 {
-     @RequestMapping(value = "", method = RequestMethod.GET)
+     @RequestMapping(value = "list", method = RequestMethod.GET)
      public String getDaily()
      {
           return "daily/list";

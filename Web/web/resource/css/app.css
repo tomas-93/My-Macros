@@ -1,3 +1,13 @@
+*
+{
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+}
+h1
+{
+    margin: 0;
+}
 #conteinerLogin
 {
     margin: 1%;
@@ -6,4 +16,20 @@
 #conteinerLogin a
 {
     margin: 1%;
+}
+#icon
+{
+    height: 10%;
+}
+#menu
+{
+    height: 90%;
+}
+#title
+{
+    height: 10%;
+}
+#appC
+{
+    height: 90%;
 }

@@ -5,6 +5,6 @@
   Time: 08:03 PM
   To change this template use File | Settings | File Templates.
 --%>
-<c:set var="variable" value="x"/>
+<c:set var="variable" value="create"/>
 <%@ include file="form.jsp" %>
 
