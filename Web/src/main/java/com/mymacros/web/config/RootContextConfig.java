@@ -38,8 +38,8 @@ import java.util.concurrent.Executor;
 
 public class RootContextConfig implements AsyncConfigurer, SchedulingConfigurer
 {
-     private static final Logger log = LogManager.getLogger();
-     private static final Logger schedulingLogger =
+     public static final Logger log = LogManager.getLogger();
+     public static final Logger schedulingLogger =
              LogManager.getLogger(log.getName() + ".[scheduling]");
 
      @Bean
@@ -48,8 +48,7 @@ public class RootContextConfig implements AsyncConfigurer, SchedulingConfigurer
           ObjectMapper mapper = new ObjectMapper();
           mapper.findAndRegisterModules();
           mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-          mapper.configure(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE,
-                  false);
+          mapper.configure(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE, false);
           return mapper;
      }
 

@@ -2,8 +2,7 @@
 <configuration status="WARN">
     <appenders>
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout
-                    pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
         <RollingFile name="WroxFileAppender" fileName="../logs/application.log"
                      filePattern="../logs/application-%d{MM-dd-yyyy}-%i.log">
@@ -21,7 +20,7 @@
             <appender-ref ref="Console" />
             <appender-ref ref="My-Macros" />
         </root>
-        <logger name="com.wrox" level="info" />
+        <logger name="com.mymacros" level="info" />
         <logger name="org.apache" level="info" />
         <logger name="org.springframework" level="info" />
     </loggers>

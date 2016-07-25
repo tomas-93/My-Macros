@@ -18,12 +18,13 @@ public class FoodDto
      @NotNull
      @NotEmpty
      @Valid
-     private String name, brand, unit, quantity;
+     private String name, brand, unit, quantity, type;
 
      public FoodDto() {
      }
 
-     public FoodDto(long id, long idMacronutrients, Instant timeDate, String name, String brand, String unit, String quantity) {
+     public FoodDto(long id, long idMacronutrients, Instant timeDate, String name, String brand, String unit, String quantity, String type)
+     {
           this.id = id;
           this.idMacronutrients = idMacronutrients;
           this.timeDate = timeDate;
@@ -31,6 +32,17 @@ public class FoodDto
           this.brand = brand;
           this.unit = unit;
           this.quantity = quantity;
+          this.type = type;
+     }
+
+     public String getType()
+     {
+          return type;
+     }
+
+     public void setType(String type)
+     {
+          this.type = type;
      }
 
      public long getId() {
