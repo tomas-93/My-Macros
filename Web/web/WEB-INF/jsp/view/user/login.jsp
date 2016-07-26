@@ -28,10 +28,10 @@
                         User
                         -->
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 100%">
-                        <form:input path="userName" type="text" cssClass="mdl-textfield__input"/>
-                        <label class="mdl-textfield__label" for="userName">Email</label>
-                        <form:label path="userName" cssClass="">
-                            <form:errors path="userName"
+                        <form:input path="email" type="text" cssClass="mdl-textfield__input"/>
+                        <label class="mdl-textfield__label" for="email">Email</label>
+                        <form:label path="email" cssClass="">
+                            <form:errors path="email"
                                          cssClass=""/>
                         </form:label>
                     </div>
