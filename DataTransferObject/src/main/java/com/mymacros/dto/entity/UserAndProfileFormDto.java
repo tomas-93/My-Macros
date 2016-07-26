@@ -17,9 +17,9 @@ public class UserAndProfileFormDto
      @Valid
      private String name,
              surname,
-             heigth,
+             height,
              width,
-             userName,
+             email,
              password;
      @NotNull
      @Min(0)
@@ -29,99 +29,145 @@ public class UserAndProfileFormDto
      @Valid
      private Instant timeDate;
 
-     public String getUserName() {
-          return userName;
-     }
-
-     public void setUserName(String userName) {
-          this.userName = userName;
-     }
-
-     public String getPassword() {
-          return password;
-     }
-
-     public void setPassword(String password) {
+     public UserAndProfileFormDto(String name, String surname, String height, String width,
+                                  String email, String password, Integer carbs, Integer fat,
+                                  Integer protein, Integer fiber, Integer totalCalories, Instant timeDate)
+     {
+          this.name = name;
+          this.surname = surname;
+          this.height = height;
+          this.width = width;
+          this.email = email;
           this.password = password;
+          this.carbs = carbs;
+          this.fat = fat;
+          this.protein = protein;
+          this.fiber = fiber;
+          this.totalCalories = totalCalories;
+          this.timeDate = timeDate;
      }
 
-     public String getName() {
+     public UserAndProfileFormDto()
+     {
+     }
+
+     public String getName()
+     {
           return name;
      }
 
-     public void setName(String name) {
+     public void setName(String name)
+     {
           this.name = name;
      }
 
-     public String getSurname() {
+     public String getSurname()
+     {
           return surname;
      }
 
-     public void setSurname(String surname) {
+     public void setSurname(String surname)
+     {
           this.surname = surname;
      }
 
-     public String getHeigth() {
-          return heigth;
+     public String getHeight()
+     {
+          return height;
      }
 
-     public void setHeigth(String heigth) {
-          this.heigth = heigth;
+     public void setHeight(String height)
+     {
+          this.height = height;
      }
 
-     public String getWidth() {
+     public String getWidth()
+     {
           return width;
      }
 
-     public void setWidth(String width) {
+     public void setWidth(String width)
+     {
           this.width = width;
      }
 
-     public Integer getCarbs() {
+     public String getEmail()
+     {
+          return email;
+     }
+
+     public void setEmail(String email)
+     {
+          this.email = email;
+     }
+
+     public String getPassword()
+     {
+          return password;
+     }
+
+     public void setPassword(String password)
+     {
+          this.password = password;
+     }
+
+     public Integer getCarbs()
+     {
           return carbs;
      }
 
-     public void setCarbs(int carbs) {
+     public void setCarbs(Integer carbs)
+     {
           this.carbs = carbs;
      }
 
-     public Integer getFat() {
+     public Integer getFat()
+     {
           return fat;
      }
 
-     public void setFat(int fat) {
+     public void setFat(Integer fat)
+     {
           this.fat = fat;
      }
 
-     public Integer getProtein() {
+     public Integer getProtein()
+     {
           return protein;
      }
 
-     public void setProtein(int protein) {
+     public void setProtein(Integer protein)
+     {
           this.protein = protein;
      }
 
-     public Integer getFiber() {
+     public Integer getFiber()
+     {
           return fiber;
      }
 
-     public void setFiber(int fiber) {
+     public void setFiber(Integer fiber)
+     {
           this.fiber = fiber;
      }
 
-     public Integer getTotalCalories() {
+     public Integer getTotalCalories()
+     {
           return totalCalories;
      }
 
-     public void setTotalCalories(int totalCalories) {
+     public void setTotalCalories(Integer totalCalories)
+     {
           this.totalCalories = totalCalories;
      }
 
-     public Instant getTimeDate() {
+     public Instant getTimeDate()
+     {
           return timeDate;
      }
 
-     public void setTimeDate(Instant timeDate) {
+     public void setTimeDate(Instant timeDate)
+     {
           this.timeDate = timeDate;
      }
 }

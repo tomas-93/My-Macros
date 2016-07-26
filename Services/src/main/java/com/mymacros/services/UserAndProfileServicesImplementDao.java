@@ -142,20 +142,6 @@ public class UserAndProfileServicesImplementDao implements UserAndProfileService
      {
           long idUser = this.userRepositoryDao.getIncrementID();
           long idProfile = this.profileRepositoryDao.getIncrementID();
-          this.addUser(new UserDto(idUser,
-                                      userAndProfileDto.getName(),
-                                      userAndProfileDto.getSurname(),
-                                      userAndProfileDto.getHeigth(),
-                                      userAndProfileDto.getWidth(),
-                                      userAndProfileDto.getUserName(),
-                                      userAndProfileDto.getPassword(),
-                                      userAndProfileDto.getTimeDate()));
-          this.addProfile(new ProfileDto(idProfile,
-                                           idUser,
-                                           userAndProfileDto.getCarbs(),
-                                           userAndProfileDto.getFat(),
-                                           userAndProfileDto.getProtein(),
-                                           userAndProfileDto.getFiber(),
-                                           userAndProfileDto.getTotalCalories()));
+
      }
 }
