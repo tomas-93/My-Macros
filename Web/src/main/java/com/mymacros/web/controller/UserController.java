@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -116,6 +117,27 @@ public class UserController
                           BindingResult bindingResult, Model model)
      {
           return "user/edit";
+     }
+
+     /**
+      *
+      * @param model
+      * @param id
+      * @return
+      */
+     @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+     public String getView(Model model, @PathVariable("id") long id)
+     {
+          //TODO se codigo donde se obtiene el elemeto
+          UserDto userDto = new UserDto();
+          userDto.setName("Tomas");
+          userDto.setSurname("Yussef");
+          userDto.setHeight("170");
+          userDto.setWidth("80");
+          userDto.setEmail("tomas@yussef");
+          model.addAttribute("userDto", userDto);
+          return "user/view";
+
      }
 
      /**

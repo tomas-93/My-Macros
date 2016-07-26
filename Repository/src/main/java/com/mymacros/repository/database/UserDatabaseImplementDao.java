@@ -64,7 +64,7 @@ public class UserDatabaseImplementDao implements UserRepositoryDao
          return !this.userDtoMapDatabase.keySet()
                  .stream()
                  .map(this.userDtoMapDatabase::get)
-                 .filter(userDto1 -> userDto1.getUserName()== userDto.getUserName() &&
+                 .filter(userDto1 -> userDto1.getEmail()== userDto.getEmail() &&
                          userDto1.getPassword() == userDto.getPassword())
                  .collect(Collectors.toList())
                  .isEmpty();

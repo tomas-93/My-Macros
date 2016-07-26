@@ -18,9 +18,9 @@ public class UserDto
      @Valid
      private String name,
                     surname,
-                    heigth,
+                    height,
                     width,
-                    userName,
+                    email,
                     password;
      @NotNull
      @Valid
@@ -31,25 +31,25 @@ public class UserDto
      }
 
 
-     public UserDto(long id, String name, String surname, String heigth,
-                    String width, String userName, String password, Instant timeDate)
+     public UserDto(long id, String name, String surname, String height,
+                    String width, String email, String password, Instant timeDate)
      {
           this.id = id;
           this.name = name;
           this.surname = surname;
-          this.heigth = heigth;
+          this.height = height;
           this.width = width;
-          this.userName = userName;
+          this.email = email;
           this.password = password;
           this.timeDate = timeDate;
      }
 
-     public String getUserName() {
-          return userName;
+     public String getEmail() {
+          return email;
      }
 
-     public void setUserName(String userName) {
-          this.userName = userName;
+     public void setEmail(String userName) {
+          this.email = userName;
      }
 
      public String getPassword() {
@@ -84,12 +84,12 @@ public class UserDto
           this.surname = surname;
      }
 
-     public String getHeigth() {
-          return heigth;
+     public String getHeight() {
+          return height;
      }
 
-     public void setHeigth(String heigth) {
-          this.heigth = heigth;
+     public void setHeight(String height) {
+          this.height = height;
      }
 
      public String getWidth() {
