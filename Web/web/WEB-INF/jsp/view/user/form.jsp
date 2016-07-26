@@ -158,7 +158,7 @@
             </c:when>
             <c:otherwise>
                 <div class="mdl-grid--no-spacing">
-                    <form:form method="post" modelAttribute="userDto" action="/user/add"
+                    <form:form method="post" modelAttribute="userDto" action="/user/edit"
                                cssClass="mdl-cell mdl-cell--12-col">
                         <h1>${title}</h1>
                         <div class="mdl-cell mdl-cell--12-col form" style="float: left">
@@ -206,34 +206,26 @@
 
                             <!-- email -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label componetsInput">
-                                <form:input path="email" type="text" cssClass="mdl-textfield__input"/>
-                                <label class="mdl-textfield__label" for="email">Email</label>
-                                <form:label path="email" cssClass="">
-                                    <form:errors path="email" cssClass=""/>
+                                <form:input
+                                        path="email"
+                                        type="text"
+                                        cssClass="mdl-textfield__input"/>
+                                <label class="mdl-textfield__label"
+                                       for="email">Email</label>
+                                <form:label
+                                        path="email"
+                                        cssClass="">
+                                    <form:errors
+                                            path="email"
+                                            cssClass=""/>
                                 </form:label>
                             </div>
 
+                            <input type="submit"
+                                   value="Registrarse"
+                                   class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                                   style="width: 30%; margin-bottom: 5%; margin-top: 10%;">
 
-                            <!-- Password -->
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label componetsInput">
-                                <form:input path="password" type="password"
-                                            cssClass="mdl-textfield__input"/>
-                                <label class="mdl-textfield__label" for="password">Password</label>
-                                <form:label path="password" cssClass="">
-                                    <form:errors path="password" cssClass=""/>
-                                </form:label>
-                            </div>
-
-
-                            <!-- Repetir Password -->
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label componetsInput">
-                                <form:input path="password" type="password"
-                                            cssClass="mdl-textfield__input"/>
-                                <label class="mdl-textfield__label" for="password">Repetir Password</label>
-                                <form:label path="password" cssClass="">
-                                    <form:errors path="password" cssClass=""/>
-                                </form:label>
-                            </div>
                         </div>
                     </form:form>
                 </div>
