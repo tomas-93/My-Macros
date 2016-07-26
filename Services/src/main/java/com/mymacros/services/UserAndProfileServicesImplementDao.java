@@ -1,5 +1,6 @@
 package com.mymacros.services;
 
+import com.mymacros.dto.entity.LoginDto;
 import com.mymacros.dto.entity.ProfileDto;
 import com.mymacros.dto.entity.UserAndProfileFormDto;
 import com.mymacros.dto.entity.UserDto;
@@ -104,7 +105,7 @@ public class UserAndProfileServicesImplementDao implements UserAndProfileService
       * @return
       */
      @Override
-     public boolean loginUser(UserDto userDto)
+     public boolean loginUser(LoginDto userDto)
      {
           return this.userRepositoryDao.loginUser(userDto);
      }
@@ -138,10 +139,24 @@ public class UserAndProfileServicesImplementDao implements UserAndProfileService
       * <p>Este metodo es usado cuando se recibe los datos a traves del formulario </p>
       * @param userAndProfileDto Reprecenta el objeto recibido del formulario
       */
+     @Override
      public void addUserAndProfile(UserAndProfileFormDto userAndProfileDto)
      {
           long idUser = this.userRepositoryDao.getIncrementID();
           long idProfile = this.profileRepositoryDao.getIncrementID();
+          this.addUser(new UserDto(idUser, userAndProfileDto.getName(),
+                  userAndProfileDto.getSurname(),
+                  userAndProfileDto.getHeight(),
+                  userAndProfileDto.getWidth(),
+                  userAndProfileDto.getEmail(),
+                  userAndProfileDto.getPassword()));
+          this.addProfile(new ProfileDto(idProfile,
+                  idUser,
+                  userAndProfileDto.getCarbs(),
+                  userAndProfileDto.getFat(),
+                  userAndProfileDto.getProtein(),
+                  userAndProfileDto.getFiber(),
+                  userAndProfileDto.getTotalCalories()));
 
      }
 }
