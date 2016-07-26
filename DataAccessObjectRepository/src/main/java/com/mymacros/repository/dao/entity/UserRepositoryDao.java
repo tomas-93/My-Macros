@@ -1,5 +1,6 @@
 package com.mymacros.repository.dao.entity;
 
+import com.mymacros.dto.entity.LoginDto;
 import com.mymacros.dto.entity.UserDto;
 
 /**
@@ -10,6 +11,6 @@ public interface UserRepositoryDao extends IDBase
      void createUser(UserDto userDto);
      UserDto getUser(long id);
      void updateUser(UserDto userDto);
-     boolean loginUser(UserDto userDto);
+     boolean loginUser(LoginDto userDto);
 
 }
