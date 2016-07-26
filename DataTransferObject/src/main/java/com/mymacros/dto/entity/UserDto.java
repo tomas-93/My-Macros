@@ -5,7 +5,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.time.Instant;
 
 /**
  * Created by Tomas on 17/07/2016.
@@ -22,17 +21,13 @@ public class UserDto
                     width,
                     email,
                     password;
-     @NotNull
-     @Valid
-     private Instant timeDate;
-
      public UserDto()
      {
      }
 
 
      public UserDto(long id, String name, String surname, String height,
-                    String width, String email, String password, Instant timeDate)
+                    String width, String email, String password)
      {
           this.id = id;
           this.name = name;
@@ -41,7 +36,6 @@ public class UserDto
           this.width = width;
           this.email = email;
           this.password = password;
-          this.timeDate = timeDate;
      }
 
      public String getEmail() {
@@ -99,14 +93,5 @@ public class UserDto
      public void setWidth(String width) {
           this.width = width;
      }
-
-     public Instant getTimeDate() {
-          return timeDate;
-     }
-
-     public void setTimeDate(Instant timeDate) {
-          this.timeDate = timeDate;
-     }
-
 
 }
