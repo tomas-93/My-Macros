@@ -24,13 +24,13 @@
             </div>
         </header>
         <div class="mdl-layout__drawer">
-            <span class="mdl-layout-title">Icono</span>
+            <span class="mdl-layout-title">My-Macros</span>
             <nav class="mdl-navigation">
-                <a class="mdl-navigation__link" href="">Diario</a>
-                <a class="mdl-navigation__link" href="">Alimentos</a>
-                <a class="mdl-navigation__link" href="">Receta</a>
-                <a class="mdl-navigation__link" href="">Perfil</a>
-                <a class="mdl-navigation__link" href="">Usurio</a>
+                <a class="mdl-navigation__link" href="/daily/list/${userDto.id}">Diario</a>
+                <a class="mdl-navigation__link" href="/food/list/${userDto.id}">Alimentos</a>
+                <a class="mdl-navigation__link" href="/recipe/list/${userDto.id}">Receta</a>
+                <a class="mdl-navigation__link" href="/profile/view/${userDto.id}">Perfil</a>
+                <a class="mdl-navigation__link" href="/user/view/${userDto.id}">Usurio</a>
             </nav>
         </div>
         <main class="mdl-layout__content">
