@@ -1,5 +1,6 @@
 package com.mymacros.repository.database;
 
+import com.mymacros.dto.entity.LoginDto;
 import com.mymacros.repository.dao.entity.UserRepositoryDao;
 import com.mymacros.dto.entity.UserDto;
 import org.springframework.stereotype.Repository;
@@ -59,12 +60,12 @@ public class UserDatabaseImplementDao implements UserRepositoryDao
       */
 
      @Override
-     public boolean loginUser(UserDto userDto)
+     public boolean loginUser(LoginDto userDto)
      {
          return !this.userDtoMapDatabase.keySet()
                  .stream()
                  .map(this.userDtoMapDatabase::get)
-                 .filter(userDto1 -> userDto1.getEmail()== userDto.getEmail() &&
+                 .filter(userDto1 -> userDto1.getEmail() == userDto.getEmail() &&
                          userDto1.getPassword() == userDto.getPassword())
                  .collect(Collectors.toList())
                  .isEmpty();
