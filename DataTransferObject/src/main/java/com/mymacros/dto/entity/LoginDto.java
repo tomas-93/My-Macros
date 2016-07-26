@@ -15,11 +15,11 @@ public class LoginDto
      @NotEmpty
      @Size(max = 50, min=5)
      @Valid
-     private String userName, password;
+     private String email, password;
 
-     public LoginDto(String userName, String password)
+     public LoginDto(String email, String password)
      {
-          this.userName = userName;
+          this.email = email;
           this.password = password;
      }
 
@@ -27,14 +27,14 @@ public class LoginDto
      {
      }
 
-     public String getUserName()
+     public String getEmail()
      {
-          return userName;
+          return email;
      }
 
-     public void setUserName(String userName)
+     public void setEmail(String email)
      {
-          this.userName = userName;
+          this.email = email;
      }
 
      public String getPassword()
