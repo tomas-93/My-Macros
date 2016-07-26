@@ -1,6 +1,8 @@
 package com.mymacros.services.dao.entity;
 
+import com.mymacros.dto.entity.LoginDto;
 import com.mymacros.dto.entity.ProfileDto;
+import com.mymacros.dto.entity.UserAndProfileFormDto;
 import com.mymacros.dto.entity.UserDto;
 
 import java.util.List;
@@ -13,6 +15,18 @@ public interface UserAndProfileServiceDao
      /**
       * ==================================================> <USER>
       */
+     /**
+      * <h1>addUserAndProfile</h1>
+      * <p>Envia un usuario al modulo repostory</p>
+      * @param userDto Datos Obtenidos del formulario web
+      */
+     void addUser(UserDto userDto);
+     /**
+      * <h1>addUserAndProfile</h1>
+      * <p>Envia un usuario al modulo repostory</p>
+      * @param userDto Datos Obtenidos del formulario web
+      */
+     void addUserAndProfile(UserAndProfileFormDto userDto);
      /**
       * <h1>getUser</h1>
       * <p>Busca un usuario en el respository</p>
@@ -33,7 +47,7 @@ public interface UserAndProfileServiceDao
       * @param userDto Objeto que contiene el surName y password a evaluar
       * @return Retorna true si el usuario se encuentra en el respositorio
       */
-     boolean loginUser(UserDto userDto);
+     boolean loginUser(LoginDto userDto);
      /**
       * ==================================================> <Profile>
       */
@@ -45,12 +59,7 @@ public interface UserAndProfileServiceDao
       */
      ProfileDto getProfile(long id);
 
-     /**
-      * <h1>addUserAndProfile</h1>
-      * <p>Envia un usuario al modulo repostory</p>
-      * @param userDto Datos Obtenidos del formulario web
-      */
-     void addUser(UserDto userDto);
+
 
      /**
       * <h1>addProfile</h1>
@@ -78,6 +87,4 @@ public interface UserAndProfileServiceDao
       * @param id Identificador que reprecenta el objeto alamacenado.
       */
      void deleteProfile(long id);
-
-
 }
