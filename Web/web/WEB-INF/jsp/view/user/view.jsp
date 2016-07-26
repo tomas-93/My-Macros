@@ -25,10 +25,12 @@
                 <h3>Email: ${userDto.email}</h3>
             </div>
             <div class="mdl-card__actions mdl-card--border">
-                <h3 style="float: right; margin: 1% 5% 0 5%;">Edit</h3>
-                <button style="float: right" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+                <a style="float: right" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
+                        href="<c:url value="/user/edit/${userDto.id}"/> ">
                     <i class="material-icons">edit</i>
-                </button>
+                </a>
+                <h3 style="float: right; margin: 1% 3% 0 3%;">Edit</h3>
+
             </div>
         </div>
     </jsp:body>
