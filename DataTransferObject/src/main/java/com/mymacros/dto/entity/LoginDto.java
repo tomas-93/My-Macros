@@ -16,15 +16,14 @@ public class LoginDto
      @Size(max = 50, min=5)
      @Valid
      private String email, password;
+     public LoginDto()
+     {
+     }
 
      public LoginDto(String email, String password)
      {
           this.email = email;
           this.password = password;
-     }
-
-     public LoginDto()
-     {
      }
 
      public String getEmail()

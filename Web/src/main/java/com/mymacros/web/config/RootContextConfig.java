@@ -38,9 +38,8 @@ import java.util.concurrent.Executor;
 
 public class RootContextConfig implements AsyncConfigurer, SchedulingConfigurer
 {
-     public static final Logger log = LogManager.getLogger();
-     public static final Logger schedulingLogger =
-             LogManager.getLogger(log.getName() + ".[scheduling]");
+     public static final Logger message = LogManager.getLogger();
+     public static final Logger schedulingLogger = LogManager.getLogger();
 
      @Bean
      public ObjectMapper objectMapper()
@@ -63,7 +62,7 @@ public class RootContextConfig implements AsyncConfigurer, SchedulingConfigurer
      @Bean
      public ThreadPoolTaskScheduler taskScheduler()
      {
-          log.info("Setting up thread pool task scheduler with 20 threads.");
+          message.info("Setting up thread pool task scheduler with 20 threads.");
           ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
           scheduler.setPoolSize(20);
           scheduler.setThreadNamePrefix("task-");
@@ -84,7 +83,7 @@ public class RootContextConfig implements AsyncConfigurer, SchedulingConfigurer
      public Executor getAsyncExecutor()
      {
           Executor executor = this.taskScheduler();
-          log.info("Configuring asynchronous method executor {}.", executor);
+          message.info("Configuring asynchronous method executor {}.", executor);
           return executor;
      }
 
@@ -98,7 +97,7 @@ public class RootContextConfig implements AsyncConfigurer, SchedulingConfigurer
      public void configureTasks(ScheduledTaskRegistrar registrar)
      {
           TaskScheduler scheduler = this.taskScheduler();
-          log.info("Configuring scheduled method executor {}.", scheduler);
+          message.info("Configuring scheduled method executor {}.", scheduler);
           registrar.setTaskScheduler(scheduler);
      }
 }

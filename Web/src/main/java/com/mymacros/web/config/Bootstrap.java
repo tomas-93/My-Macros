@@ -1,14 +1,12 @@
 package com.mymacros.web.config;
 
+import com.mymacros.web.filter.LoginFilter;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
-import javax.servlet.MultipartConfigElement;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRegistration;
+import javax.servlet.*;
 
 /**
  * Created by Tomas on 23/07/2016.
@@ -38,6 +36,9 @@ public class Bootstrap implements WebApplicationInitializer
                   null, 20_971_520L, 41_943_040L, 512_000
           ));
           dispatcher.addMapping("/");
+
+          FilterRegistration.Dynamic registration = container.addFilter("login", new LoginFilter());
+          registration.addMappingForUrlPatterns(null, false, "/app/*");
 
      }
 }

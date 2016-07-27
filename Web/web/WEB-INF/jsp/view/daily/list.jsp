@@ -5,10 +5,13 @@
   Time: 08:06 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="/WEB-INF/jsp/base.jspf" %>
-<template:main htmlTitle="Diario" bodyTitle="Diario">
+<template:app htmlTitle="Diario" bodyTitle="Diario">
     <jsp:body>
-        <h1>Diario</h1>
+        <div class="container">
+            <table class="">
+                <thead></thead>
+                <tbody></tbody>
+            </table>
+        </div>
     </jsp:body>
-</template:main>
+</template:app>
