@@ -24,12 +24,20 @@ public class LoginFilter implements Filter
      {
           try
           {
-               RootContextConfig.message.info("DoFilter verificado session");
+               RootContextConfig.message.info("\nDoFilter verificado session\n");
                HttpSession session = ((HttpServletRequest) servletRequest).getSession(false);
-               session.getAttribute("id");
-               filterChain.doFilter(servletRequest, servletResponse);
+               if (session.getAttribute("id") != null)
+               {
+                    RootContextConfig.message.info("\nSession Activa\n");
+                    filterChain.doFilter(servletRequest, servletResponse);
+               }else
+               {
+                    RootContextConfig.message.info("\nSession Rechazada\n");
+                    ((HttpServletResponse) servletResponse).sendRedirect("/login/form");
+               }
           } catch (Exception e)
           {
+               RootContextConfig.message.info("\nSession Rechazada\n");
                ((HttpServletResponse) servletResponse).sendRedirect("/login/form");
           }
      }
