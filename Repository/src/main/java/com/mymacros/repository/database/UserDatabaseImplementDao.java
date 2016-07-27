@@ -1,8 +1,8 @@
 package com.mymacros.repository.database;
 
 import com.mymacros.dto.entity.LoginDto;
-import com.mymacros.repository.dao.entity.UserRepositoryDao;
 import com.mymacros.dto.entity.UserDto;
+import com.mymacros.repository.dao.entity.UserRepositoryDao;
 import org.springframework.stereotype.Repository;
 
 import java.util.Hashtable;
@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 @Repository
 public class UserDatabaseImplementDao implements UserRepositoryDao
 {
-
      private final Map<Long, UserDto> userDtoMapDatabase = new Hashtable<>();
      private volatile long idUser = 1L;
 
@@ -25,6 +24,7 @@ public class UserDatabaseImplementDao implements UserRepositoryDao
       *
       * @param userDto entidad que sera guardado en la base de datos
       */
+     @Override
      public void createUser(UserDto userDto)
      {
           this.userDtoMapDatabase.put(userDto.getId(), userDto);
@@ -37,9 +37,27 @@ public class UserDatabaseImplementDao implements UserRepositoryDao
       * @param id identificador del usuario que se quiere obtiner
       * @return Retorna un objecto UserDto obtenida de la base de datos
       */
+     @Override
      public UserDto getUser(long id)
      {
           return this.userDtoMapDatabase.get(id);
+     }
+
+     /**
+      * Busca un objeto en el repositorio por el parametro email
+      *
+      * @param email de l usuario
+      * @return retorna un userDto tras la busqueda
+      */
+     @Override
+     public UserDto getUser(String email)
+     {
+          return this.userDtoMapDatabase.keySet()
+                  .stream()
+                  .map(this.userDtoMapDatabase::get)
+                  .filter(userDto -> userDto.equals(email))
+                  .collect(Collectors.toList())
+                  .get(0);
      }
 
      /**
@@ -48,6 +66,7 @@ public class UserDatabaseImplementDao implements UserRepositoryDao
       *
       * @param userDto Entidad que sera actualizado en la base de datos.
       */
+     @Override
      public void updateUser(UserDto userDto) {
           this.userDtoMapDatabase.replace(userDto.getId(), userDto);
      }
@@ -62,13 +81,14 @@ public class UserDatabaseImplementDao implements UserRepositoryDao
      @Override
      public boolean loginUser(LoginDto userDto)
      {
-         return !this.userDtoMapDatabase.keySet()
+          boolean flag = !this.userDtoMapDatabase.keySet()
                  .stream()
                  .map(this.userDtoMapDatabase::get)
-                 .filter(userDto1 -> userDto1.getEmail() == userDto.getEmail() &&
-                         userDto1.getPassword() == userDto.getPassword())
+                 .filter(userDto1 -> userDto1.getEmail().equals(userDto.getEmail()) &&
+                         userDto1.getPassword().equals(userDto.getPassword()))
                  .collect(Collectors.toList())
                  .isEmpty();
+          return flag;
      }
 
 

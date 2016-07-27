@@ -5,7 +5,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.time.Instant;
+import javax.validation.constraints.Size;
 
 /**
  * Created by Tomas on 20/07/2016.
@@ -14,41 +14,51 @@ public class UserAndProfileFormDto
 {
      @NotNull
      @NotEmpty
+     @Size(max = 50, min=5)
      @Valid
      private String name,
              surname,
-             height,
-             width,
              email,
-             password;
+             password,repitPassword;
+     @NotNull
+     @NotEmpty
+     @Size(max = 5, min=2)
+     @Valid
+     private String height,
+             width;
      @NotNull
      @Min(0)
      @Valid
      private Integer carbs, fat, protein, fiber, totalCalories;
-     @NotNull
-     @Valid
-     private Instant timeDate;
 
-     public UserAndProfileFormDto(String name, String surname, String height, String width,
-                                  String email, String password, Integer carbs, Integer fat,
-                                  Integer protein, Integer fiber, Integer totalCalories, Instant timeDate)
+     public UserAndProfileFormDto(String name, String surname, String email, String password, String repitPassword, String height, String width, Integer carbs, Integer fat, Integer protein, Integer fiber, Integer totalCalories)
      {
           this.name = name;
           this.surname = surname;
-          this.height = height;
-          this.width = width;
           this.email = email;
           this.password = password;
+          this.repitPassword = repitPassword;
+          this.height = height;
+          this.width = width;
           this.carbs = carbs;
           this.fat = fat;
           this.protein = protein;
           this.fiber = fiber;
           this.totalCalories = totalCalories;
-          this.timeDate = timeDate;
      }
 
      public UserAndProfileFormDto()
      {
+     }
+
+     public String getRepitPassword()
+     {
+          return repitPassword;
+     }
+
+     public void setRepitPassword(String repitPassword)
+     {
+          this.repitPassword = repitPassword;
      }
 
      public String getName()
@@ -161,13 +171,4 @@ public class UserAndProfileFormDto
           this.totalCalories = totalCalories;
      }
 
-     public Instant getTimeDate()
-     {
-          return timeDate;
-     }
-
-     public void setTimeDate(Instant timeDate)
-     {
-          this.timeDate = timeDate;
-     }
 }

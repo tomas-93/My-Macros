@@ -16,6 +16,12 @@ public interface UserAndProfileServiceDao
       * ==================================================> <USER>
       */
      /**
+      * Busca un objeto en el repositorio por el parametro email
+      * @param email de l usuario
+      * @return retorna un userDto tras la busqueda
+      */
+     UserDto getUser(String email);
+     /**
       * <h1>addUserAndProfile</h1>
       * <p>Envia un usuario al modulo repostory</p>
       * @param userDto Datos Obtenidos del formulario web

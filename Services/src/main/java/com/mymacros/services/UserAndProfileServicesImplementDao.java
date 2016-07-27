@@ -48,6 +48,18 @@ public class UserAndProfileServicesImplementDao implements UserAndProfileService
      }
 
      /**
+      * Busca un objeto en el repositorio por el parametro email
+      *
+      * @param email de l usuario
+      * @return retorna un userDto tras la busqueda
+      */
+     @Override
+     public UserDto getUser(String email)
+     {
+          return null;
+     }
+
+     /**
       * <h1>addUserAndProfile</h1>
       * <p>Envia un usuario al modulo repostory</p>
       *

@@ -10,7 +10,9 @@ public interface UserRepositoryDao extends IDBase
 {
      void createUser(UserDto userDto);
      UserDto getUser(long id);
+     UserDto getUser(String email);
      void updateUser(UserDto userDto);
      boolean loginUser(LoginDto userDto);
+
 
 }
