@@ -1,18 +1,17 @@
 package com.mymacros.repository.dao.entity;
 
-import com.mymacros.dto.entity.LoginDto;
-import com.mymacros.dto.entity.UserDto;
+import com.mymacros.repository.entity.UserEntity;
 
 /**
  * Created by Tomas on 17/07/2016.
  */
 public interface UserRepositoryDao
 {
-     void createUser(UserDto userDto);
-     UserDto getUser(long id);
-     UserDto getUser(String email);
-     void updateUser(UserDto userDto);
-     boolean loginUser(LoginDto userDto);
+     void createUser(UserEntity userDto);
+     UserEntity getUser(long id);
+     UserEntity getUser(String email);
+     void updateUser(UserEntity userDto);
+     boolean loginUser(UserEntity userDto);
 
 
 }

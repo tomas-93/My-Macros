@@ -1,6 +1,6 @@
 package com.mymacros.repository.dao.entity;
 
-import com.mymacros.dto.entity.RecipeDto;
+import com.mymacros.repository.entity.RecipeEntity;
 
 import java.util.List;
 
@@ -9,9 +9,9 @@ import java.util.List;
  */
 public interface RecipeRepositoryDao
 {
-     List<RecipeDto> getAllRecipe(long idUser);
-     RecipeDto getRecipeDto(long id);
-     void createRecipe(RecipeDto recipeDto);
-     void updateRecipe(RecipeDto recipeDto);
+     List<RecipeEntity> getAllRecipe(long idUser);
+     RecipeEntity getRecipeDto(long id);
+     void createRecipe(RecipeEntity recipeDto);
+     void updateRecipe(RecipeEntity recipeDto);
      void deleteRecipe(long id);
 }

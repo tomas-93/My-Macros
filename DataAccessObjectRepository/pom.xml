@@ -16,8 +16,8 @@
     </parent>
     <dependencies>
         <dependency>
-            <groupId>DataTransferObject</groupId>
-            <artifactId>DataTransferObject</artifactId>
+            <groupId>Repository</groupId>
+            <artifactId>Repository</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

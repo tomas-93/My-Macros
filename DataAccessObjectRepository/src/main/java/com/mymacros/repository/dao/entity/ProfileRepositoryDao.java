@@ -1,6 +1,6 @@
 package com.mymacros.repository.dao.entity;
 
-import com.mymacros.dto.entity.ProfileDto;
+import com.mymacros.repository.entity.ProfileEntity;
 
 import java.util.List;
 
@@ -9,9 +9,9 @@ import java.util.List;
  */
 public interface ProfileRepositoryDao
 {
-     List<ProfileDto> getAllProfiles(long id);
-     ProfileDto getProfile(long id);
-     void createProfile(ProfileDto profileDto);
-     void updateProfile(ProfileDto profileDto);
+     List<ProfileEntity> getAllProfiles(long id);
+     ProfileEntity getProfile(long id);
+     void createProfile(ProfileEntity profileDto);
+     void updateProfile(ProfileEntity profileDto);
      void deleteProfile(long id);
 }

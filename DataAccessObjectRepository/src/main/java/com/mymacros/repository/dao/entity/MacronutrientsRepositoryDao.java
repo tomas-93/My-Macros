@@ -1,6 +1,6 @@
 package com.mymacros.repository.dao.entity;
 
-import com.mymacros.dto.entity.MacronutrientsDto;
+import com.mymacros.repository.entity.MacrosEntity;
 
 import java.util.List;
 
@@ -9,9 +9,9 @@ import java.util.List;
  */
 public interface MacronutrientsRepositoryDao
 {
-     List<MacronutrientsDto> getAllMacronutrients(long id);
-     MacronutrientsDto getMacronutrients(long id);
-     void createMacronutrients(MacronutrientsDto macronutrientsDto);
-     void updateMacronutrients(MacronutrientsDto macronutrientsDto);
+     List<MacrosEntity> getAllMacronutrients(long id);
+     MacrosEntity getMacronutrients(long id);
+     void createMacronutrients(MacrosEntity macronutrientsDto);
+     void updateMacronutrients(MacrosEntity macronutrientsDto);
      void deleteMacronutrients(long id);
 }
