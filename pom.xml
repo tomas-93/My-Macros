@@ -23,37 +23,40 @@
         <maven-war-plugin>2.3</maven-war-plugin>
         <jackson.version>2.4.2</jackson.version>
         <log4j.version>2.0.2</log4j.version>
-        <spring.framework.version>4.3.0.RELEASE</spring.framework.version>
-        <hibernate.version>5.2.4.Final</hibernate.version>
+        <org.springframework-version-mvc>4.3.1.RELEASE</org.springframework-version-mvc>
+        <org.springframework-version-orm>4.3.1.RELEASE</org.springframework-version-orm>
+        <org.springframework-version-context>4.3.1.RELEASE</org.springframework-version-context>
+        <org.springframework-version-oxm>4.3.1.RELEASE</org.springframework-version-oxm>
+        <org.springframework-version-data-jpa>1.10.2.RELEASE</org.springframework-version-data-jpa>
+        <hibernate.version>5.2.1.Final</hibernate.version>
         <javax.inject>1</javax.inject>
         <javax.annotation-api>1.2</javax.annotation-api>
         <javax.servlet-api>3.1.0</javax.servlet-api>
         <javax.servlet.jsp-api>2.3.1</javax.servlet.jsp-api>
         <javax.servlet.jsp.jstl-api>1.2.1</javax.servlet.jsp.jstl-api>
         <javax.servlet.jsp.jstl.org.glassfish.web>1.2.2</javax.servlet.jsp.jstl.org.glassfish.web>
+        <db>2.1.1</db>
+        <mysql>5.1.39</mysql>
     </properties>
 
     <dependencies>
-        <!--
-                    SpringFramework
-         -->
+        <!-- SpringFramework -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>${spring.framework.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${spring.framework.version}</version>
+            <version>${org.springframework-version-context}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-oxm</artifactId>
-            <version>${spring.framework.version}</version>
+            <version>${org.springframework-version-oxm}</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${org.springframework-version-orm}</version>
         </dependency>
         <!--
                     Jacson

@@ -5,10 +5,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
@@ -18,7 +26,10 @@ import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.sql.DataSource;
+import java.util.Properties;
 import java.util.concurrent.Executor;
 
 /**
@@ -27,6 +38,10 @@ import java.util.concurrent.Executor;
 @Configuration
 @EnableAsync(proxyTargetClass = true)
 @EnableScheduling
+@EnableTransactionManagement(
+        mode = AdviceMode.PROXY, proxyTargetClass = false,
+        order = Ordered.LOWEST_PRECEDENCE
+)
 @ComponentScan(
         basePackages = {
                 "com.mymacros.web",
@@ -55,7 +70,7 @@ public class RootContextConfig implements AsyncConfigurer, SchedulingConfigurer
      public Jaxb2Marshaller jaxb2Marshaller()
      {
           Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-          marshaller.setPackagesToScan(new String[] { "com.mymacros.web" });
+          marshaller.setPackagesToScan("com.mymacros.web");
           return marshaller;
      }
 
@@ -100,4 +115,53 @@ public class RootContextConfig implements AsyncConfigurer, SchedulingConfigurer
           message.info("Configuring scheduled method executor {}.", scheduler);
           registrar.setTaskScheduler(scheduler);
      }
+    /**
+     * =============================================>Hibernate
+     */
+    @Bean
+    public DataSource dataSource()
+    {
+        DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
+        driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/test");
+        driverManagerDataSource.setUsername("tomas");
+        driverManagerDataSource.setPassword("tomas");
+        return driverManagerDataSource;
+    }
+
+    private Properties properties()
+    {
+        Properties properties = new Properties();
+        properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+        properties.put("hibernate.show_sql", "true");
+        properties.put("hibernate.format_sql", "true");
+        properties.put("hibernate.enable_lazy_load_no_trans", "true");
+        return properties;
+    }
+    @Bean
+    public SessionFactory sessionFactory()
+    {
+        LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
+        localSessionFactoryBean.setDataSource(dataSource());
+        localSessionFactoryBean.setPackagesToScan("com.mymacros.web",
+                                                     "com.mymacros.services",
+                                                     "com.mymacros.repository");
+        localSessionFactoryBean.setHibernateProperties(properties());
+        return localSessionFactoryBean.getObject();
+    }
+    @Bean
+    public Session session(SessionFactory sessionFactory)
+    {
+        return sessionFactory.getCurrentSession();
+    }
+
+    @Bean
+    @Autowired
+    public HibernateTransactionManager hibernateTransactionManager(SessionFactory sessionFactory)
+    {
+        HibernateTransactionManager hibernateTransactionManager = new HibernateTransactionManager();
+        hibernateTransactionManager.setSessionFactory(sessionFactory);
+        return hibernateTransactionManager;
+    }
+
 }

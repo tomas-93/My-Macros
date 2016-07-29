@@ -16,6 +16,13 @@
     </parent>
 
     <dependencies>
+        <!-- Hibernate -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <!-- My Modulos -->
         <dependency>
             <groupId>DataAccessObjectRepository</groupId>
             <artifactId>DataAccessObjectRepository</artifactId>

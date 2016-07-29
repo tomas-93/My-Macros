@@ -43,74 +43,75 @@ import java.util.List;
 )
 public class ServletContextConfig extends WebMvcConfigurerAdapter
 {
-     @Inject
-     ObjectMapper objectMapper;
-     @Inject
-     Marshaller marshaller;
-     @Inject
-     Unmarshaller unmarshaller;
+    @Inject
+    ObjectMapper objectMapper;
+    @Inject
+    Marshaller marshaller;
+    @Inject
+    Unmarshaller unmarshaller;
 
-     @Override
-     public void configureMessageConverters(
-             List<HttpMessageConverter<?>> converters
-     ) {
-          converters.add(new ByteArrayHttpMessageConverter());
-          converters.add(new StringHttpMessageConverter());
-          converters.add(new FormHttpMessageConverter());
-          converters.add(new SourceHttpMessageConverter<>());
+    @Override
+    public void configureMessageConverters(
+            List<HttpMessageConverter<?>> converters
+    )
+    {
+        converters.add(new ByteArrayHttpMessageConverter());
+        converters.add(new StringHttpMessageConverter());
+        converters.add(new FormHttpMessageConverter());
+        converters.add(new SourceHttpMessageConverter<>());
 
-          MarshallingHttpMessageConverter xmlConverter =
-                  new MarshallingHttpMessageConverter();
-          xmlConverter.setSupportedMediaTypes(Arrays.asList(
-                  new MediaType("application", "xml"),
-                  new MediaType("text", "xml")
-          ));
-          xmlConverter.setMarshaller(this.marshaller);
-          xmlConverter.setUnmarshaller(this.unmarshaller);
-          converters.add(xmlConverter);
+        MarshallingHttpMessageConverter xmlConverter =
+                new MarshallingHttpMessageConverter();
+        xmlConverter.setSupportedMediaTypes(Arrays.asList(
+                new MediaType("application", "xml"),
+                new MediaType("text", "xml")
+        ));
+        xmlConverter.setMarshaller(this.marshaller);
+        xmlConverter.setUnmarshaller(this.unmarshaller);
+        converters.add(xmlConverter);
 
-          MappingJackson2HttpMessageConverter jsonConverter =
-                  new MappingJackson2HttpMessageConverter();
-          jsonConverter.setSupportedMediaTypes(Arrays.asList(
-                  new MediaType("application", "json"),
-                  new MediaType("text", "json")
-          ));
-          jsonConverter.setObjectMapper(this.objectMapper);
-          converters.add(jsonConverter);
-     }
+        MappingJackson2HttpMessageConverter jsonConverter =
+                new MappingJackson2HttpMessageConverter();
+        jsonConverter.setSupportedMediaTypes(Arrays.asList(
+                new MediaType("application", "json"),
+                new MediaType("text", "json")
+        ));
+        jsonConverter.setObjectMapper(this.objectMapper);
+        converters.add(jsonConverter);
+    }
 
-     @Override
-     public void configureContentNegotiation(
-             ContentNegotiationConfigurer configurer)
-     {
-          configurer.favorPathExtension(true).favorParameter(false)
-                  .parameterName("mediaType").ignoreAcceptHeader(false)
-                  .useJaf(false).defaultContentType(MediaType.APPLICATION_XML)
-                  .mediaType("xml", MediaType.APPLICATION_XML)
-                  .mediaType("json", MediaType.APPLICATION_JSON);
-     }
+    @Override
+    public void configureContentNegotiation(
+            ContentNegotiationConfigurer configurer)
+    {
+        configurer.favorPathExtension(true).favorParameter(false)
+                .parameterName("mediaType").ignoreAcceptHeader(false)
+                .useJaf(false).defaultContentType(MediaType.APPLICATION_XML)
+                .mediaType("xml", MediaType.APPLICATION_XML)
+                .mediaType("json", MediaType.APPLICATION_JSON);
+    }
 
-     @Bean
-     public ViewResolver viewResolver()
-     {
-          InternalResourceViewResolver resolver =
-                  new InternalResourceViewResolver();
-          resolver.setViewClass(JstlView.class);
-          resolver.setPrefix("/WEB-INF/jsp/view/");
-          resolver.setSuffix(".jsp");
-          return resolver;
-     }
+    @Bean
+    public ViewResolver viewResolver()
+    {
+        InternalResourceViewResolver resolver =
+                new InternalResourceViewResolver();
+        resolver.setViewClass(JstlView.class);
+        resolver.setPrefix("/WEB-INF/jsp/view/");
+        resolver.setSuffix(".jsp");
+        return resolver;
+    }
 
-     @Bean
-     public RequestToViewNameTranslator viewNameTranslator()
-     {
-          return new DefaultRequestToViewNameTranslator();
-     }
+    @Bean
+    public RequestToViewNameTranslator viewNameTranslator()
+    {
+        return new DefaultRequestToViewNameTranslator();
+    }
 
-     @Bean
-     public MultipartResolver multipartResolver()
-     {
-          return new StandardServletMultipartResolver();
-     }
+    @Bean
+    public MultipartResolver multipartResolver()
+    {
+        return new StandardServletMultipartResolver();
+    }
 
 }
