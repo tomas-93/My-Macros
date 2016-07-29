@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Tomas on 17/07/2016.
  */
-public interface MacronutrientsRepositoryDao extends IDBase
+public interface MacronutrientsRepositoryDao
 {
      List<MacronutrientsDto> getAllMacronutrients(long id);
      MacronutrientsDto getMacronutrients(long id);

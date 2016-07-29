@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Tomas on 17/07/2016.
  */
-public interface FoodDailyRepositoryDao extends IDBase
+public interface FoodDailyRepositoryDao
 {
      List<FoodDailyDto> getAllFoodDaily(long idUser);
      FoodDailyDto getFoodDaily(long id);

@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Tomas on 17/07/2016.
  */
-public interface RecipeRepositoryDao extends IDBase
+public interface RecipeRepositoryDao
 {
      List<RecipeDto> getAllRecipe(long idUser);
      RecipeDto getRecipeDto(long id);
