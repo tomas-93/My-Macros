@@ -9,10 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.AdviceMode;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
 import org.springframework.core.Ordered;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
@@ -53,72 +50,74 @@ import java.util.concurrent.Executor;
 
 public class RootContextConfig implements AsyncConfigurer, SchedulingConfigurer
 {
-     public static final Logger message = LogManager.getLogger();
-     public static final Logger schedulingLogger = LogManager.getLogger();
+    public static final Logger message = LogManager.getLogger();
+    public static final Logger schedulingLogger = LogManager.getLogger();
 
-     @Bean
-     public ObjectMapper objectMapper()
-     {
-          ObjectMapper mapper = new ObjectMapper();
-          mapper.findAndRegisterModules();
-          mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-          mapper.configure(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE, false);
-          return mapper;
-     }
+    @Bean
+    public ObjectMapper objectMapper()
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.findAndRegisterModules();
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        mapper.configure(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE, false);
+        return mapper;
+    }
 
-     @Bean
-     public Jaxb2Marshaller jaxb2Marshaller()
-     {
-          Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-          marshaller.setPackagesToScan("com.mymacros.web");
-          return marshaller;
-     }
+    @Bean
+    public Jaxb2Marshaller jaxb2Marshaller()
+    {
+        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        marshaller.setPackagesToScan("com.mymacros.web");
+        return marshaller;
+    }
 
-     @Bean
-     public ThreadPoolTaskScheduler taskScheduler()
-     {
-          message.info("Setting up thread pool task scheduler with 20 threads.");
-          ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
-          scheduler.setPoolSize(20);
-          scheduler.setThreadNamePrefix("task-");
-          scheduler.setAwaitTerminationSeconds(60);
-          scheduler.setWaitForTasksToCompleteOnShutdown(true);
-          scheduler.setErrorHandler(t -> schedulingLogger.error(
-                  "Unknown error occurred while executing task.", t
-          ));
-          scheduler.setRejectedExecutionHandler(
-                  (r, e) -> schedulingLogger.error(
-                          "Execution of task {} was rejected for unknown reasons.", r
-                  )
-          );
-          return scheduler;
-     }
+    @Bean
+    public ThreadPoolTaskScheduler taskScheduler()
+    {
+        message.info("Setting up thread pool task scheduler with 20 threads.");
+        ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
+        scheduler.setPoolSize(20);
+        scheduler.setThreadNamePrefix("task-");
+        scheduler.setAwaitTerminationSeconds(60);
+        scheduler.setWaitForTasksToCompleteOnShutdown(true);
+        scheduler.setErrorHandler(t -> schedulingLogger.error(
+                "Unknown error occurred while executing task.", t
+        ));
+        scheduler.setRejectedExecutionHandler(
+                (r, e) -> schedulingLogger.error(
+                        "Execution of task {} was rejected for unknown reasons.", r
+                )
+        );
+        return scheduler;
+    }
 
-     @Override
-     public Executor getAsyncExecutor()
-     {
-          Executor executor = this.taskScheduler();
-          message.info("Configuring asynchronous method executor {}.", executor);
-          return executor;
-     }
+    @Override
+    public Executor getAsyncExecutor()
+    {
+        Executor executor = this.taskScheduler();
+        message.info("Configuring asynchronous method executor {}.", executor);
+        return executor;
+    }
 
-     @Override
-     public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler()
-     {
-          return null;
-     }
+    @Override
+    public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler()
+    {
+        return null;
+    }
 
-     @Override
-     public void configureTasks(ScheduledTaskRegistrar registrar)
-     {
-          TaskScheduler scheduler = this.taskScheduler();
-          message.info("Configuring scheduled method executor {}.", scheduler);
-          registrar.setTaskScheduler(scheduler);
-     }
+    @Override
+    public void configureTasks(ScheduledTaskRegistrar registrar)
+    {
+        TaskScheduler scheduler = this.taskScheduler();
+        message.info("Configuring scheduled method executor {}.", scheduler);
+        registrar.setTaskScheduler(scheduler);
+    }
+
     /**
      * =============================================>Hibernate
      */
     @Bean
+    @Scope(value = "singleton")
     public DataSource dataSource()
     {
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
@@ -138,18 +137,22 @@ public class RootContextConfig implements AsyncConfigurer, SchedulingConfigurer
         properties.put("hibernate.enable_lazy_load_no_trans", "true");
         return properties;
     }
+
     @Bean
+    @Scope(value = "singleton")
     public SessionFactory sessionFactory()
     {
         LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
         localSessionFactoryBean.setDataSource(dataSource());
         localSessionFactoryBean.setPackagesToScan("com.mymacros.web",
-                                                     "com.mymacros.services",
-                                                     "com.mymacros.repository");
+                "com.mymacros.services",
+                "com.mymacros.repository");
         localSessionFactoryBean.setHibernateProperties(properties());
         return localSessionFactoryBean.getObject();
     }
+
     @Bean
+    @Scope(value = "singleton")
     public Session session(SessionFactory sessionFactory)
     {
         return sessionFactory.getCurrentSession();
@@ -157,6 +160,7 @@ public class RootContextConfig implements AsyncConfigurer, SchedulingConfigurer
 
     @Bean
     @Autowired
+    @Scope(value = "singleton")
     public HibernateTransactionManager hibernateTransactionManager(SessionFactory sessionFactory)
     {
         HibernateTransactionManager hibernateTransactionManager = new HibernateTransactionManager();
