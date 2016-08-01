@@ -13,7 +13,8 @@ public class RecipeEntity
     private long id;
     private String name;
     private Timestamp time;
-    private FoodEntity foodByIdFood;
+    private UserEntity userByIdUser;
+    private MacrosEntity macrosEntity;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -74,16 +75,26 @@ public class RecipeEntity
         result = 31 * result + (time != null ? time.hashCode() : 0);
         return result;
     }
-
     @ManyToOne
-    @JoinColumn(name = "idFood", referencedColumnName = "id")
-    public FoodEntity getFoodByIdFood()
+    @JoinColumn(name = "idUser", referencedColumnName = "id")
+    public UserEntity getUserByIdUser()
     {
-        return foodByIdFood;
+        return this.userByIdUser;
+    }
+    public void setUserByIdUser(UserEntity userByIdUser)
+    {
+        this.userByIdUser = userByIdUser;
     }
 
-    public void setFoodByIdFood(FoodEntity foodByIdFood)
+    @ManyToOne
+    @JoinColumn(name = "idMacros", referencedColumnName = "id")
+    public MacrosEntity getMacrosEntity()
     {
-        this.foodByIdFood = foodByIdFood;
+        return macrosEntity;
+    }
+
+    public void setMacrosEntity(MacrosEntity macrosEntity)
+    {
+        this.macrosEntity = macrosEntity;
     }
 }

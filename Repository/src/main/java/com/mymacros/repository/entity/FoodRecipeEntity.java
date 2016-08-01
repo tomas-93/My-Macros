@@ -7,10 +7,11 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "foodrecipe", schema = "mymacros")
-public class FoodrecipeEntity
+public class FoodRecipeEntity
 {
     private long id;
-    private FoodEntity foodByIdFood;
+    private RecipeEntity recipeByIdRecipe;
+    private FoodEntity foodEntity;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -30,7 +31,7 @@ public class FoodrecipeEntity
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        FoodrecipeEntity that = (FoodrecipeEntity) o;
+        FoodRecipeEntity that = (FoodRecipeEntity) o;
 
         if (id != that.id) return false;
 
@@ -44,14 +45,26 @@ public class FoodrecipeEntity
     }
 
     @ManyToOne
-    @JoinColumn(name = "idFood", referencedColumnName = "id")
-    public FoodEntity getFoodByIdFood()
+    @JoinColumn(name = "idRecipe", referencedColumnName = "id")
+    public RecipeEntity getRecipeByIdRecipe()
     {
-        return foodByIdFood;
+        return recipeByIdRecipe;
     }
 
-    public void setFoodByIdFood(FoodEntity foodByIdFood)
+    public void setRecipeByIdRecipe(RecipeEntity recipeByIdRecipe)
     {
-        this.foodByIdFood = foodByIdFood;
+        this.recipeByIdRecipe = recipeByIdRecipe;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "idFood", referencedColumnName = "id")
+    public FoodEntity getFoodEntity()
+    {
+        return foodEntity;
+    }
+
+    public void setFoodEntity(FoodEntity foodEntity)
+    {
+        this.foodEntity = foodEntity;
     }
 }

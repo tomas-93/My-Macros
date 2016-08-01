@@ -8,12 +8,14 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name = "dailyfood", schema = "mymacros")
-public class DailyfoodEntity
+public class DailyFoodEntity
 {
     private long id;
-    private int numberFood;
+    private short numberFood;
     private Timestamp time;
     private DailyEntity dailyByIdDaily;
+    private RecipeEntity recipeByIdrecipe;
+    private FoodEntity foodEntity;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -29,12 +31,12 @@ public class DailyfoodEntity
 
     @Basic
     @Column(name = "numberFood", nullable = false)
-    public int getNumberFood()
+    public short getNumberFood()
     {
         return numberFood;
     }
 
-    public void setNumberFood(int numberFood)
+    public void setNumberFood(short numberFood)
     {
         this.numberFood = numberFood;
     }
@@ -57,7 +59,7 @@ public class DailyfoodEntity
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        DailyfoodEntity that = (DailyfoodEntity) o;
+        DailyFoodEntity that = (DailyFoodEntity) o;
 
         if (id != that.id) return false;
         if (numberFood != that.numberFood) return false;
@@ -85,5 +87,29 @@ public class DailyfoodEntity
     public void setDailyByIdDaily(DailyEntity dailyByIdDaily)
     {
         this.dailyByIdDaily = dailyByIdDaily;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "idRecipe", referencedColumnName = "id")
+    public RecipeEntity getRecipeByIdrecipe()
+    {
+        return recipeByIdrecipe;
+    }
+
+    public void setRecipeByIdrecipe(RecipeEntity recipeByIdrecipe)
+    {
+        this.recipeByIdrecipe = recipeByIdrecipe;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "idFood", referencedColumnName = "id")
+    public FoodEntity getFoodEntity()
+    {
+        return foodEntity;
+    }
+
+    public void setFoodEntity(FoodEntity foodEntity)
+    {
+        this.foodEntity = foodEntity;
     }
 }

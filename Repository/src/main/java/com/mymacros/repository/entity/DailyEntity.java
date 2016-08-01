@@ -11,8 +11,11 @@ import java.sql.Timestamp;
 public class DailyEntity
 {
     private long id;
+    private UserEntity userByIdUser;
+    private MacrosEntity macrosEntity;
     private int caloriesConsumed;
     private Timestamp time;
+
 
     @Id
     @Column(name = "id", nullable = false)
@@ -73,4 +76,26 @@ public class DailyEntity
         result = 31 * result + (time != null ? time.hashCode() : 0);
         return result;
     }
+
+    @ManyToOne
+    @JoinColumn(name = "idUser", referencedColumnName = "id")
+    public UserEntity getUserByIdEntity()
+    {
+        return this.userByIdUser;
+    }
+    public void setUserByIdEntity(UserEntity userByIdEntity)
+    {
+        this.userByIdUser = userByIdEntity;
+    }
+    @ManyToOne
+    @JoinColumn(name = "idMacros", referencedColumnName = "id")
+    public MacrosEntity getMacrosEntity()
+    {
+        return this.macrosEntity;
+    }
+    public void setMacrosEntity(MacrosEntity macrosEntity)
+    {
+        this.macrosEntity = macrosEntity;
+    }
+
 }

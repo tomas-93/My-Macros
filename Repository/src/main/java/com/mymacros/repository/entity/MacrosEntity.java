@@ -3,10 +3,10 @@ package com.mymacros.repository.entity;
 import javax.persistence.*;
 
 /**
- * Created by Tomas on 29/07/2016.
+ * Created by Tomas on 01/08/2016.
  */
 @Entity
-@Table(name = "macros", schema = "mymacros")
+@Table(name = "macros", schema = "mymacros", catalog = "")
 public class MacrosEntity
 {
     private long id;
@@ -15,6 +15,10 @@ public class MacrosEntity
     private Integer protein;
     private Integer fiber;
     private int totalCalorie;
+    private Integer sugar;
+    private Integer saturated;
+    private Integer monounsaturated;
+    private Integer polyunsaturated;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -88,6 +92,54 @@ public class MacrosEntity
         this.totalCalorie = totalCalorie;
     }
 
+    @Basic
+    @Column(name = "sugar", nullable = true)
+    public Integer getSugar()
+    {
+        return sugar;
+    }
+
+    public void setSugar(Integer sugar)
+    {
+        this.sugar = sugar;
+    }
+
+    @Basic
+    @Column(name = "saturated", nullable = true)
+    public Integer getSaturated()
+    {
+        return saturated;
+    }
+
+    public void setSaturated(Integer saturated)
+    {
+        this.saturated = saturated;
+    }
+
+    @Basic
+    @Column(name = "monounsaturated", nullable = true)
+    public Integer getMonounsaturated()
+    {
+        return monounsaturated;
+    }
+
+    public void setMonounsaturated(Integer monounsaturated)
+    {
+        this.monounsaturated = monounsaturated;
+    }
+
+    @Basic
+    @Column(name = "polyunsaturated", nullable = true)
+    public Integer getPolyunsaturated()
+    {
+        return polyunsaturated;
+    }
+
+    public void setPolyunsaturated(Integer polyunsaturated)
+    {
+        this.polyunsaturated = polyunsaturated;
+    }
+
     @Override
     public boolean equals(Object o)
     {
@@ -102,6 +154,12 @@ public class MacrosEntity
         if (fat != null ? !fat.equals(that.fat) : that.fat != null) return false;
         if (protein != null ? !protein.equals(that.protein) : that.protein != null) return false;
         if (fiber != null ? !fiber.equals(that.fiber) : that.fiber != null) return false;
+        if (sugar != null ? !sugar.equals(that.sugar) : that.sugar != null) return false;
+        if (saturated != null ? !saturated.equals(that.saturated) : that.saturated != null) return false;
+        if (monounsaturated != null ? !monounsaturated.equals(that.monounsaturated) : that.monounsaturated != null)
+            return false;
+        if (polyunsaturated != null ? !polyunsaturated.equals(that.polyunsaturated) : that.polyunsaturated != null)
+            return false;
 
         return true;
     }
@@ -115,6 +173,10 @@ public class MacrosEntity
         result = 31 * result + (protein != null ? protein.hashCode() : 0);
         result = 31 * result + (fiber != null ? fiber.hashCode() : 0);
         result = 31 * result + totalCalorie;
+        result = 31 * result + (sugar != null ? sugar.hashCode() : 0);
+        result = 31 * result + (saturated != null ? saturated.hashCode() : 0);
+        result = 31 * result + (monounsaturated != null ? monounsaturated.hashCode() : 0);
+        result = 31 * result + (polyunsaturated != null ? polyunsaturated.hashCode() : 0);
         return result;
     }
 }

@@ -6,12 +6,13 @@ import javax.persistence.*;
  * Created by Tomas on 29/07/2016.
  */
 @Entity
-@Table(name = "profile", schema = "mymacros", catalog = "")
+@Table(name = "profile", schema = "mymacros")
 public class ProfileEntity
 {
     private long id;
     private String name;
-    private MacrosEntity macrosByIdMacros;
+    private UserEntity userByIdUser;
+    private MacrosEntity macrosEntity;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -60,14 +61,25 @@ public class ProfileEntity
     }
 
     @ManyToOne
-    @JoinColumn(name = "idMacros", referencedColumnName = "id")
-    public MacrosEntity getMacrosByIdMacros()
+    @JoinColumn(name = "idUser", referencedColumnName = "id")
+    public UserEntity getUserByIdUser()
     {
-        return macrosByIdMacros;
+        return this.userByIdUser;
+    }
+    public void setUserByIdUser(UserEntity userByIdUser)
+    {
+        this.userByIdUser = userByIdUser;
     }
 
-    public void setMacrosByIdMacros(MacrosEntity macrosByIdMacros)
+    @ManyToOne
+    @JoinColumn(name = "idMacros", referencedColumnName = "id")
+    public MacrosEntity getMacrosEntity()
     {
-        this.macrosByIdMacros = macrosByIdMacros;
+        return macrosEntity;
+    }
+
+    public void setMacrosEntity(MacrosEntity macrosEntity)
+    {
+        this.macrosEntity = macrosEntity;
     }
 }

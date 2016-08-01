@@ -1,7 +1,7 @@
 package com.mymacros.repository.entity;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.sql.Timestamp;
 
 /**
@@ -14,11 +14,12 @@ public class UserEntity
     private long id;
     private String name;
     private String surname;
-    private Date brithday;
+    private LocalDate birthday;
     private int height;
     private int weight;
     private Timestamp time;
-    private String pasword;
+    private String password;
+    private String email;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -57,15 +58,15 @@ public class UserEntity
     }
 
     @Basic
-    @Column(name = "brithday", nullable = false)
-    public Date getBrithday()
+    @Column(name = "birthday", nullable = false)
+    public LocalDate getBirthday()
     {
-        return brithday;
+        return birthday;
     }
 
-    public void setBrithday(Date brithday)
+    public void setBirthday(LocalDate brithday)
     {
-        this.brithday = brithday;
+        this.birthday = brithday;
     }
 
     @Basic
@@ -105,15 +106,27 @@ public class UserEntity
     }
 
     @Basic
-    @Column(name = "pasword", nullable = false, length = 128)
-    public String getPasword()
+    @Column(name = "password", nullable = false, length = 128)
+    public String getPassword()
     {
-        return pasword;
+        return password;
     }
 
-    public void setPasword(String pasword)
+    public void setPassword(String pasword)
     {
-        this.pasword = pasword;
+        this.password = pasword;
+    }
+
+    @Basic
+    @Column(name = "email", nullable = false, length = 50)
+    public String getEmail()
+    {
+        return email;
+    }
+
+    public void setEmail(String email)
+    {
+        this.email = email;
     }
 
     @Override
@@ -129,9 +142,10 @@ public class UserEntity
         if (weight != that.weight) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (surname != null ? !surname.equals(that.surname) : that.surname != null) return false;
-        if (brithday != null ? !brithday.equals(that.brithday) : that.brithday != null) return false;
+        if (birthday != null ? !birthday.equals(that.birthday) : that.birthday != null) return false;
         if (time != null ? !time.equals(that.time) : that.time != null) return false;
-        if (pasword != null ? !pasword.equals(that.pasword) : that.pasword != null) return false;
+        if (password != null ? !password.equals(that.password) : that.password != null) return false;
+        if (email != null ? !email.equals(that.email) : that.email != null) return false;
 
         return true;
     }
@@ -142,11 +156,12 @@ public class UserEntity
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (surname != null ? surname.hashCode() : 0);
-        result = 31 * result + (brithday != null ? brithday.hashCode() : 0);
+        result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
         result = 31 * result + height;
         result = 31 * result + weight;
         result = 31 * result + (time != null ? time.hashCode() : 0);
-        result = 31 * result + (pasword != null ? pasword.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
         return result;
     }
 }
