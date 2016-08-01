@@ -1,7 +1,5 @@
 package com.mymacros.repository.dao.entity;
 
-import com.mymacros.dto.entity.DailyDto;
-
 import java.util.List;
 
 /**
@@ -9,9 +7,9 @@ import java.util.List;
  */
 public interface DailyRepositoryDao
 {
-     List<DailyDto> getAllDaily(long idDaily);
-     DailyDto getDaily(long id);
-     void createDaily(DailyDto dailyDto);
+     List<DailyEntity> getAllDaily(long idDaily);
+     DailyEntity getDaily(long id);
+     void createDaily(DailyEntity dailyDto);
      void deleteDaily(long id);
-     void updateDaily(DailyDto dailyDto);
+     void updateDaily(DailyEntity dailyDto);
 }

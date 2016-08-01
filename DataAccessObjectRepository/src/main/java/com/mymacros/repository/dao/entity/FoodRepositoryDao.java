@@ -1,7 +1,5 @@
 package com.mymacros.repository.dao.entity;
 
-import com.mymacros.repository.entity.FoodEntity;
-
 import java.util.List;
 
 /**

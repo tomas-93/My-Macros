@@ -1,7 +1,5 @@
 package com.mymacros.repository.dao.entity;
 
-import com.mymacros.repository.entity.FoodEntity;
-
 import java.util.List;
 
 /**
@@ -9,9 +7,9 @@ import java.util.List;
  */
 public interface FoodDailyRepositoryDao
 {
-     List<FoodEntity> getAllFoodDaily(long idUser);
-     FoodEntity getFoodDaily(long id);
-     void crateFoodDaily(FoodEntity foodDailyDto);
-     void updateFoodDaily(FoodEntity foodDailyDto);
+     List<DailyFoodEntity> getAllFoodDaily(long id);
+     DailyFoodEntity getFoodDaily(long id);
+     void crateFoodDaily(DailyFoodEntity dailyFoodEntity);
+     void updateFoodDaily(DailyFoodEntity dailyFoodEntity);
      void deleteFoodDaily(long id);
 }

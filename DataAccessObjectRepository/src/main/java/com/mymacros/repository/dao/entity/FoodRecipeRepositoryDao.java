@@ -1,7 +1,5 @@
 package com.mymacros.repository.dao.entity;
 
-import com.mymacros.repository.entity.FoodrecipeEntity;
-
 import java.util.List;
 
 /**
@@ -9,9 +7,9 @@ import java.util.List;
  */
 public interface FoodRecipeRepositoryDao
 {
-     List<FoodrecipeEntity> getAllFoodRecipe(long idUser);
-     FoodrecipeEntity getFoodRecipe(long id);
-     void createFoodRecipe(FoodrecipeEntity foodRecipeDto);
-     void updateFoodRecipe(FoodrecipeEntity foodRecipeDto);
+     List<FoodRecipeEntity> getAllFoodRecipe(long idRecipe);
+     FoodRecipeEntity getFoodRecipe(long id);
+     void createFoodRecipe(FoodRecipeEntity foodRecipeDto);
+     void updateFoodRecipe(FoodRecipeEntity foodRecipeDto);
      void deleteFoodRecipe(long id);
 }
