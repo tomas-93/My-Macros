@@ -3,102 +3,117 @@ package com.mymacros.dto.entity;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.time.Instant;
 
 /**
  * Created by Tomas on 17/07/2016.
  */
 public class FoodDto
 {
-     private long id, idMacronutrients;
-     @NotNull
-     @Valid
-     private Instant timeDate;
-     @NotNull
-     @NotEmpty
-     @Valid
-     private String name, brand, unit, quantity, type;
+    private long id, idMacronutrients, idUser;
+    @NotNull
+    @NotEmpty
+    @Valid
+    private String name, brand, unit, type;
+    @NotNull
+    @Min(0)
+    @Valid
+    private Integer quantity;
 
-     public FoodDto() {
-     }
+    public FoodDto()
+    {
+    }
 
-     public FoodDto(long id, long idMacronutrients, Instant timeDate, String name, String brand, String unit, String quantity, String type)
-     {
-          this.id = id;
-          this.idMacronutrients = idMacronutrients;
-          this.timeDate = timeDate;
-          this.name = name;
-          this.brand = brand;
-          this.unit = unit;
-          this.quantity = quantity;
-          this.type = type;
-     }
+    public FoodDto(long id, long idMacronutrients, long idUser, String name, String brand, String unit, String type, Integer quantity)
+    {
+        this.id = id;
+        this.idMacronutrients = idMacronutrients;
+        this.idUser = idUser;
+        this.name = name;
+        this.brand = brand;
+        this.unit = unit;
+        this.type = type;
+        this.quantity = quantity;
+    }
 
-     public String getType()
-     {
-          return type;
-     }
+    public String getType()
+    {
+        return type;
+    }
 
-     public void setType(String type)
-     {
-          this.type = type;
-     }
+    public void setType(String type)
+    {
+        this.type = type;
+    }
 
-     public long getId() {
-          return id;
-     }
+    public long getId()
+    {
+        return id;
+    }
 
-     public void setId(long id) {
-          this.id = id;
-     }
+    public void setId(long id)
+    {
+        this.id = id;
+    }
 
-     public long getIdMacronutrients() {
-          return idMacronutrients;
-     }
+    public long getIdMacronutrients()
+    {
+        return idMacronutrients;
+    }
 
-     public void setIdMacronutrients(long idMacronutrients) {
-          this.idMacronutrients = idMacronutrients;
-     }
+    public void setIdMacronutrients(long idMacronutrients)
+    {
+        this.idMacronutrients = idMacronutrients;
+    }
 
-     public Instant getTimeDate() {
-          return timeDate;
-     }
+    public String getName()
+    {
+        return name;
+    }
 
-     public void setTimeDate(Instant timeDate) {
-          this.timeDate = timeDate;
-     }
+    public void setName(String name)
+    {
+        this.name = name;
+    }
 
-     public String getName() {
-          return name;
-     }
+    public String getBrand()
+    {
+        return brand;
+    }
 
-     public void setName(String name) {
-          this.name = name;
-     }
+    public void setBrand(String brand)
+    {
+        this.brand = brand;
+    }
 
-     public String getBrand() {
-          return brand;
-     }
+    public String getUnit()
+    {
+        return unit;
+    }
 
-     public void setBrand(String brand) {
-          this.brand = brand;
-     }
+    public void setUnit(String unit)
+    {
+        this.unit = unit;
+    }
 
-     public String getUnit() {
-          return unit;
-     }
+    public Integer getQuantity()
+    {
+        return quantity;
+    }
 
-     public void setUnit(String unit) {
-          this.unit = unit;
-     }
+    public void setQuantity(Integer quantity)
+    {
+        this.quantity = quantity;
+    }
 
-     public String getQuantity() {
-          return quantity;
-     }
+    public long getIdUser()
+    {
+        return idUser;
+    }
 
-     public void setQuantity(String quantity) {
-          this.quantity = quantity;
-     }
-
+    public void setIdUser(long idUser)
+    {
+        this.idUser = idUser;
+    }
 }

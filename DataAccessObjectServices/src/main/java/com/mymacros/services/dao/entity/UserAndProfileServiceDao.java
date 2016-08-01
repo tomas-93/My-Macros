@@ -5,6 +5,7 @@ import com.mymacros.dto.entity.ProfileDto;
 import com.mymacros.dto.entity.UserAndProfileFormDto;
 import com.mymacros.dto.entity.UserDto;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -17,22 +18,16 @@ public interface UserAndProfileServiceDao
       */
      /**
       * Busca un objeto en el repositorio por el parametro email
-      * @param email de l usuario
+      * @param loginDto Objeto DTO que contiene el email y contraseña
       * @return retorna un userDto tras la busqueda
       */
-     UserDto getUser(String email);
+     UserDto login(LoginDto loginDto);
      /**
       * <h1>addUserAndProfile</h1>
       * <p>Envia un usuario al modulo repostory</p>
       * @param userDto Datos Obtenidos del formulario web
       */
      void addUser(UserDto userDto);
-     /**
-      * <h1>addUserAndProfile</h1>
-      * <p>Envia un usuario al modulo repostory</p>
-      * @param userDto Datos Obtenidos del formulario web
-      */
-     void addUserAndProfile(UserAndProfileFormDto userDto);
      /**
       * <h1>getUser</h1>
       * <p>Busca un usuario en el respository</p>
@@ -45,15 +40,6 @@ public interface UserAndProfileServiceDao
       * @param formUser Datos obtenidos del formulario web
       */
      void updateUser(UserDto formUser);
-
-     /**
-      * <h1>loginUser</h1>
-      * <p>Envia un objeto UserDto para identificar si el usuario se encuentra en repositorio<</p>
-      *
-      * @param userDto Objeto que contiene el surName y password a evaluar
-      * @return Retorna true si el usuario se encuentra en el respositorio
-      */
-     boolean loginUser(LoginDto userDto);
      /**
       * ==================================================> <Profile>
       */
@@ -64,8 +50,6 @@ public interface UserAndProfileServiceDao
       * @param id Indetificador del objeto a buscar
       */
      ProfileDto getProfile(long id);
-
-
 
      /**
       * <h1>addProfile</h1>

@@ -1,8 +1,11 @@
 package com.mymacros.dto.entity;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by Tomas on 17/07/2016.
@@ -15,11 +18,18 @@ public class ProfileDto
      @Valid
      private Integer carbs, fat, protein, fiber, totalCalories;
 
+     @NotNull
+     @NotEmpty
+     @Size(min = 5, max = 50)
+     @Valid
+     private String name;
+
      public ProfileDto()
      {
      }
 
-     public ProfileDto(long id, long idUser, int carbs, int fat, int protein, int fiber, int totalCalories)
+     public ProfileDto(long id, long idUser, int carbs, int fat, int protein,
+                       int fiber, int totalCalories, String name)
      {
           this.id = id;
           this.idUser = idUser;
@@ -28,6 +38,7 @@ public class ProfileDto
           this.protein = protein;
           this.fiber = fiber;
           this.totalCalories = totalCalories;
+         this.name = name;
      }
 
      public long getId() {
@@ -85,4 +96,14 @@ public class ProfileDto
      public void setTotalCalories(int totalCalories) {
           this.totalCalories = totalCalories;
      }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
 }

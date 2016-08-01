@@ -9,20 +9,19 @@ import javax.validation.constraints.NotNull;
  */
 public class RecipeDto
 {
-     private long id, idMacros, idFoodRecipe;
+     private long id, idUser, idMacros;
      @NotNull
      @NotEmpty
-     private String name, description;
+     private String name;
 
      public RecipeDto() {
      }
 
-     public RecipeDto(long id, long idMacros, long idFoodRecipe, String name, String description) {
+     public RecipeDto(long id, long idUser, long idMacros, String name) {
           this.id = id;
+          this.idUser = idUser;
           this.idMacros = idMacros;
-          this.idFoodRecipe = idFoodRecipe;
           this.name = name;
-          this.description = description;
      }
 
      public long getId() {
@@ -33,6 +32,14 @@ public class RecipeDto
           this.id = id;
      }
 
+     public long getIdUser() {
+          return idUser;
+     }
+
+     public void setIdUser(long idUser) {
+          this.idUser = idUser;
+     }
+
      public long getIdMacros() {
           return idMacros;
      }
@@ -41,28 +48,12 @@ public class RecipeDto
           this.idMacros = idMacros;
      }
 
-     public long getIdFoodRecipe() {
-          return idFoodRecipe;
-     }
-
-     public void setIdFoodRecipe(long idFoodRecipe) {
-          this.idFoodRecipe = idFoodRecipe;
-     }
-
      public String getName() {
           return name;
      }
 
      public void setName(String name) {
           this.name = name;
-     }
-
-     public String getDescription() {
-          return description;
-     }
-
-     public void setDescription(String description) {
-          this.description = description;
      }
 
 }

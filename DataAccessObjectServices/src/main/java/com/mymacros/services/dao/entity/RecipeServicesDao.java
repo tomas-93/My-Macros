@@ -18,7 +18,7 @@ public interface RecipeServicesDao extends MacrosServicesDao
       * <p>Obtiene un objeto Recipe del Repositorio</p>
       * @param id Indetificador que reprecenta el elemeto a buscar.
       */
-     void getRecipe(long id);
+     RecipeDto getRecipe(long id);
 
      /**
       * <h1>getAllRecipe</h1>
