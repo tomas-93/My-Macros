@@ -1,6 +1,8 @@
 package com.mymacros.repository.dao.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.security.Principal;
 import java.time.LocalDate;
 import java.sql.Timestamp;
 
@@ -9,7 +11,7 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name = "user", schema = "mymacros")
-public class UserEntity
+public class UserEntity implements Principal, Serializable
 {
     private long id;
     private String name;

@@ -1,13 +1,14 @@
 package com.mymacros.repository.dao.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Tomas on 29/07/2016.
  */
 @Entity
 @Table(name = "foodrecipe", schema = "mymacros")
-public class FoodRecipeEntity
+public class FoodRecipeEntity implements Serializable
 {
     private long id;
     private RecipeEntity recipeByIdRecipe;
