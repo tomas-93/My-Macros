@@ -2,13 +2,14 @@ package com.mymacros.services;
 
 import com.mymacros.dto.entity.DailyDto;
 import com.mymacros.dto.entity.FoodDailyDto;
-import com.mymacros.repository.dao.entity.DailyRepositoryDao;
-import com.mymacros.repository.dao.entity.FoodDailyRepositoryDao;
+import com.mymacros.repository.dao.entity.*;
 import com.mymacros.services.dao.entity.DailyServicesDao;
+import com.mymacros.services.util.Convert;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Tomas on 20/07/2016.
@@ -16,10 +17,12 @@ import java.util.List;
 @Service
 public class DailyServicesImplementDao implements DailyServicesDao
 {
-     @Inject
-     private DailyRepositoryDao dailyRepositoryDao;
-     @Inject
-     private FoodDailyRepositoryDao foodDailyRepositoryDao;
+    @Inject
+    private DailyRepositoryDao dailyRepositoryDao;
+    @Inject
+    private FoodDailyRepositoryDao foodDailyRepositoryDao;
+    @Inject
+    private MacronutrientsRepositoryDao macronutrientsRepositoryDao;
 
      /**
       * <h1>addDailyDto</h1>
@@ -30,7 +33,7 @@ public class DailyServicesImplementDao implements DailyServicesDao
      @Override
      public void addDailyDto(DailyDto dailyDto)
      {
-          this.dailyRepositoryDao.createDaily(dailyDto);
+         this.dailyRepositoryDao.createDaily(Convert.dailyEntity(dailyDto));
      }
 
      /**
@@ -43,20 +46,23 @@ public class DailyServicesImplementDao implements DailyServicesDao
      @Override
      public DailyDto getDailyDto(long id)
      {
-          return this.dailyRepositoryDao.getDaily(id);
+         return Convert.dailyDto(this.dailyRepositoryDao.getDaily(id));
      }
 
      /**
       * <h1>getAllDaily</h1>
       * <p>Obtiene una lista de objetos DailyDto relacionados con el usuario</p>
       *
-      * @param idDaily Indetidicador que reprecenta la relacion entre el usuario y el entidad DailyDto
+      * @param idUser Indetidicador que reprecenta la relacion entre el usuario y el entidad DailyDto
       * @return Retorna una lista de elemeto DailyDto relacionados con el usuario.
       */
      @Override
-     public List<DailyDto> getAllDaily(long idDaily)
+     public List<DailyDto> getAllDaily(long idUser)
      {
-          return this.dailyRepositoryDao.getAllDaily(idDaily);
+         return this.dailyRepositoryDao.getAllDaily(idUser)
+                 .stream()
+                 .map(Convert::dailyDto)
+                 .collect(Collectors.toList());
      }
 
      /**
@@ -68,7 +74,7 @@ public class DailyServicesImplementDao implements DailyServicesDao
      @Override
      public void updateDailyDto(DailyDto dailyDto)
      {
-          this.dailyRepositoryDao.updateDaily(dailyDto);
+         this.dailyRepositoryDao.updateDaily(Convert.dailyEntity(dailyDto));
      }
 
      /**
@@ -80,7 +86,13 @@ public class DailyServicesImplementDao implements DailyServicesDao
      @Override
      public void deleteDailyDto(long id)
      {
-          this.dailyRepositoryDao.deleteDaily(id);
+         DailyEntity dailyEntity = this.dailyRepositoryDao.getDaily(id);
+         this.dailyRepositoryDao.deleteDaily(id);
+         this.foodDailyRepositoryDao.getAllFoodDaily(dailyEntity.getId())
+                 .stream()
+                 .map(DailyFoodEntity::getId)
+                 .forEach(this.foodDailyRepositoryDao::deleteFoodDaily);
+         this.macronutrientsRepositoryDao.deleteMacronutrients(dailyEntity.getMacrosEntity().getId());
      }
 
      /**
@@ -92,7 +104,7 @@ public class DailyServicesImplementDao implements DailyServicesDao
      @Override
      public void addFoodDailyDto(FoodDailyDto foodDailyDto)
      {
-          this.foodDailyRepositoryDao.crateFoodDaily(foodDailyDto);
+         this.foodDailyRepositoryDao.crateFoodDaily(Convert.foodDailyEntity(foodDailyDto));
      }
 
      /**
@@ -105,7 +117,7 @@ public class DailyServicesImplementDao implements DailyServicesDao
      @Override
      public FoodDailyDto getFoodDailyDto(long id)
      {
-          return this.foodDailyRepositoryDao.getFoodDaily(id);
+         return Convert.foodDailyDto(this.foodDailyRepositoryDao.getFoodDaily(id));
      }
 
      /**
@@ -118,7 +130,10 @@ public class DailyServicesImplementDao implements DailyServicesDao
      @Override
      public List<FoodDailyDto> getAllFoodDailyDto(long id)
      {
-          return this.foodDailyRepositoryDao.getAllFoodDaily(id);
+         return this.foodDailyRepositoryDao.getAllFoodDaily(id)
+                 .stream()
+                 .map(Convert::foodDailyDto)
+                 .collect(Collectors.toList());
      }
 
      /**
@@ -130,7 +145,7 @@ public class DailyServicesImplementDao implements DailyServicesDao
      @Override
      public void updateFoodDailyDto(FoodDailyDto foodDailyDto)
      {
-          this.foodDailyRepositoryDao.updateFoodDaily(foodDailyDto);
+         this.foodDailyRepositoryDao.updateFoodDaily(Convert.foodDailyEntity(foodDailyDto));
      }
 
      /**
@@ -142,17 +157,6 @@ public class DailyServicesImplementDao implements DailyServicesDao
      @Override
      public void deleteFoodDailyDto(long id)
      {
-          this.foodDailyRepositoryDao.deleteFoodDaily(id);
-     }
-
-     public void addElement(DailyDto dailyDto, FoodDailyDto foodDailyDto)
-     {
-          dailyDto.setId(this.dailyRepositoryDao.getIncrementID());
-
-          foodDailyDto.setId(this.foodDailyRepositoryDao.getIncrementID());
-          foodDailyDto.setIdDaily(dailyDto.getId());
-
-          this.addDailyDto(dailyDto);
-          this.addFoodDailyDto(foodDailyDto);
+         this.foodDailyRepositoryDao.deleteFoodDaily(id);
      }
 }
