@@ -18,7 +18,7 @@
                             <!--
                                 User
                                 -->
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 100%">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="weight: 100%">
                                 <form:input path="email" type="text" cssClass="mdl-textfield__input"/>
                                 <label class="mdl-textfield__label" for="email">Email</label>
                                 <form:label path="email" cssClass="">
@@ -32,7 +32,7 @@
                         -->
 
                         <div class="mdl-cell mdl-cell--12-col" >
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 100%">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="weight: 100%">
                                 <form:input path="password" type="password" cssClass="mdl-textfield__input"/>
                                 <label class="mdl-textfield__label" for="password">Password</label>
                                 <form:label path="password" cssClass="">
@@ -42,7 +42,7 @@
                             </div>
                         </div>
                         <input type="submit" value="Login"
-                               class="mdl-button mdl-js-button mdl-button--raised" style="width: 50%;">
+                               class="mdl-button mdl-js-button mdl-button--raised" style="weight: 50%;">
                         <a href="<c:url value="/login/add"/> " style="margin-top: 1%;">Registrarce?</a>
                     </form:form>
                 </div>

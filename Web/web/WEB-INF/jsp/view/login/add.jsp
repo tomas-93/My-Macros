@@ -69,12 +69,12 @@
                     </div>
 
 
-                    <!-- width -->
+                    <!-- weight -->
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label componetsInput">
-                        <form:input path="width" type="text" cssClass="mdl-textfield__input"/>
-                        <label class="mdl-textfield__label" for="width">Peso (Kg)</label>
-                        <form:label path="width" cssClass="">
-                            <form:errors path="width" cssClass=""/>
+                        <form:input path="weight" type="text" cssClass="mdl-textfield__input"/>
+                        <label class="mdl-textfield__label" for="weight">Peso (Kg)</label>
+                        <form:label path="weight" cssClass="">
+                            <form:errors path="weight" cssClass=""/>
                         </form:label>
                     </div>
 
@@ -174,9 +174,9 @@
                             <form:errors path="totalCalories" cssClass=""/>
                         </form:label>
                     </div>
-                    <div style="height: 5%; width: 5%;"></div>
+                    <div style="height: 5%; weight: 5%;"></div>
                     <input type="submit" value="Registrarse"
-                           class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="width: 30%; margin-bottom: 5%; margin-top:20%;">
+                           class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="weight: 30%; margin-bottom: 5%; margin-top:20%;">
                 </div>
             </form:form>
         </div>

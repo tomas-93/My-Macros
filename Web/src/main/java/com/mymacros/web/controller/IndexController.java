@@ -16,30 +16,9 @@ import javax.inject.Inject;
 @Controller
 public class IndexController
 {
-     @Inject
-     UserAndProfileServiceDao userAndProfileServiceDao;
      @RequestMapping("/")
      public View getIdenx()
      {
-          if (userAndProfileServiceDao.getUser(10) != null)
-          {
-               UserDto userDto = new UserDto();
-               userDto.setId(10);
-               userDto.setName("Tomas");
-               userDto.setSurname("Yussef");
-               userDto.setEmail("tomasyussef@gmail.com");
-               userDto.setPassword("yussef");
-               userDto.setWidth("80");
-               userDto.setHeight("1.80");
-               ProfileDto profileDto =  new ProfileDto();
-               profileDto.setId(10);
-               profileDto.setIdUser(10);
-               profileDto.setCarbs(10);
-               profileDto.setProtein(10);
-               profileDto.setFat(10);
-               profileDto.setTotalCalories(10);
-               profileDto.setFiber(10);
-          }
           return new RedirectView("/app/daily/list");
      }
 }

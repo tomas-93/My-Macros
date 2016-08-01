@@ -1,4 +1,4 @@
-package com.mymacros.repository.entity;
+package com.mymacros.repository.dao.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;

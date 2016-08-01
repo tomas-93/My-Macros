@@ -9,7 +9,7 @@
 <c:set var="title" value="Vista de Usuario"/>
 <template:app htmlTitle="${title}" bodyTitle="${title}">
     <jsp:body>
-        <div class="mdl-card mdl-shadow--4dp" style="width: 50%; margin: 1% auto;">
+        <div class="mdl-card mdl-shadow--4dp" style="weight: 50%; margin: 1% auto;">
             <div class="mdl-card__title">
                 <h3>${userDto.name} ${userDto.surname}</h3>
             </div>
@@ -19,7 +19,7 @@
             <div class="mdl-card--border"></div>
             <div class="mdl-card__supporting-text">
                 <h3>Altura: ${userDto.height}</h3>
-                <h3>Peso: ${userDto.width}</h3>
+                <h3>Peso: ${userDto.weight}</h3>
                 <h3>Email: ${userDto.email}</h3>
             </div>
             <div class="mdl-card__actions mdl-card--border">
