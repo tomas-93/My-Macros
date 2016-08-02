@@ -127,6 +127,12 @@
             <version>${javax.inject}</version>
             <scope>compile</scope>
         </dependency>
+        <!-- jBCrypt-->
+        <dependency>
+            <groupId>de.svenkubiak</groupId>
+            <artifactId>jBCrypt</artifactId>
+            <version>0.4.1</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

@@ -19,7 +19,7 @@ public class UserDto
     private String name,
             surname,
             email,
-            password;
+            password,repeatPassword;
     private Integer height,
             weight;
 
@@ -28,13 +28,14 @@ public class UserDto
     {
     }
 
-    public UserDto(long id, String name, String surname, String email, String password, Integer height, Integer weight, LocalDate birthday)
+    public UserDto(long id, String name, String surname, String email, String password, String repeatPassword, Integer height, Integer weight, LocalDate birthday)
     {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password = password;
+        this.repeatPassword = repeatPassword;
         this.height = height;
         this.weight = weight;
         this.birthday = birthday;
@@ -120,4 +121,13 @@ public class UserDto
         this.surname = surname;
     }
 
+    public String getRepeatPassword()
+    {
+        return repeatPassword;
+    }
+
+    public void setRepeatPassword(String repeatPassword)
+    {
+        this.repeatPassword = repeatPassword;
+    }
 }

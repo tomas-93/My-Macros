@@ -208,17 +208,17 @@ public class Convert
      * @param userDto
      * @return
      */
-    public static UserEntity userEntity(UserDto userDto)
+    public static UserEntity userEntity(UserDto userDto,byte[] password)
     {
         UserEntity userEntity = new UserEntity();
         userEntity.setId(userDto.getId());
-        userEntity.setName(userDto.getName());
+        userEntity.setUserName(userDto.getName());
         userEntity.setSurname(userDto.getSurname());
         userEntity.setHeight(userDto.getHeight());
         userEntity.setWeight(userDto.getWeight());
         userEntity.setEmail(userDto.getEmail());
         userEntity.setBirthday(userDto.getBirthday());
-        userEntity.setPassword(userDto.getPassword());
+        userEntity.setPassword(password);
         return userEntity;
     }
 
@@ -231,7 +231,7 @@ public class Convert
     {
         UserDto userDto = new UserDto();
         userDto.setId(userEntity.getId());
-        userDto.setName(userEntity.getName());
+        userDto.setName(userEntity.getUserName());
         userDto.setSurname(userEntity.getSurname());
         userDto.setBirthday(userEntity.getBirthday());
         userDto.setEmail(userEntity.getEmail());

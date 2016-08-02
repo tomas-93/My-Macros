@@ -1,26 +1,30 @@
 package com.mymacros.repository.dao.entity;
 
 import javax.persistence.*;
+import javax.security.auth.Subject;
+import javax.servlet.http.HttpSession;
 import java.io.Serializable;
-import java.security.Principal;
 import java.time.LocalDate;
 import java.sql.Timestamp;
+import java.security.Principal;
 
 /**
  * Created by Tomas on 29/07/2016.
  */
 @Entity
 @Table(name = "user", schema = "mymacros")
-public class UserEntity implements Principal, Serializable
+public class UserEntity implements Serializable,Principal
 {
+    private static final String SESSION_ATTRIBUTE_KEY = "com.mymacros.repository";
+
     private long id;
-    private String name;
+    private String userName;
     private String surname;
     private LocalDate birthday;
     private int height;
     private int weight;
     private Timestamp time;
-    private String password;
+    private byte[] password;
     private String email;
 
     @Id
@@ -37,14 +41,14 @@ public class UserEntity implements Principal, Serializable
 
     @Basic
     @Column(name = "name", nullable = false, length = 50)
-    public String getName()
+    public String getUserName()
     {
-        return name;
+        return userName;
     }
 
-    public void setName(String name)
+    public void setUserName(String name)
     {
-        this.name = name;
+        this.userName = name;
     }
 
     @Basic
@@ -109,12 +113,12 @@ public class UserEntity implements Principal, Serializable
 
     @Basic
     @Column(name = "password", nullable = false, length = 128)
-    public String getPassword()
+    public byte[] getPassword()
     {
         return password;
     }
 
-    public void setPassword(String pasword)
+    public void setPassword( byte[] pasword)
     {
         this.password = pasword;
     }
@@ -142,7 +146,7 @@ public class UserEntity implements Principal, Serializable
         if (id != that.id) return false;
         if (height != that.height) return false;
         if (weight != that.weight) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (userName != null ? !userName.equals(that.userName) : that.userName != null) return false;
         if (surname != null ? !surname.equals(that.surname) : that.surname != null) return false;
         if (birthday != null ? !birthday.equals(that.birthday) : that.birthday != null) return false;
         if (time != null ? !time.equals(that.time) : that.time != null) return false;
@@ -156,7 +160,7 @@ public class UserEntity implements Principal, Serializable
     public int hashCode()
     {
         int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (userName != null ? userName.hashCode() : 0);
         result = 31 * result + (surname != null ? surname.hashCode() : 0);
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
         result = 31 * result + height;
@@ -165,5 +169,22 @@ public class UserEntity implements Principal, Serializable
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         return result;
+    }
+
+    public String getName()
+    {
+        return this.getUserName();
+    }
+
+
+    public static Principal getPrincipal(HttpSession session)
+    {
+        return session == null ? null :
+                (Principal)session.getAttribute(SESSION_ATTRIBUTE_KEY);
+    }
+
+    public static void setPrincipal(HttpSession session, Principal principal)
+    {
+        session.setAttribute(SESSION_ATTRIBUTE_KEY, principal);
     }
 }

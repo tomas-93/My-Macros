@@ -4,10 +4,15 @@ import com.mymacros.dto.entity.*;
 import com.mymacros.repository.dao.entity.*;
 import com.mymacros.services.dao.entity.UserAndProfileServiceDao;
 import com.mymacros.services.util.Convert;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 
+import java.nio.charset.StandardCharsets;
+import java.security.NoSuchAlgorithmException;
+import java.security.Principal;
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,6 +28,21 @@ public class UserAndProfileServicesImplementDao implements UserAndProfileService
     private ProfileRepositoryDao profileRepositoryDao;
     @Inject
     private MacronutrientsRepositoryDao macronutrientsRepositoryDao;
+
+    private static final SecureRandom RANDOM;
+    private static final int HASHING_ROUNDS = 10;
+
+    static
+    {
+        try
+        {
+            RANDOM = SecureRandom.getInstanceStrong();
+        }
+        catch(NoSuchAlgorithmException e)
+        {
+            throw new IllegalStateException(e);
+        }
+    }
     /**
      * <h1>getUser</h1>
      * <p>Busca un usuario en el respository</p>
@@ -54,12 +74,16 @@ public class UserAndProfileServicesImplementDao implements UserAndProfileService
      * @return retorna un userDto tras la busqueda
      */
     @Override
-    public UserDto login(LoginDto loginDto)
+    public Principal login(LoginDto loginDto)
     {
         UserEntity userEntity = this.userRepositoryDao.loginUser(loginDto);
-        if (userEntity.getEmail() == null)
+        if (userEntity == null)
             return null;
-        return Convert.userDto(userEntity);
+
+        if (!BCrypt.checkpw(loginDto.getPassword(),new String(userEntity.getPassword(), StandardCharsets.UTF_8)))
+            return null;
+
+        return userEntity;
     }
 
     /**
@@ -71,8 +95,10 @@ public class UserAndProfileServicesImplementDao implements UserAndProfileService
     @Override
     public void addUser(UserDto userDto)
     {
-        this.userRepositoryDao.createUser(Convert.userEntity(userDto));
+        String salt = BCrypt.gensalt(HASHING_ROUNDS, RANDOM);
+        this.userRepositoryDao.createUser(Convert.userEntity(userDto, BCrypt.hashpw(userDto.getPassword(), salt).getBytes()));
     }
+
 
     /**
      * <h1>addProfile</h1>
@@ -111,7 +137,8 @@ public class UserAndProfileServicesImplementDao implements UserAndProfileService
     @Override
     public void updateUser(UserDto userDto)
     {
-        this.userRepositoryDao.updateUser(Convert.userEntity(userDto));
+        String salt = BCrypt.gensalt(HASHING_ROUNDS, RANDOM);
+        this.userRepositoryDao.updateUser(Convert.userEntity(userDto, BCrypt.hashpw(userDto.getPassword(), salt).getBytes()));
     }
     /**
      * <h1>updateProfile</h1>

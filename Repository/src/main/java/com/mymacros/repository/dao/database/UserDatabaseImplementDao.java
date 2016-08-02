@@ -73,9 +73,8 @@ public class UserDatabaseImplementDao implements UserRepositoryDao
     {
         return (UserEntity)
                 this.session.createQuery("from UserEntity WHERE " +
-                        "UserEntity.email = :email AND UserEntity.password = :password")
-                        .setParameter("email",userDto.getEmail())
-                        .setParameter("password", userDto.getPassword());
+                        "UserEntity.email = :email")
+                        .setParameter("email",userDto.getEmail());
     }
 
 }

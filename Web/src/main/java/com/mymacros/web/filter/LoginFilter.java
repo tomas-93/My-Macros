@@ -1,50 +1,47 @@
 package com.mymacros.web.filter;
 
-import com.mymacros.web.config.RootContextConfig;
+import com.mymacros.repository.dao.entity.UserEntity;
+import org.apache.logging.log4j.ThreadContext;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.security.Principal;
+import java.util.UUID;
 
 /**
- * Created by Tomas on 26/07/2016.
+ * Created by Tomas on 01/08/2016.
  */
 public class LoginFilter implements Filter
 {
-     @Override
-     public void init(FilterConfig filterConfig) throws ServletException
-     {
 
-     }
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException
+    {
 
-     @Override
-     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException
-     {
-          try
-          {
-               RootContextConfig.message.info("\nDoFilter verificado session\n");
-               HttpSession session = ((HttpServletRequest) servletRequest).getSession(false);
-               if (session.getAttribute("id") != null)
-               {
-                    RootContextConfig.message.info("\nSession Activa\n");
-                    filterChain.doFilter(servletRequest, servletResponse);
-               }else
-               {
-                    RootContextConfig.message.info("\nSession Rechazada\n");
-                    ((HttpServletResponse) servletResponse).sendRedirect("/login/form");
-               }
-          } catch (Exception e)
-          {
-               RootContextConfig.message.info("\nSession Rechazada\n");
-               ((HttpServletResponse) servletResponse).sendRedirect("/login/form");
-          }
-     }
+    }
 
-     @Override
-     public void destroy()
-     {
+    @Override
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException
+    {
+        String id = UUID.randomUUID().toString();
+        ThreadContext.put("id", id);
+        Principal  principal = UserEntity.getPrincipal(((HttpServletRequest)servletRequest).getSession());
+        if (principal!=null)
+            ThreadContext.put("userName", principal.getName());
+        try
+        {
+            ((HttpServletResponse)servletResponse).setHeader("X-Request-Id", id);
+        }finally
+        {
+            ThreadContext.clearAll();
+        }
+    }
 
-     }
+    @Override
+    public void destroy()
+    {
+
+    }
 }
