@@ -1,25 +1,25 @@
-package com.mymacros.repository.dao.database;
+package com.mymacros.repository.dao.implement.database;
 
-import com.mymacros.repository.dao.entity.FoodEntity;
+import com.mymacros.database.entity.FoodEntity;
 import com.mymacros.repository.dao.entity.FoodRepositoryDao;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
 import java.util.List;
 
 /**
- * Created by Tomas on 18/07/2016.
+ * @author Tomas Yussef Galicia Guzman
  */
 @Repository
-public class FoodDataBaseImplementDao implements FoodRepositoryDao
+public class FoodDataBaseImplementDao extends HibernateTemplate implements FoodRepositoryDao
 {
-    private Session session;
-
     @Inject
-    public FoodDataBaseImplementDao(Session session)
+    public FoodDataBaseImplementDao(SessionFactory sessionFactory)
     {
-        this.session = session;
+        super(sessionFactory);
     }
 
     /**
@@ -33,9 +33,7 @@ public class FoodDataBaseImplementDao implements FoodRepositoryDao
     public List<FoodEntity> getAllFood(long idUser)
     {
         return (List<FoodEntity>)
-                this.session.createQuery("from FoodEntity inner join UserEntity where  FoodEntity.userByIdUser=:idUser")
-                .setParameter("idUser", idUser)
-                .list();
+                this.find("from FoodEntity inner join UserEntity where  FoodEntity.userByIdUser=:idUser", idUser);
     }
 
     /**
@@ -48,7 +46,7 @@ public class FoodDataBaseImplementDao implements FoodRepositoryDao
     @Override
     public FoodEntity getFood(long id)
     {
-        return this.session.load(FoodEntity.class, id);
+        return this.load(FoodEntity.class, id);
     }
 
     /**
@@ -60,7 +58,7 @@ public class FoodDataBaseImplementDao implements FoodRepositoryDao
     @Override
     public void createFood(FoodEntity foodDto)
     {
-        this.session.save(foodDto);
+        this.save(foodDto);
     }
 
     /**
@@ -72,8 +70,8 @@ public class FoodDataBaseImplementDao implements FoodRepositoryDao
     @Override
     public void updateFood(FoodEntity foodDto)
     {
-        if (this.session.load(FoodEntity.class, foodDto.getId()) != null)
-            this.session.update(foodDto);
+        if (this.load(FoodEntity.class, foodDto.getId()) != null)
+            this.update(foodDto);
     }
 
     /**
@@ -85,7 +83,8 @@ public class FoodDataBaseImplementDao implements FoodRepositoryDao
     @Override
     public void deleteFood(long id)
     {
-        if (this.session.load(FoodEntity.class, id) != null)
-            this.session.remove(id);
+        FoodEntity foodEntity = this.load(FoodEntity.class, id);
+        if (foodEntity != null)
+            this.delete(foodEntity);
     }
 }

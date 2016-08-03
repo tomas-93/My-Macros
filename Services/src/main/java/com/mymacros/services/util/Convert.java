@@ -1,7 +1,8 @@
 package com.mymacros.services.util;
 
+
+import com.mymacros.database.entity.*;
 import com.mymacros.dto.entity.*;
-import com.mymacros.repository.dao.entity.*;
 
 /**
  * Created by Tomas on 01/08/2016.

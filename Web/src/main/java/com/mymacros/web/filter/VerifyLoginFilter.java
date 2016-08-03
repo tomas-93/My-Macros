@@ -1,7 +1,6 @@
 package com.mymacros.web.filter;
 
-import com.mymacros.repository.dao.entity.UserEntity;
-import com.mymacros.web.config.RootContextConfig;
+import com.mymacros.database.entity.UserEntity;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

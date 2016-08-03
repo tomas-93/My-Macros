@@ -2,7 +2,7 @@ package com.mymacros.web.controller;
 
 import com.mymacros.dto.entity.LoginDto;
 import com.mymacros.dto.entity.UserDto;
-import com.mymacros.repository.dao.entity.UserEntity;
+import com.mymacros.database.entity.UserEntity;
 import com.mymacros.services.dao.entity.UserAndProfileServiceDao;
 import com.mymacros.web.config.RootContextConfig;
 import org.springframework.stereotype.Controller;
@@ -18,6 +18,8 @@ import javax.servlet.http.HttpSession;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Arrays;
+import java.util.Map;
 
 /**
  * Created by Tomas on 26/07/2016.
@@ -55,20 +57,16 @@ public class LoginController
      */
     @RequestMapping(value = "/session", method = RequestMethod.POST)
     public String session(@Valid @ModelAttribute("loginDto") LoginDto loginDto,
-                          BindingResult bindingResult, Model model, HttpSession session, HttpServletRequest request)
+                          BindingResult bindingResult, Map<String, Object> model, HttpSession session, HttpServletRequest request)
     {
         if (UserEntity.getPrincipal(session) != null)
             return "redirect:/app/daily/list";
 
         if (bindingResult.hasErrors())
         {
-            RootContextConfig.message.info("\n\nError de formularion\n\n");
-            model.addAttribute("loginDto", loginDto);
+            model.put("loginDto", loginDto);
             return "login/session";
         }
-
-        RootContextConfig.message.info("\n\nUser: " + loginDto.getEmail());
-        RootContextConfig.message.info("\n\nPass: " + loginDto.getPassword());
 
         Principal principal ;
         try
@@ -77,13 +75,14 @@ public class LoginController
         }catch (ConstraintViolationException e )
         {
             loginDto.setPassword("");
-            model.addAttribute("validationError", e.getConstraintViolations());
+            model.put("loginDto", loginDto);
+            model.put("loginFail", true);
             return "login/session";
         }
         if(principal == null)
         {
             loginDto.setPassword("");
-            model.addAttribute("loginFail", true);
+            model.put("loginFail", true);
             return "login/session";
         }
         UserEntity.setPrincipal(session, principal);
@@ -102,7 +101,7 @@ public class LoginController
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String addUser(Model model)
     {
-        model.addAttribute("userAndProfileFormDto", new UserDto());
+        model.addAttribute("userDto", new UserDto());
         return "login/add";
     }
 
@@ -115,20 +114,32 @@ public class LoginController
      * @return retorna la vista daily si no tubo errores pero si encontro retorna la del formulario
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addUser(@Valid @ModelAttribute("userAndProfileFormDto")
-                                  UserDto userDto, BindingResult bindingResult, Model model)
+    public String addUser(@Valid @ModelAttribute("userDto")UserDto userDto, BindingResult bindingResult, Model model)
     {
+        RootContextConfig.message.info("\n\n URL: /login/add:POST \n\n");
+        RootContextConfig.message.info("\n\nuser: " + userDto.getEmail());
+        RootContextConfig.message.info("\n\nPass: " + userDto.getPassword());
+        RootContextConfig.message.info("\n\nPass: " + userDto.getRepeatPassword());
         if (bindingResult.hasErrors())
         {
-            model.addAttribute("userAndProfileFormDto", userDto);
+            RootContextConfig.message.info("\n\n Error en la validacion \n\n");
+            RootContextConfig.message.info("\n\n "+userDto.getRepeatPassword()+" \n\n");
+            RootContextConfig.message.info("\n\n "+userDto.getPassword()+" \n\n");
+            RootContextConfig.message.info("\n\n "+userDto.getHeight()+" \n\n");
+            RootContextConfig.message.info("\n\n "+userDto.getWeight()+" \n\n");
+            RootContextConfig.message.info("\n\n "+userDto.getName()+" \n\n");
+            RootContextConfig.message.info("\n\n "+userDto.getSurname()+" \n\n");
+            RootContextConfig.message.info("\n\n "+userDto.getBirthday()+" \n\n");
+
+            model.addAttribute("userDto", userDto);
             return "login/add";
         }
 
         if (!userDto.getPassword().equals(userDto.getRepeatPassword()))
         {
             RootContextConfig.message.info("\n\n Pass Incorrecto \n\n");
-            model.addAttribute("userAndProfileFormDto", userDto);
-            model.addAttribute("passErr", true);
+            model.addAttribute("userDto", userDto);
+            model.addAttribute("passErr", 1);
             return "login/add";
         }
         RootContextConfig.message.info("\n\nuser: " + userDto.getEmail());

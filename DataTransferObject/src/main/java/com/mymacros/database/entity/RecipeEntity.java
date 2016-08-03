@@ -1,4 +1,4 @@
-package com.mymacros.repository.dao.entity;
+package com.mymacros.database.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,15 +8,14 @@ import java.sql.Timestamp;
  * Created by Tomas on 29/07/2016.
  */
 @Entity
-@Table(name = "daily", schema = "mymacros")
-public class DailyEntity implements Serializable
+@Table(name = "recipe", schema = "mymacros")
+public class RecipeEntity implements Serializable
 {
     private long id;
+    private String name;
+    private Timestamp time;
     private UserEntity userByIdUser;
     private MacrosEntity macrosEntity;
-    private int caloriesConsumed;
-    private Timestamp time;
-
 
     @Id
     @Column(name = "id", nullable = false)
@@ -31,15 +30,15 @@ public class DailyEntity implements Serializable
     }
 
     @Basic
-    @Column(name = "caloriesConsumed", nullable = false)
-    public int getCaloriesConsumed()
+    @Column(name = "name", nullable = false, length = 50)
+    public String getName()
     {
-        return caloriesConsumed;
+        return name;
     }
 
-    public void setCaloriesConsumed(int caloriesConsumed)
+    public void setName(String name)
     {
-        this.caloriesConsumed = caloriesConsumed;
+        this.name = name;
     }
 
     @Basic
@@ -60,10 +59,10 @@ public class DailyEntity implements Serializable
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        DailyEntity that = (DailyEntity) o;
+        RecipeEntity that = (RecipeEntity) o;
 
         if (id != that.id) return false;
-        if (caloriesConsumed != that.caloriesConsumed) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (time != null ? !time.equals(that.time) : that.time != null) return false;
 
         return true;
@@ -73,30 +72,30 @@ public class DailyEntity implements Serializable
     public int hashCode()
     {
         int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + caloriesConsumed;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (time != null ? time.hashCode() : 0);
         return result;
     }
-
     @ManyToOne
     @JoinColumn(name = "idUser", referencedColumnName = "id")
-    public UserEntity getUserByIdEntity()
+    public UserEntity getUserByIdUser()
     {
         return this.userByIdUser;
     }
-    public void setUserByIdEntity(UserEntity userByIdEntity)
+    public void setUserByIdUser(UserEntity userByIdUser)
     {
-        this.userByIdUser = userByIdEntity;
+        this.userByIdUser = userByIdUser;
     }
+
     @ManyToOne
     @JoinColumn(name = "idMacros", referencedColumnName = "id")
     public MacrosEntity getMacrosEntity()
     {
-        return this.macrosEntity;
+        return macrosEntity;
     }
+
     public void setMacrosEntity(MacrosEntity macrosEntity)
     {
         this.macrosEntity = macrosEntity;
     }
-
 }

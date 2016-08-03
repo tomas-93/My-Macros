@@ -1,5 +1,7 @@
 package com.mymacros.repository.dao.entity;
 
+import com.mymacros.database.entity.MacrosEntity;
+
 import java.util.List;
 
 /**

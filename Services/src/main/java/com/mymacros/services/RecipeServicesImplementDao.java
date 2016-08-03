@@ -1,19 +1,25 @@
 package com.mymacros.services;
 
+
+import com.mymacros.database.entity.FoodRecipeEntity;
+import com.mymacros.database.entity.RecipeEntity;
 import com.mymacros.dto.entity.FoodRecipeDto;
 import com.mymacros.dto.entity.MacronutrientsDto;
 import com.mymacros.dto.entity.RecipeDto;
-import com.mymacros.repository.dao.entity.*;
+import com.mymacros.repository.dao.entity.FoodRecipeRepositoryDao;
+import com.mymacros.repository.dao.entity.MacronutrientsRepositoryDao;
+import com.mymacros.repository.dao.entity.RecipeRepositoryDao;
 import com.mymacros.services.dao.entity.RecipeServicesDao;
 import com.mymacros.services.util.Convert;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Created by Tomas on 20/07/2016.
+ * @author Tomas Yussef Galicia Guzman
  */
 @Service
 public class RecipeServicesImplementDao implements RecipeServicesDao
@@ -32,6 +38,7 @@ public class RecipeServicesImplementDao implements RecipeServicesDao
      * @param id Indetificador que reprecenta el elemeto a buscar.
      */
     @Override
+    @Transactional
     public RecipeDto getRecipe(long id)
     {
         return Convert.recipeDto(this.recipeRepositoryDao.getRecipeDto(id));
@@ -45,6 +52,7 @@ public class RecipeServicesImplementDao implements RecipeServicesDao
      * @return Retorna una lista de con todos lo objetos encontrados
      */
     @Override
+    @Transactional
     public List<RecipeDto> getAllRecipe(long id)
     {
         return this.recipeRepositoryDao.getAllRecipe(id)
@@ -60,6 +68,7 @@ public class RecipeServicesImplementDao implements RecipeServicesDao
      * @param recipeDto Objeto que encapsula los nunevos elemetos.
      */
     @Override
+    @Transactional
     public void addRecipe(RecipeDto recipeDto)
     {
         this.recipeRepositoryDao.createRecipe(Convert.recipeEntity(recipeDto));
@@ -72,6 +81,7 @@ public class RecipeServicesImplementDao implements RecipeServicesDao
      * @param id Indetificador que reprecenta el objeto a eliminar
      */
     @Override
+    @Transactional
     public void deleteRecipe(long id)
     {
         RecipeEntity recipeEntity = this.recipeRepositoryDao.getRecipeDto(id);
@@ -89,6 +99,7 @@ public class RecipeServicesImplementDao implements RecipeServicesDao
      * @param recipeDto Objeto que encapsula los nuevos datos.
      */
     @Override
+    @Transactional
     public void updateRecipe(RecipeDto recipeDto)
     {
         this.recipeRepositoryDao.updateRecipe(Convert.recipeEntity(recipeDto));
@@ -101,6 +112,7 @@ public class RecipeServicesImplementDao implements RecipeServicesDao
      * @param foodRecipeDto Objeto que encapsula el nuevo elemeto a ser enviado.
      */
     @Override
+    @Transactional
     public void addFoodRecipe(FoodRecipeDto foodRecipeDto)
     {
         this.foodRecipeRepositoryDao.createFoodRecipe(Convert.foodRecipeEntity(foodRecipeDto));
@@ -113,6 +125,7 @@ public class RecipeServicesImplementDao implements RecipeServicesDao
      * @param id Identificador que reprecenta el elemto a buscar
      */
     @Override
+    @Transactional
     public FoodRecipeDto getFoodRecipe(long id)
     {
         return Convert.foodRecipeDto(this.foodRecipeRepositoryDao.getFoodRecipe(id));
@@ -126,6 +139,7 @@ public class RecipeServicesImplementDao implements RecipeServicesDao
      * @return Retorna una lista de los objetos encontrados
      */
     @Override
+    @Transactional
     public List<FoodRecipeDto> getAllFoodRecipe(long id)
     {
         return this.foodRecipeRepositoryDao.getAllFoodRecipe(id)
@@ -141,6 +155,7 @@ public class RecipeServicesImplementDao implements RecipeServicesDao
      * @param foodRecipeDto Objeto que encapsula los nuevos elementos de la base de datos
      */
     @Override
+    @Transactional
     public void updateFoodRecipe(FoodRecipeDto foodRecipeDto)
     {
         this.foodRecipeRepositoryDao.updateFoodRecipe(Convert.foodRecipeEntity(foodRecipeDto));
@@ -153,6 +168,7 @@ public class RecipeServicesImplementDao implements RecipeServicesDao
      * @param id Identificar que reprecenta el objeto a eliminar
      */
     @Override
+    @Transactional
     public void deleteFoodRecipe(long id)
     {
         this.foodRecipeRepositoryDao.deleteFoodRecipe(id);
@@ -165,6 +181,7 @@ public class RecipeServicesImplementDao implements RecipeServicesDao
      * @param macronutrientsDto Objeto que encapsula los nuevos elemetos
      */
     @Override
+    @Transactional
     public void addMacros(MacronutrientsDto macronutrientsDto)
     {
         this.macronutrientsRepositoryDao.createMacronutrients(Convert.macrosEntity(macronutrientsDto));
@@ -179,6 +196,7 @@ public class RecipeServicesImplementDao implements RecipeServicesDao
      * @return Retorna el objeto que se encuentra relacionad
      */
     @Override
+    @Transactional
     public MacronutrientsDto getMacros(long id)
     {
         return Convert.macronutrientsDto(this.macronutrientsRepositoryDao.getMacronutrients(id));
@@ -192,6 +210,7 @@ public class RecipeServicesImplementDao implements RecipeServicesDao
      * @return Retorna una lista de elemetos.
      */
     @Override
+    @Transactional
     public List<MacronutrientsDto> getAllMacros(long id)
     {
         return this.macronutrientsRepositoryDao.getAllMacronutrients(id)
@@ -207,6 +226,7 @@ public class RecipeServicesImplementDao implements RecipeServicesDao
      * @param macronutrientsDto Objeto que encapsula los nuevos elemetos
      */
     @Override
+    @Transactional
     public void updateMacros(MacronutrientsDto macronutrientsDto)
     {
         this.macronutrientsRepositoryDao.updateMacronutrients(Convert.macrosEntity(macronutrientsDto));
@@ -219,6 +239,7 @@ public class RecipeServicesImplementDao implements RecipeServicesDao
      * @param id Indetificador que reprecenta el obejto a eliminar.
      */
     @Override
+    @Transactional
     public void deleteMacros(long id)
     {
         this.macronutrientsRepositoryDao.deleteMacronutrients(id);

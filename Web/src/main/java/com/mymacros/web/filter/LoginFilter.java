@@ -1,6 +1,6 @@
 package com.mymacros.web.filter;
 
-import com.mymacros.repository.dao.entity.UserEntity;
+import com.mymacros.database.entity.UserEntity;
 import org.apache.logging.log4j.ThreadContext;
 
 import javax.servlet.*;
@@ -27,12 +27,15 @@ public class LoginFilter implements Filter
     {
         String id = UUID.randomUUID().toString();
         ThreadContext.put("id", id);
-        Principal  principal = UserEntity.getPrincipal(((HttpServletRequest)servletRequest).getSession());
+        Principal  principal = UserEntity.getPrincipal(((HttpServletRequest)servletRequest).getSession(false));
+
         if (principal!=null)
             ThreadContext.put("userName", principal.getName());
         try
         {
             ((HttpServletResponse)servletResponse).setHeader("X-Request-Id", id);
+            filterChain.doFilter(servletRequest, servletResponse);
+
         }finally
         {
             ThreadContext.clearAll();

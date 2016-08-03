@@ -1,8 +1,9 @@
-package com.mymacros.repository.dao.database;
+package com.mymacros.repository.dao.implement.database;
 
-import com.mymacros.repository.dao.entity.DailyFoodEntity;
 import com.mymacros.repository.dao.entity.FoodDailyRepositoryDao;
-import org.hibernate.Session;
+import com.mymacros.database.entity.DailyFoodEntity;
+import org.hibernate.SessionFactory;
+import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
@@ -10,13 +11,17 @@ import java.util.List;
 
 
 /**
- * Created by Tomas on 18/07/2016.
+ * @author Tomas Yussef Galicia Guazman
  */
 @Repository
-public class FoodDailyDataBaseImplementDao implements FoodDailyRepositoryDao
+public class FoodDailyDataBaseImplementDao extends HibernateTemplate implements FoodDailyRepositoryDao
 {
     @Inject
-    private Session session;
+    public FoodDailyDataBaseImplementDao(SessionFactory sessionFactory)
+    {
+        super(sessionFactory);
+    }
+
     /**
      * <h1>getAllFoodDaily</h1>
      * <p>Metod donde se obtine todos los datos de la base de datos</p>
@@ -28,9 +33,7 @@ public class FoodDailyDataBaseImplementDao implements FoodDailyRepositoryDao
     public List<DailyFoodEntity> getAllFoodDaily(long id)
     {
         return (List<DailyFoodEntity>)
-                session.createQuery("from DailyFoodEntity inner join DailyEntity where  DailyFoodEntity.dailyByIdDaily = :idDaily")
-                        .setParameter("idDaily",id)
-                        .list();
+                this.find("from DailyFoodEntity inner join DailyEntity where  DailyFoodEntity.dailyByIdDaily = :idDaily", id);
     }
 
     /**
@@ -43,7 +46,7 @@ public class FoodDailyDataBaseImplementDao implements FoodDailyRepositoryDao
     @Override
     public DailyFoodEntity getFoodDaily(long id)
     {
-        return this.session.load(DailyFoodEntity.class, id);
+        return this.load(DailyFoodEntity.class, id);
     }
 
     /**
@@ -55,7 +58,7 @@ public class FoodDailyDataBaseImplementDao implements FoodDailyRepositoryDao
     @Override
     public void crateFoodDaily(DailyFoodEntity dailyFoodEntity)
     {
-        this.session.save(dailyFoodEntity);
+        this.save(dailyFoodEntity);
     }
 
     /**
@@ -68,8 +71,8 @@ public class FoodDailyDataBaseImplementDao implements FoodDailyRepositoryDao
     @Override
     public void updateFoodDaily(DailyFoodEntity dailyFoodEntity)
     {
-        if(this.session.load(DailyFoodEntity.class, dailyFoodEntity.getId()) != null)
-            this.session.update(dailyFoodEntity);
+        if (this.load(DailyFoodEntity.class, dailyFoodEntity.getId()) != null)
+            this.update(dailyFoodEntity);
     }
 
     /**
@@ -82,9 +85,9 @@ public class FoodDailyDataBaseImplementDao implements FoodDailyRepositoryDao
     @Override
     public void deleteFoodDaily(long id)
     {
-
-        if(this.session.load(DailyFoodEntity.class, id) != null)
-            this.session.remove(id);
+        DailyFoodEntity dailyFoodEntity = this.load(DailyFoodEntity.class, id);
+        if (dailyFoodEntity != null)
+            this.delete(dailyFoodEntity);
     }
 
 }

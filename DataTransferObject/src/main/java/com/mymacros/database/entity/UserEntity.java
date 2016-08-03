@@ -1,10 +1,8 @@
-package com.mymacros.repository.dao.entity;
+package com.mymacros.database.entity;
 
 import javax.persistence.*;
-import javax.security.auth.Subject;
 import javax.servlet.http.HttpSession;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.sql.Timestamp;
 import java.security.Principal;
 
@@ -20,7 +18,7 @@ public class UserEntity implements Serializable,Principal
     private long id;
     private String userName;
     private String surname;
-    private LocalDate birthday;
+    private String birthday;
     private int height;
     private int weight;
     private Timestamp time;
@@ -40,7 +38,7 @@ public class UserEntity implements Serializable,Principal
     }
 
     @Basic
-    @Column(name = "name", nullable = false, length = 50)
+    @Column(name = "username", nullable = false, length = 50)
     public String getUserName()
     {
         return userName;
@@ -65,12 +63,12 @@ public class UserEntity implements Serializable,Principal
 
     @Basic
     @Column(name = "birthday", nullable = false)
-    public LocalDate getBirthday()
+    public String getBirthday()
     {
         return birthday;
     }
 
-    public void setBirthday(LocalDate brithday)
+    public void setBirthday(String brithday)
     {
         this.birthday = brithday;
     }
@@ -171,6 +169,7 @@ public class UserEntity implements Serializable,Principal
         return result;
     }
 
+    @Transient
     public String getName()
     {
         return this.getUserName();

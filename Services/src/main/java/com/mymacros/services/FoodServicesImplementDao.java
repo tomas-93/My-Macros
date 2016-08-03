@@ -1,18 +1,21 @@
 package com.mymacros.services;
 
+import com.mymacros.database.entity.FoodEntity;
 import com.mymacros.dto.entity.FoodDto;
 import com.mymacros.dto.entity.MacronutrientsDto;
-import com.mymacros.repository.dao.entity.*;
+import com.mymacros.repository.dao.entity.FoodRepositoryDao;
+import com.mymacros.repository.dao.entity.MacronutrientsRepositoryDao;
 import com.mymacros.services.dao.entity.FoodServicesDao;
 import com.mymacros.services.util.Convert;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Created by Tomas on 20/07/2016.
+ * @author Tomas Yussef Galicia Guzman
  */
 @Service
 public class FoodServicesImplementDao implements FoodServicesDao
@@ -29,6 +32,7 @@ public class FoodServicesImplementDao implements FoodServicesDao
      * @return Retorna el elemento devuelto del repositorio
      */
     @Override
+    @Transactional
     public FoodDto getFoodDto(long id)
     {
         return Convert.foodDto(this.foodRepositoryDao.getFood(id));
@@ -41,6 +45,7 @@ public class FoodServicesImplementDao implements FoodServicesDao
      * @param foodDto Objeto que encapsula la nueva informacion.
      */
     @Override
+    @Transactional
     public void addFoodDto(FoodDto foodDto)
     {
         this.foodRepositoryDao.createFood(Convert.foodEntity(foodDto));
@@ -53,6 +58,7 @@ public class FoodServicesImplementDao implements FoodServicesDao
      * @return retorna un objeto list con todos los elemetos
      */
     @Override
+    @Transactional
     public List<FoodDto> getAllFoodDto(long idUser)
     {
         return this.foodRepositoryDao.getAllFood(idUser)
@@ -68,6 +74,7 @@ public class FoodServicesImplementDao implements FoodServicesDao
      * @param foodDto Objeto que encapsula los datos actualizados
      */
     @Override
+    @Transactional
     public void updateFoodDto(FoodDto foodDto)
     {
         this.foodRepositoryDao.updateFood(Convert.foodEntity(foodDto));
@@ -80,6 +87,7 @@ public class FoodServicesImplementDao implements FoodServicesDao
      * @param id Identificador que reprecenta el elemento a eliminar.
      */
     @Override
+    @Transactional
     public void deleteFoodDto(long id)
     {
         FoodEntity foodEntity = this.foodRepositoryDao.getFood(id);
@@ -94,6 +102,7 @@ public class FoodServicesImplementDao implements FoodServicesDao
      * @param macronutrientsDto Objeto que encapsula los nuevos elemetos
      */
     @Override
+    @Transactional
     public void addMacros(MacronutrientsDto macronutrientsDto)
     {
         this.macronutrientsRepositoryDao.createMacronutrients(Convert.macrosEntity(macronutrientsDto));
@@ -108,6 +117,7 @@ public class FoodServicesImplementDao implements FoodServicesDao
      * @return Retorna el objeto que se encuentra relacionad
      */
     @Override
+    @Transactional
     public MacronutrientsDto getMacros(long id)
     {
         return Convert.macronutrientsDto(this.macronutrientsRepositoryDao.getMacronutrients(id));
@@ -121,6 +131,7 @@ public class FoodServicesImplementDao implements FoodServicesDao
      * @return Retorna una lista de elemetos.
      */
     @Override
+    @Transactional
     public List<MacronutrientsDto> getAllMacros(long id)
     {
         return this.macronutrientsRepositoryDao.getAllMacronutrients(id)
@@ -136,6 +147,7 @@ public class FoodServicesImplementDao implements FoodServicesDao
      * @param macronutrientsDto Objeto que encapsula los nuevos elemetos
      */
     @Override
+    @Transactional
     public void updateMacros(MacronutrientsDto macronutrientsDto)
     {
         this.macronutrientsRepositoryDao.updateMacronutrients(Convert.macrosEntity(macronutrientsDto));
@@ -148,6 +160,7 @@ public class FoodServicesImplementDao implements FoodServicesDao
      * @param id Indetificador que reprecenta el obejto a eliminar.
      */
     @Override
+    @Transactional
     public void deleteMacros(long id)
     {
         this.macronutrientsRepositoryDao.deleteMacronutrients(id);

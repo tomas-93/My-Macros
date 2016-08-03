@@ -1,18 +1,24 @@
 package com.mymacros.services;
 
+
+import com.mymacros.database.entity.DailyEntity;
+import com.mymacros.database.entity.DailyFoodEntity;
 import com.mymacros.dto.entity.DailyDto;
 import com.mymacros.dto.entity.FoodDailyDto;
-import com.mymacros.repository.dao.entity.*;
+import com.mymacros.repository.dao.entity.DailyRepositoryDao;
+import com.mymacros.repository.dao.entity.FoodDailyRepositoryDao;
+import com.mymacros.repository.dao.entity.MacronutrientsRepositoryDao;
 import com.mymacros.services.dao.entity.DailyServicesDao;
 import com.mymacros.services.util.Convert;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Created by Tomas on 20/07/2016.
+ * @author Tomas Yussef Galicia Guzman
  */
 @Service
 public class DailyServicesImplementDao implements DailyServicesDao
@@ -31,6 +37,7 @@ public class DailyServicesImplementDao implements DailyServicesDao
       * @param dailyDto Objeto que encapsula los nuevos datos.
       */
      @Override
+     @Transactional
      public void addDailyDto(DailyDto dailyDto)
      {
          this.dailyRepositoryDao.createDaily(Convert.dailyEntity(dailyDto));
@@ -44,6 +51,7 @@ public class DailyServicesImplementDao implements DailyServicesDao
       * @return Retorna el elemto buscado en el respositorio
       */
      @Override
+     @Transactional
      public DailyDto getDailyDto(long id)
      {
          return Convert.dailyDto(this.dailyRepositoryDao.getDaily(id));
@@ -57,6 +65,7 @@ public class DailyServicesImplementDao implements DailyServicesDao
       * @return Retorna una lista de elemeto DailyDto relacionados con el usuario.
       */
      @Override
+     @Transactional
      public List<DailyDto> getAllDaily(long idUser)
      {
          return this.dailyRepositoryDao.getAllDaily(idUser)
@@ -72,6 +81,7 @@ public class DailyServicesImplementDao implements DailyServicesDao
       * @param dailyDto Objeto que encapsula los datos actualizados.
       */
      @Override
+     @Transactional
      public void updateDailyDto(DailyDto dailyDto)
      {
          this.dailyRepositoryDao.updateDaily(Convert.dailyEntity(dailyDto));
@@ -84,6 +94,7 @@ public class DailyServicesImplementDao implements DailyServicesDao
       * @param id Indetificador que reprecenta elemeto a eliminar.
       */
      @Override
+     @Transactional
      public void deleteDailyDto(long id)
      {
          DailyEntity dailyEntity = this.dailyRepositoryDao.getDaily(id);
@@ -102,6 +113,7 @@ public class DailyServicesImplementDao implements DailyServicesDao
       * @param foodDailyDto Objeto que en capsula la nueva informacion
       */
      @Override
+     @Transactional
      public void addFoodDailyDto(FoodDailyDto foodDailyDto)
      {
          this.foodDailyRepositoryDao.crateFoodDaily(Convert.foodDailyEntity(foodDailyDto));
@@ -115,6 +127,7 @@ public class DailyServicesImplementDao implements DailyServicesDao
       * @return Retorna el elemto buscado en el respositorio
       */
      @Override
+     @Transactional
      public FoodDailyDto getFoodDailyDto(long id)
      {
          return Convert.foodDailyDto(this.foodDailyRepositoryDao.getFoodDaily(id));
@@ -128,6 +141,7 @@ public class DailyServicesImplementDao implements DailyServicesDao
       * @return Retorna una lista de elemeto FoodDailyDto relacionados con el DailyDto.
       */
      @Override
+     @Transactional
      public List<FoodDailyDto> getAllFoodDailyDto(long id)
      {
          return this.foodDailyRepositoryDao.getAllFoodDaily(id)
@@ -143,6 +157,7 @@ public class DailyServicesImplementDao implements DailyServicesDao
       * @param foodDailyDto Objeto que encapsula los datos actualizados.
       */
      @Override
+     @Transactional
      public void updateFoodDailyDto(FoodDailyDto foodDailyDto)
      {
          this.foodDailyRepositoryDao.updateFoodDaily(Convert.foodDailyEntity(foodDailyDto));
@@ -155,6 +170,7 @@ public class DailyServicesImplementDao implements DailyServicesDao
       * @param id Indetificador que reprecenta elemeto a eliminar.
       */
      @Override
+     @Transactional
      public void deleteFoodDailyDto(long id)
      {
          this.foodDailyRepositoryDao.deleteFoodDaily(id);

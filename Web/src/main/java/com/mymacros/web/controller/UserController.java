@@ -19,7 +19,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping(value = "/app/user")
-public class UserController
+public class    UserController
 {
      @Inject
      private UserAndProfileServiceDao userAndProfileServiceDao;

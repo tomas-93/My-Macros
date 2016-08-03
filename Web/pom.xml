@@ -60,21 +60,6 @@
             <version>${hibernate.version}</version>
         </dependency>
         <!--
-                          Java J2EE
-         -->
-        <dependency>
-            <groupId>javax.annotation</groupId>
-            <artifactId>javax.annotation-api</artifactId>
-            <version>${javax.annotation-api}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>${javax.servlet-api}</version>
-            <scope>provided</scope>
-        </dependency>
-        <!--
           Java JSP
        -->
         <dependency>

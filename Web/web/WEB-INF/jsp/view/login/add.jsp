@@ -15,7 +15,6 @@
             <div class="mdl-cell mdl-cell--12-col form" style="float: left">
                 <h3>Datos de Usurio</h3>
                 <!-- Nombre -->
-
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label componetsInput">
                     <form:input path="name" type="text" cssClass="mdl-textfield__input"/>
                     <label class="mdl-textfield__label" for="name">Nombre</label>
@@ -23,8 +22,6 @@
                         <form:errors path="name" cssClass=""/>
                     </form:label>
                 </div>
-
-
                 <!-- surName -->
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label componetsInput">
                     <form:input path="surname" type="text" cssClass="mdl-textfield__input"/>
@@ -33,18 +30,14 @@
                         <form:errors path="surname" cssClass=""/>
                     </form:label>
                 </div>
-
-
                 <!-- height -->
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label componetsInput">
                     <form:input path="height" type="text" cssClass="mdl-textfield__input"/>
-                    <label class="mdl-textfield__label" for="height">Estatura (M)</label>
+                    <label class="mdl-textfield__label" for="height">Estatura (CM)</label>
                     <form:label path="height" cssClass="">
                         <form:errors path="height" cssClass=""/>
                     </form:label>
                 </div>
-
-
                 <!-- weight -->
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label componetsInput">
                     <form:input path="weight" type="text" cssClass="mdl-textfield__input"/>
@@ -53,8 +46,6 @@
                         <form:errors path="weight" cssClass=""/>
                     </form:label>
                 </div>
-
-
                 <!-- email -->
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label componetsInput">
                     <form:input path="email" type="text" cssClass="mdl-textfield__input"/>
@@ -63,14 +54,12 @@
                         <form:errors path="email" cssClass=""/>
                     </form:label>
                 </div>
-
-
                 <!-- Password -->
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label componetsInput">
                     <form:input path="password" type="password"
                                 cssClass="mdl-textfield__input"/>
                     <label class="mdl-textfield__label" for="password">Password</label>
-                    <c:if test="${passErr}">
+                    <c:if test="${passErr==1}">
                         <form:label path="password" cssClass="">
                             Error Las contraseñas no coinciden
                         </form:label>
@@ -79,14 +68,12 @@
                         <form:errors path="password" cssClass=""/>
                     </form:label>
                 </div>
-
-
                 <!-- Repetir Password -->
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label componetsInput">
                     <form:input path="repeatPassword" type="password"
                                 cssClass="mdl-textfield__input"/>
                     <label class="mdl-textfield__label" for="repeatPassword">Repetir Password</label>
-                    <c:if test="${passErr}">
+                    <c:if test="${passErr==1}">
                         <form:label path="repeatPassword" cssClass="">
                             Error Las contraseñas no coinciden
                         </form:label>
@@ -95,14 +82,16 @@
                         <form:errors path="repeatPassword" cssClass=""/>
                     </form:label>
                 </div>
+                <div class="componetsInput">
+                    <label>Fecha de nacimiento</label>
+                    <form:input type="date" path="birthday" style="width: 30%; margin: 5%"/>
+                </div>
             </div>
-            <br>
-            <div style="height: 5%; width: 5%;"></div>
+
             <input type="submit" value="Registrarse"
                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                   style="width: 30%; margin-bottom: 5%; margin-top:20%;">
+                   style="width: 30%; margin: 5%">
             </div>
         </form:form>
-        </div>
     </jsp:body>
 </template:login>

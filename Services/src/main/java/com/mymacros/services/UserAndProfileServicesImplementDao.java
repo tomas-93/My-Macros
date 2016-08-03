@@ -1,11 +1,19 @@
 package com.mymacros.services;
 
-import com.mymacros.dto.entity.*;
-import com.mymacros.repository.dao.entity.*;
+
+import com.mymacros.dto.entity.LoginDto;
+import com.mymacros.dto.entity.ProfileDto;
+import com.mymacros.dto.entity.UserDto;
+import com.mymacros.repository.dao.entity.MacronutrientsRepositoryDao;
+import com.mymacros.repository.dao.entity.ProfileRepositoryDao;
+import com.mymacros.repository.dao.entity.UserRepositoryDao;
 import com.mymacros.services.dao.entity.UserAndProfileServiceDao;
 import com.mymacros.services.util.Convert;
+import com.mymacros.database.entity.ProfileEntity;
+import com.mymacros.database.entity.UserEntity;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 
@@ -17,7 +25,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Created by Tomas on 20/07/2016.
+ * @author Tomas Yussef Galicia Guzman
  */
 @Service
 public class UserAndProfileServicesImplementDao implements UserAndProfileServiceDao
@@ -50,6 +58,7 @@ public class UserAndProfileServicesImplementDao implements UserAndProfileService
      * @param id Indetificador del objeto a buscar
      */
     @Override
+    @Transactional
     public UserDto getUser(long id)
     {
         return Convert.userDto(this.userRepositoryDao.getUser(id));
@@ -62,6 +71,7 @@ public class UserAndProfileServicesImplementDao implements UserAndProfileService
      * @param id Indetificador del objeto a buscar
      */
     @Override
+    @Transactional
     public ProfileDto getProfile(long id)
     {
         return Convert.profileDto(this.profileRepositoryDao.getProfile(id));
@@ -74,6 +84,7 @@ public class UserAndProfileServicesImplementDao implements UserAndProfileService
      * @return retorna un userDto tras la busqueda
      */
     @Override
+    @Transactional
     public Principal login(LoginDto loginDto)
     {
         UserEntity userEntity = this.userRepositoryDao.loginUser(loginDto);
@@ -93,6 +104,7 @@ public class UserAndProfileServicesImplementDao implements UserAndProfileService
      * @param userDto Datos Obtenidos del formulario web
      */
     @Override
+    @Transactional
     public void addUser(UserDto userDto)
     {
         String salt = BCrypt.gensalt(HASHING_ROUNDS, RANDOM);
@@ -107,6 +119,7 @@ public class UserAndProfileServicesImplementDao implements UserAndProfileService
      * @param profileDto Datos Obtenidos del formulario web
      */
     @Override
+    @Transactional
     public void addProfile(ProfileDto profileDto)
     {
         this.profileRepositoryDao.createProfile(Convert.profileEntity(profileDto));
@@ -119,6 +132,7 @@ public class UserAndProfileServicesImplementDao implements UserAndProfileService
      * @return Retorna un objeto List con el contenido de la base de datos.
      */
     @Override
+    @Transactional
     public List<ProfileDto> getAllProfile(long idUser)
     {
         return this.profileRepositoryDao.getAllProfiles(idUser)
@@ -135,6 +149,7 @@ public class UserAndProfileServicesImplementDao implements UserAndProfileService
      * @param userDto Datos obtenidos del formulario web
      */
     @Override
+    @Transactional
     public void updateUser(UserDto userDto)
     {
         String salt = BCrypt.gensalt(HASHING_ROUNDS, RANDOM);
@@ -147,6 +162,7 @@ public class UserAndProfileServicesImplementDao implements UserAndProfileService
      * @param profileDto Datos obtenidos del formulario web
      */
     @Override
+    @Transactional
     public void updateProfile(ProfileDto profileDto)
     {
         this.profileRepositoryDao.updateProfile(Convert.profileEntity(profileDto));
@@ -159,6 +175,7 @@ public class UserAndProfileServicesImplementDao implements UserAndProfileService
      * @param id Identificador que reprecenta el objeto alamacenado.
      */
     @Override
+    @Transactional
     public void deleteProfile(long id)
     {
         ProfileEntity profileEntity = this.profileRepositoryDao.getProfile(id);

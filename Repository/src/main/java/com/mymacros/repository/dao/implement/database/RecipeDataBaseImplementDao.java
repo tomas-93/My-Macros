@@ -1,22 +1,28 @@
-package com.mymacros.repository.dao.database;
+package com.mymacros.repository.dao.implement.database;
 
-import com.mymacros.repository.dao.entity.RecipeEntity;
+import com.mymacros.database.entity.RecipeEntity;
 import com.mymacros.repository.dao.entity.RecipeRepositoryDao;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
 import java.util.List;
 
 
+
 /**
- * Created by Tomas on 18/07/2016.
+ * @author Tomas Yussef Galicia Guzman
  */
 @Repository
-public class RecipeDataBaseImplementDao implements RecipeRepositoryDao
+public class RecipeDataBaseImplementDao extends HibernateTemplate implements RecipeRepositoryDao
 {
     @Inject
-    private Session session;
+    public RecipeDataBaseImplementDao(SessionFactory sessionFactory)
+    {
+        super(sessionFactory);
+    }
     /**
      * <h1>getAllRecipe</h1>
      * <p>Obtiene una lista de los elemento de la base de datos</p>
@@ -28,11 +34,8 @@ public class RecipeDataBaseImplementDao implements RecipeRepositoryDao
     public List<RecipeEntity> getAllRecipe(long idUser)
     {
         return (List<RecipeEntity>)
-                this.session.createQuery("from RecipeEntity inner join UserEntity " +
-                        "where RecipeEntity.userByIdUser =:idUser")
-                .setParameter("idUser", idUser)
-                .list();
-
+                this.find("from RecipeEntity inner join UserEntity " +
+                        "where RecipeEntity.userByIdUser =:idUser", idUser);
     }
 
     /**
@@ -45,7 +48,7 @@ public class RecipeDataBaseImplementDao implements RecipeRepositoryDao
     @Override
     public RecipeEntity getRecipeDto(long id)
     {
-        return this.session.load(RecipeEntity.class, id);
+        return this.load(RecipeEntity.class, id);
     }
 
     /**
@@ -57,7 +60,7 @@ public class RecipeDataBaseImplementDao implements RecipeRepositoryDao
     @Override
     public void createRecipe(RecipeEntity recipeEntity)
     {
-        this.session.save(recipeEntity);
+        this.save(recipeEntity);
     }
 
     /**
@@ -69,8 +72,8 @@ public class RecipeDataBaseImplementDao implements RecipeRepositoryDao
     @Override
     public void updateRecipe(RecipeEntity recipeEntity)
     {
-        if (this.session.load(RecipeEntity.class, recipeEntity.getId()) != null)
-            this.session.update(recipeEntity);
+        if (this.load(RecipeEntity.class, recipeEntity.getId()) != null)
+            this.update(recipeEntity);
     }
 
     /**
@@ -82,7 +85,8 @@ public class RecipeDataBaseImplementDao implements RecipeRepositoryDao
     @Override
     public void deleteRecipe(long id)
     {
-        if (this.session.load(RecipeEntity.class, id) != null)
-            this.session.remove(id);
+        RecipeEntity recipeEntity = this.load(RecipeEntity.class, id);
+        if (recipeEntity != null)
+            this.delete(recipeEntity);
     }
 }

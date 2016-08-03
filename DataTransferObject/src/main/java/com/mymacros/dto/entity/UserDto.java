@@ -4,8 +4,9 @@ package com.mymacros.dto.entity;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 
 /**
  * Created by Tomas on 17/07/2016.
@@ -19,16 +20,23 @@ public class UserDto
     private String name,
             surname,
             email,
-            password,repeatPassword;
+            password, repeatPassword;
+    @NotNull
+    @Max(200)
+    @Min(0)
+    @Valid
     private Integer height,
             weight;
 
-    private LocalDate birthday;
+    @NotNull
+    @Valid
+    private String birthday;
+
     public UserDto()
     {
     }
 
-    public UserDto(long id, String name, String surname, String email, String password, String repeatPassword, Integer height, Integer weight, LocalDate birthday)
+    public UserDto(long id, String name, String surname, String email, String password, String repeatPassword, Integer height, Integer weight, String birthday)
     {
         this.id = id;
         this.name = name;
@@ -41,12 +49,12 @@ public class UserDto
         this.birthday = birthday;
     }
 
-    public LocalDate getBirthday()
+    public String getBirthday()
     {
         return birthday;
     }
 
-    public void setBirthday(LocalDate birthday)
+    public void setBirthday(String birthday)
     {
         this.birthday  = birthday;
     }

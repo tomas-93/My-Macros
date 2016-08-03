@@ -1,8 +1,9 @@
-package com.mymacros.repository.dao.database;
+package com.mymacros.repository.dao.implement.database;
 
+import com.mymacros.database.entity.MacrosEntity;
 import com.mymacros.repository.dao.entity.MacronutrientsRepositoryDao;
-import com.mymacros.repository.dao.entity.MacrosEntity;
-import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
@@ -10,13 +11,16 @@ import java.util.List;
 
 
 /**
- * Created by Tomas on 18/07/2016.
+ *   @author Tomas Yussef Galicia Guzman
  */
 @Repository
-public class MacronutrientsDataBaseImplementDao implements MacronutrientsRepositoryDao
+public class MacronutrientsDataBaseImplementDao extends HibernateTemplate implements MacronutrientsRepositoryDao
 {
     @Inject
-    private Session session;
+    public MacronutrientsDataBaseImplementDao(SessionFactory sessionFactory)
+    {
+        super(sessionFactory);
+    }
     /**
      * <h1>getAllMacronutrients</h1>
      * <p>Obtiene una lista de todos los elemtos de la base de datos</p>
@@ -28,9 +32,7 @@ public class MacronutrientsDataBaseImplementDao implements MacronutrientsReposit
     public List<MacrosEntity> getAllMacronutrients(long idMacros)
     {
         return (List<MacrosEntity>)
-                this.session.createQuery("from MacrosEntity where MacrosEntity.id=:idMacros")
-                .setParameter("idMacros", idMacros)
-                .list();
+                this.find("from MacrosEntity where MacrosEntity.id=:idMacros", idMacros);
     }
 
     /**
@@ -43,7 +45,7 @@ public class MacronutrientsDataBaseImplementDao implements MacronutrientsReposit
     @Override
     public MacrosEntity getMacronutrients(long id)
     {
-        return this.session.load(MacrosEntity.class, id);
+        return this.load(MacrosEntity.class, id);
     }
 
     /**
@@ -55,7 +57,7 @@ public class MacronutrientsDataBaseImplementDao implements MacronutrientsReposit
     @Override
     public void createMacronutrients(MacrosEntity macronutrientsDto)
     {
-        this.session.save(macronutrientsDto);
+        this.save(macronutrientsDto);
     }
 
     /**
@@ -67,8 +69,8 @@ public class MacronutrientsDataBaseImplementDao implements MacronutrientsReposit
     @Override
     public void updateMacronutrients(MacrosEntity macronutrientsDto)
     {
-        if (this.session.load(MacrosEntity.class, macronutrientsDto.getId()) != null)
-            this.session.update(macronutrientsDto);
+        if (this.load(MacrosEntity.class, macronutrientsDto.getId()) != null)
+            this.update(macronutrientsDto);
     }
 
     /**
@@ -80,8 +82,9 @@ public class MacronutrientsDataBaseImplementDao implements MacronutrientsReposit
     @Override
     public void deleteMacronutrients(long id)
     {
-        if (this.session.load(MacrosEntity.class, id) != null)
-            this.session.remove(id);
+        MacrosEntity macrosEntity =this.load(MacrosEntity.class, id);
+        if (macrosEntity != null)
+            this.delete(id);
     }
 
 }

@@ -1,8 +1,9 @@
-package com.mymacros.repository.dao.database;
+package com.mymacros.repository.dao.implement.database;
 
-import com.mymacros.repository.dao.entity.ProfileEntity;
+import com.mymacros.database.entity.ProfileEntity;
 import com.mymacros.repository.dao.entity.ProfileRepositoryDao;
-import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
@@ -10,13 +11,16 @@ import javax.inject.Inject;
 import java.util.List;
 
 /**
- * Created by Tomas on 18/07/2016.
+ * @author Tomas Yussef Galicia Guzman
  */
 @Repository
-public class ProfileDataBaseImplementDao implements ProfileRepositoryDao
+public class ProfileDataBaseImplementDao extends HibernateTemplate implements ProfileRepositoryDao
 {
     @Inject
-    private Session session;
+    public ProfileDataBaseImplementDao(SessionFactory sessionFactory)
+    {
+        super(sessionFactory);
+    }
     /**
      * <h1>getAllProfiles</h1>
      * <p>Se obtiene una lista de perfile de toda la base de datos</p>
@@ -28,10 +32,8 @@ public class ProfileDataBaseImplementDao implements ProfileRepositoryDao
     public List<ProfileEntity> getAllProfiles(long idUser)
     {
         return (List<ProfileEntity>)
-                this.session.createQuery("from ProfileEntity inner join UserEntity" +
-                        " where ProfileEntity.userByIdUser=:idUser")
-                        .setParameter("idUser", idUser)
-                        .list();
+                this.find("from ProfileEntity inner join UserEntity" +
+                        " where ProfileEntity.userByIdUser=:idUser", idUser);
     }
 
     /**
@@ -44,7 +46,7 @@ public class ProfileDataBaseImplementDao implements ProfileRepositoryDao
     @Override
     public ProfileEntity getProfile(long id)
     {
-        return this.session.load(ProfileEntity.class, id);
+        return this.load(ProfileEntity.class, id);
     }
 
     /**
@@ -56,7 +58,7 @@ public class ProfileDataBaseImplementDao implements ProfileRepositoryDao
     @Override
     public void createProfile(ProfileEntity profileEntity)
     {
-        this.session.save(profileEntity);
+        this.save(profileEntity);
     }
 
     /**
@@ -68,9 +70,9 @@ public class ProfileDataBaseImplementDao implements ProfileRepositoryDao
     @Override
     public void updateProfile(ProfileEntity profileEntity)
     {
-        if (this.session.load(ProfileEntity.class, profileEntity.getId()) != null)
+        if (this.load(ProfileEntity.class, profileEntity.getId()) != null)
         {
-            this.session.update(profileEntity);
+            this.update(profileEntity);
         }
     }
 
@@ -83,9 +85,10 @@ public class ProfileDataBaseImplementDao implements ProfileRepositoryDao
     @Override
     public void deleteProfile(long id)
     {
-        if (this.session.load(ProfileEntity.class, id) != null)
+        ProfileEntity profileEntity = this.load(ProfileEntity.class, id);
+        if ( profileEntity != null)
         {
-            this.session.remove(id);
+            this.delete(profileEntity);
         }
     }
 

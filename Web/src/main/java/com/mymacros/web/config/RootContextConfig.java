@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,14 +39,9 @@ import java.util.concurrent.Executor;
         order = Ordered.LOWEST_PRECEDENCE
 )
 @ComponentScan(
-        basePackages = {
-                "com.mymacros.web",
-                "com.mymacros.services",
-                "com.mymacros.repository"
-        },
+        basePackages = "com.mymacros.*",
         excludeFilters = @ComponentScan.Filter(Controller.class)
 )
-
 public class RootContextConfig implements AsyncConfigurer, SchedulingConfigurer
 {
     public static final Logger message = LogManager.getLogger();
@@ -116,13 +110,11 @@ public class RootContextConfig implements AsyncConfigurer, SchedulingConfigurer
     /**
      * =============================================>Hibernate
      */
-    @Bean
-    @Scope(value = "singleton")
     public DataSource dataSource()
     {
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
         driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/test");
+        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/mymacros");
         driverManagerDataSource.setUsername("tomas");
         driverManagerDataSource.setPassword("tomas");
         return driverManagerDataSource;
@@ -140,23 +132,15 @@ public class RootContextConfig implements AsyncConfigurer, SchedulingConfigurer
 
     @Bean
     @Scope(value = "singleton")
-    public SessionFactory sessionFactory()
+    public LocalSessionFactoryBean localSessionFactoryBean()
     {
         LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
         localSessionFactoryBean.setDataSource(dataSource());
-        localSessionFactoryBean.setPackagesToScan("com.mymacros.web",
-                "com.mymacros.services",
-                "com.mymacros.repository");
+        localSessionFactoryBean.setPackagesToScan("com.mymacros.*");
         localSessionFactoryBean.setHibernateProperties(properties());
-        return localSessionFactoryBean.getObject();
+        return localSessionFactoryBean;
     }
 
-    @Bean
-    @Scope(value = "singleton")
-    public Session session(SessionFactory sessionFactory)
-    {
-        return sessionFactory.getCurrentSession();
-    }
 
     @Bean
     @Autowired

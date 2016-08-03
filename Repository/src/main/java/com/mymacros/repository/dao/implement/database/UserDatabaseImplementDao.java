@@ -1,28 +1,31 @@
-package com.mymacros.repository.dao.database;
+package com.mymacros.repository.dao.implement.database;
 
 
+import com.mymacros.database.entity.UserEntity;
 import com.mymacros.dto.entity.LoginDto;
 import com.mymacros.repository.dao.entity.UserRepositoryDao;
-import com.mymacros.repository.dao.entity.UserEntity;
-import org.hibernate.Session;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.hibernate.SessionFactory;
+import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import javax.inject.Inject;
+import java.util.List;
 
 
 /**
- * Created by Tomas on 18/07/2016.
+ * @author Tomas Yussef Galicia Guzman
  */
 @Repository
-public class UserDatabaseImplementDao implements UserRepositoryDao
+public class UserDatabaseImplementDao extends HibernateTemplate implements UserRepositoryDao
 {
-    private final Session session;
+    private final Logger message = LogManager.getLogger();
 
     @Inject
-    public UserDatabaseImplementDao(Session session)
+    public UserDatabaseImplementDao(SessionFactory sessionFactory)
     {
-        this.session = session;
+        super(sessionFactory);
     }
-
     /**
      * <h1>Crear Usuario</h1>
      * <p>Metodo para crear usuarios</p>
@@ -32,7 +35,7 @@ public class UserDatabaseImplementDao implements UserRepositoryDao
     @Override
     public void createUser(UserEntity userEntity)
     {
-        this.session.save(userEntity);
+        this.save(userEntity);
     }
 
     /**
@@ -45,7 +48,7 @@ public class UserDatabaseImplementDao implements UserRepositoryDao
     @Override
     public UserEntity getUser(long id)
     {
-        return this.session.load(UserEntity.class, id);
+        return this.load(UserEntity.class, id);
     }
 
     /**
@@ -57,7 +60,7 @@ public class UserDatabaseImplementDao implements UserRepositoryDao
     @Override
     public void updateUser(UserEntity userEntity)
     {
-        this.session.update(userEntity);
+        this.update(userEntity);
     }
 
     /**
@@ -71,10 +74,8 @@ public class UserDatabaseImplementDao implements UserRepositoryDao
     @Override
     public UserEntity loginUser(LoginDto userDto)
     {
-        return (UserEntity)
-                this.session.createQuery("from UserEntity WHERE " +
-                        "UserEntity.email = :email")
-                        .setParameter("email",userDto.getEmail());
+        List list = this.find("from UserEntity WHERE email = '"+userDto.getEmail()+"'");
+        return  list.isEmpty()  ?  null : (UserEntity) list.get(0);
     }
 
 }

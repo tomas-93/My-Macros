@@ -127,11 +127,32 @@
             <version>${javax.inject}</version>
             <scope>compile</scope>
         </dependency>
+        <!--
+                  Java J2EE
+           -->
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+            <version>${javax.annotation-api}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${javax.servlet-api}</version>
+            <scope>provided</scope>
+        </dependency>
         <!-- jBCrypt-->
         <dependency>
             <groupId>de.svenkubiak</groupId>
             <artifactId>jBCrypt</artifactId>
             <version>0.4.1</version>
+        </dependency>
+        <!-- Mysql -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql}</version>
         </dependency>
     </dependencies>
     <build>

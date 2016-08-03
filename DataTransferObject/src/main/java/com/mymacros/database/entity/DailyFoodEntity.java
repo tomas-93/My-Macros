@@ -1,4 +1,4 @@
-package com.mymacros.repository.dao.entity;
+package com.mymacros.database.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
