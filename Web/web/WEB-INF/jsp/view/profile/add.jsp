@@ -1,3 +1,4 @@
+
 <%--
   Created by IntelliJ IDEA.
   User: Tomas
@@ -6,11 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<c:set var="title" value="Agrega Nuevo Perfile"/>
+<c:set var="value" value="post"/>
+<c:set var="url" value="/app/profile/add"/>
+<%@ include file="form.jsp"%>

@@ -3,6 +3,7 @@ package com.mymacros.services.util;
 
 import com.mymacros.database.entity.*;
 import com.mymacros.dto.entity.*;
+import com.sun.corba.se.impl.orbutil.concurrent.CondVar;
 
 /**
  * Created by Tomas on 01/08/2016.
@@ -17,36 +18,38 @@ public class Convert
      *
      */
 
-    /**
-     *
-     * @param macrosEntity
-     * @return
-     */
     public static MacronutrientsDto macronutrientsDto(MacrosEntity macrosEntity)
     {
         MacronutrientsDto macronutrientsDto = new MacronutrientsDto();
-        macronutrientsDto.setId(macrosEntity.getId());
-        macronutrientsDto.setTotalProtein(macrosEntity.getProtein());
-        macronutrientsDto.setFiber(macrosEntity.getFiber());
-        macronutrientsDto.setSugar(macrosEntity.getSugar());
-        macronutrientsDto.setTotalCarbohydrates(macrosEntity.getCarbs());
-        macronutrientsDto.setTotalFats(macrosEntity.getFat());
-        macronutrientsDto.setMonounsaturated(macrosEntity.getMonounsaturated());
-        macronutrientsDto.setPolyunsaturated(macrosEntity.getPolyunsaturated());
-        macronutrientsDto.setSaturated(macrosEntity.getSaturated());
+        try { macronutrientsDto.setId(macrosEntity.getId()); }
+        catch(NullPointerException ignored){}
+        try {macronutrientsDto.setTotalProtein(macrosEntity.getProtein());}
+        catch (NullPointerException ignored){};
+        try {macronutrientsDto.setFiber(macrosEntity.getFiber());}
+        catch (NullPointerException ignored){}
+        try{ macronutrientsDto.setSugar(macrosEntity.getSugar());}
+        catch (NullPointerException ignored){};
+        try{ macronutrientsDto.setTotalCarbohydrates(macrosEntity.getCarbs()); }
+        catch (NullPointerException ignored){};
+        try{ macronutrientsDto.setTotalFats(macrosEntity.getFat());}
+        catch (NullPointerException ignored){};
+        try{ macronutrientsDto.setMonounsaturated(macrosEntity.getMonounsaturated()); }
+        catch (NullPointerException ignored){}
+        try { macronutrientsDto.setPolyunsaturated(macrosEntity.getPolyunsaturated());}
+        catch (NullPointerException ignored){}
+        try { macronutrientsDto.setSaturated(macrosEntity.getSaturated());}
+        catch (NullPointerException ignored){}
+        try{ macronutrientsDto.setTotalCal(macrosEntity.getTotalCalorie()); }
+        catch (NullPointerException ignored){}
         return macronutrientsDto;
 
     }
 
-    /**
-     *
-     * @param macronutrientsDto
-     * @return
-     */
     public static MacrosEntity macrosEntity(MacronutrientsDto macronutrientsDto)
     {
         MacrosEntity macrosEntity = new MacrosEntity();
         macrosEntity.setId(macronutrientsDto.getId());
+        macrosEntity.setTotalCalorie(macronutrientsDto.getTotalCal());
         macrosEntity.setCarbs(macronutrientsDto.getTotalCarbohydrates());
         macrosEntity.setProtein(macronutrientsDto.getTotalProtein());
         macrosEntity.setFat(macronutrientsDto.getTotalFats());
@@ -59,56 +62,44 @@ public class Convert
 
     }
 
-    /**
-     *
-     * @param recipeDto
-     * @return
-     */
     public static RecipeEntity recipeEntity(RecipeDto recipeDto)
     {
         RecipeEntity recipeEntity = new RecipeEntity();
         recipeEntity.setId(recipeDto.getId());
         recipeEntity.setName(recipeDto.getName());
+
         UserEntity userEntity = new UserEntity();
         userEntity.setId(recipeDto.getIdUser());
         recipeEntity.setUserByIdUser(userEntity);
+
         MacrosEntity macrosEntity = new MacrosEntity();
         macrosEntity.setId(recipeDto.getIdMacros());
         recipeEntity.setMacrosEntity(macrosEntity);
+
         return recipeEntity;
     }
 
-    /**
-     *
-     * @param recipeEntity
-     * @return
-     */
     public static RecipeDto recipeDto(RecipeEntity recipeEntity)
     {
         RecipeDto recipeDto = new RecipeDto();
         recipeDto.setId(recipeEntity.getId());
         recipeDto.setName(recipeEntity.getName());
-        recipeDto.setIdMacros(recipeEntity.getMacrosEntity().getId());
-        recipeDto.setIdUser(recipeEntity.getUserByIdUser().getId());
+        recipeDto.setMacronutrientsDto(Convert.macronutrientsDto(recipeEntity.getMacrosEntity()));
+        recipeDto.setUserDto(Convert.userDto(recipeEntity.getUserByIdUser()));
         return recipeDto;
     }
 
-    /**
-     *
-     * @param foodRecipeDto
-     * @return
-     */
     public static FoodRecipeEntity foodRecipeEntity(FoodRecipeDto foodRecipeDto)
     {
         FoodRecipeEntity foodRecipeEntity = new FoodRecipeEntity();
         foodRecipeEntity.setId(foodRecipeDto.getId());
 
         RecipeEntity recipeEntity = new RecipeEntity();
-        recipeEntity.setId(foodRecipeDto.getIdRecipe());
+        recipeEntity.setId(foodRecipeDto.getRecipeDto().getId());
         foodRecipeEntity.setRecipeByIdRecipe(recipeEntity);
 
         FoodEntity foodEntity = new FoodEntity();
-        foodEntity.setId(foodRecipeDto.getIdFood());
+        foodEntity.setId(foodRecipeDto.getFoodDto().getId());
         foodRecipeEntity.setFoodEntity(foodEntity);
 
 
@@ -116,71 +107,58 @@ public class Convert
         return foodRecipeEntity;
     }
 
-    /**
-     *
-     * @param foodRecipeEntity
-     * @return
-     */
     public static FoodRecipeDto foodRecipeDto(FoodRecipeEntity foodRecipeEntity)
     {
         FoodRecipeDto foodRecipeDto = new FoodRecipeDto();
         foodRecipeDto.setId(foodRecipeEntity.getId());
-        foodRecipeDto.setIdFood(foodRecipeEntity.getFoodEntity().getId());
-        foodRecipeDto.setIdRecipe(foodRecipeEntity.getRecipeByIdRecipe().getId());
+
+        foodRecipeDto.setFoodDto(Convert.foodDto(foodRecipeEntity.getFoodEntity()));
+
+        foodRecipeDto.setRecipeDto(Convert.recipeDto(foodRecipeEntity.getRecipeByIdRecipe()));
         return foodRecipeDto;
     }
-    /**
-     *
-     * @param dailyDto
-     * @return
-     */
+
     public static DailyEntity dailyEntity(DailyDto dailyDto)
     {
         DailyEntity dailyEntity = new DailyEntity();
+
         UserEntity userEntity = new UserEntity();
         userEntity.setId(dailyDto.getId());
 
         MacrosEntity macrosEntity = new MacrosEntity();
-
         dailyEntity.setCaloriesConsumed(dailyDto.getTotalCaloriesConsumed());
+
         dailyEntity.setMacrosEntity(macrosEntity);
         dailyEntity.setUserByIdEntity(userEntity);
 
         return dailyEntity;
-
     }
 
-    /**
-     *
-     * @param dailyEntity
-     * @return
-     */
     public static DailyDto dailyDto(DailyEntity dailyEntity)
     {
         DailyDto dailyDto = new DailyDto();
         dailyDto.setId(dailyEntity.getId());
-        dailyDto.setIdUser(dailyEntity.getUserByIdEntity().getId());
-        dailyDto.setIdMacros(dailyEntity.getMacrosEntity().getId());
+        dailyDto.setUserDto(Convert.userDto(dailyEntity.getUserByIdEntity()));
+        dailyDto.setMacronutrientsDto(Convert.macronutrientsDto(dailyEntity.getMacrosEntity()));
         dailyDto.setTotalCaloriesConsumed(dailyEntity.getCaloriesConsumed());
         return dailyDto;
     }
 
-    /**
-     *
-     * @param foodDailyDto
-     * @return
-     */
     public static DailyFoodEntity foodDailyEntity(FoodDailyDto foodDailyDto)
     {
         DailyFoodEntity dailyFoodEntity = new DailyFoodEntity();
         dailyFoodEntity.setId(foodDailyDto.getId());
+
         DailyEntity dailyEntity = new DailyEntity();
-        dailyEntity.setId(foodDailyDto.getId());
+        dailyEntity.setId(foodDailyDto.getIdDaily());
         dailyFoodEntity.setDailyByIdDaily(dailyEntity);
+
         FoodEntity foodEntity = new FoodEntity();
-        foodEntity.setId(foodDailyDto.getId());
+        foodEntity.setId(foodDailyDto.getIdFood());
         dailyFoodEntity.setFoodEntity(foodEntity);
+
         dailyFoodEntity.setNumberFood(foodDailyDto.getNumberFood());
+
         RecipeEntity recipeEntity = new RecipeEntity();
         recipeEntity.setId(foodDailyDto.getIdRecipe());
         dailyFoodEntity.setRecipeByIdrecipe(recipeEntity);
@@ -188,27 +166,17 @@ public class Convert
 
     }
 
-    /**
-     *
-     * @param dailyFoodEntity
-     * @return
-     */
     public static FoodDailyDto foodDailyDto(DailyFoodEntity dailyFoodEntity)
     {
         FoodDailyDto foodDailyDto = new FoodDailyDto();
         foodDailyDto.setId(dailyFoodEntity.getId());
-        foodDailyDto.setIdDaily(dailyFoodEntity.getDailyByIdDaily().getId());
-        foodDailyDto.setIdRecipe(dailyFoodEntity.getRecipeByIdrecipe().getId());
+        foodDailyDto.setDailyDto(Convert.dailyDto(dailyFoodEntity.getDailyByIdDaily()));
+        foodDailyDto.setRecipeDto(Convert.recipeDto(dailyFoodEntity.getRecipeByIdrecipe()));
         foodDailyDto.setNumberFood(dailyFoodEntity.getNumberFood());
-        foodDailyDto.setIdFood(dailyFoodEntity.getFoodEntity().getId());
+        foodDailyDto.setFoodDto(Convert.foodDto(dailyFoodEntity.getFoodEntity()));
         return foodDailyDto;
     }
 
-    /**
-     *
-     * @param userDto
-     * @return
-     */
     public static UserEntity userEntity(UserDto userDto,byte[] password)
     {
         UserEntity userEntity = new UserEntity();
@@ -223,11 +191,6 @@ public class Convert
         return userEntity;
     }
 
-    /**
-     *
-     * @param userEntity
-     * @return
-     */
     public static UserDto userDto(UserEntity userEntity)
     {
         UserDto userDto = new UserDto();
@@ -242,82 +205,67 @@ public class Convert
         return userDto;
     }
 
-    /**
-     *
-     * @param profileDto
-     * @return
-     */
     public static ProfileEntity profileEntity(ProfileDto profileDto)
     {
         MacrosEntity macrosEntity = new MacrosEntity();
-        macrosEntity.setCarbs(profileDto.getCarbs());
-        macrosEntity.setFat(profileDto.getFat());
-        macrosEntity.setFiber(profileDto.getFiber());
-        macrosEntity.setProtein(profileDto.getProtein());
-        macrosEntity.setTotalCalorie(profileDto.getTotalCalories());
+        try{ macrosEntity.setId(profileDto.getMacronutrientsDto().getId()); }
+        catch (NullPointerException ignore){}
+        macrosEntity.setCarbs(profileDto.getMacronutrientsDto().getTotalCarbohydrates());
+        macrosEntity.setFat(profileDto.getMacronutrientsDto().getTotalFats());
+        macrosEntity.setFiber(profileDto.getMacronutrientsDto().getFiber());
+        macrosEntity.setProtein(profileDto.getMacronutrientsDto().getTotalProtein());
+        macrosEntity.setTotalCalorie(profileDto.getMacronutrientsDto().getTotalCal());
+
+        UserEntity userEntity = new UserEntity();
+        userEntity.setId(profileDto.getUserDto().getId());
+
         ProfileEntity profileEntity = new ProfileEntity();
+        try{profileEntity.setId(profileDto.getId());}
+        catch (NullPointerException ignore){}
         profileEntity.setMacrosEntity(macrosEntity);
+        profileEntity.setUserByIdUser(userEntity);
+
         profileEntity.setName(profileDto.getName());
         return profileEntity;
 
     }
 
-    /**
-     *
-     * @param profileEntity
-     * @return
-     */
     public static ProfileDto profileDto(ProfileEntity profileEntity)
     {
         return new ProfileDto(profileEntity.getId(),
-                profileEntity.getUserByIdUser().getId(),
-                profileEntity.getMacrosEntity().getCarbs(),
-                profileEntity.getMacrosEntity().getFat(),
-                profileEntity.getMacrosEntity().getProtein(),
-                profileEntity.getMacrosEntity().getFiber(),
-                profileEntity.getMacrosEntity().getTotalCalorie(),
+                Convert.userDto(profileEntity.getUserByIdUser()),
+                Convert.macronutrientsDto(profileEntity.getMacrosEntity()),
                 profileEntity.getName());
     }
 
-    /**
-     *
-     * @param foodEntity
-     * @return
-     */
     public static FoodDto foodDto(FoodEntity foodEntity)
     {
         FoodDto foodDto = new FoodDto();
         foodDto.setId(foodEntity.getId());
         foodDto.setName(foodEntity.getName());
         foodDto.setBrand(foodEntity.getBrand());
-        foodDto.setIdMacronutrients(foodEntity.getMacrosEntity().getId());
-        foodDto.setIdUser(foodEntity.getUserByIdUser().getId());
+        foodDto.setMacronutrientsDto(Convert.macronutrientsDto(foodEntity.getMacrosEntity()));
+        foodDto.setUserDto(Convert.userDto(foodEntity.getUserByIdUser()));
         foodDto.setQuantity(foodEntity.getQuantity());
-        foodDto.setType(foodEntity.getType());
         foodDto.setUnit(foodEntity.getUnit());
+
         return foodDto;
     }
 
-    /**
-     *
-     * @param foodDto
-     * @return
-     */
     public static FoodEntity foodEntity(FoodDto foodDto)
     {
         FoodEntity foodEntity = new FoodEntity();
-        foodEntity.setId(foodDto.getId());
+        try{foodEntity.setId(foodDto.getId());}
+        catch (NullPointerException ignored){}
         foodEntity.setName(foodDto.getName());
         foodEntity.setBrand(foodDto.getBrand());
         foodEntity.setQuantity(foodDto.getQuantity());
         foodEntity.setUnit(foodDto.getUnit());
-        foodEntity.setType(foodDto.getType());
         UserEntity userEntity = new UserEntity();
-        userEntity.setId(foodDto.getId());
+        try { userEntity.setId(foodDto.getUserDto().getId()); }
+        catch (NullPointerException ignored){}
         foodEntity.setUserByIdUser(userEntity);
-        MacrosEntity macrosEntity = new MacrosEntity();
-        macrosEntity.setId(foodDto.getId());
-        foodEntity.setMacrosEntity(macrosEntity);
+        foodEntity.setMacrosEntity(Convert.macrosEntity(foodDto.getMacronutrientsDto()));
         return foodEntity;
     }
 }

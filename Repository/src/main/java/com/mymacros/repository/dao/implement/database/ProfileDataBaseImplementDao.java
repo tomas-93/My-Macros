@@ -2,12 +2,14 @@ package com.mymacros.repository.dao.implement.database;
 
 import com.mymacros.database.entity.ProfileEntity;
 import com.mymacros.repository.dao.entity.ProfileRepositoryDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
-
+import javax.persistence.Query;
 import java.util.List;
 
 /**
@@ -21,6 +23,10 @@ public class ProfileDataBaseImplementDao extends HibernateTemplate implements Pr
     {
         super(sessionFactory);
     }
+
+    public final Logger message = LogManager.getLogger();
+
+
     /**
      * <h1>getAllProfiles</h1>
      * <p>Se obtiene una lista de perfile de toda la base de datos</p>
@@ -31,9 +37,13 @@ public class ProfileDataBaseImplementDao extends HibernateTemplate implements Pr
     @SuppressWarnings("unchecked")
     public List<ProfileEntity> getAllProfiles(long idUser)
     {
-        return (List<ProfileEntity>)
-                this.find("from ProfileEntity inner join UserEntity" +
-                        " where ProfileEntity.userByIdUser=:idUser", idUser);
+        Query query = this.getSessionFactory()
+                .getCurrentSession()
+                .createQuery("from ProfileEntity where userByIdUser.id = :id")
+                .setParameter("id", idUser);
+
+        List list = query.getResultList();
+        return  list.isEmpty()? null: (List<ProfileEntity>) list;
     }
 
     /**
@@ -58,6 +68,7 @@ public class ProfileDataBaseImplementDao extends HibernateTemplate implements Pr
     @Override
     public void createProfile(ProfileEntity profileEntity)
     {
+        this.save(profileEntity.getMacrosEntity());
         this.save(profileEntity);
     }
 
@@ -72,6 +83,7 @@ public class ProfileDataBaseImplementDao extends HibernateTemplate implements Pr
     {
         if (this.load(ProfileEntity.class, profileEntity.getId()) != null)
         {
+            this.update(profileEntity.getMacrosEntity());
             this.update(profileEntity);
         }
     }
@@ -86,7 +98,7 @@ public class ProfileDataBaseImplementDao extends HibernateTemplate implements Pr
     public void deleteProfile(long id)
     {
         ProfileEntity profileEntity = this.load(ProfileEntity.class, id);
-        if ( profileEntity != null)
+        if (profileEntity != null)
         {
             this.delete(profileEntity);
         }
