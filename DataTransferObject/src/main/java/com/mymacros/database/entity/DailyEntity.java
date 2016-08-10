@@ -3,6 +3,8 @@ package com.mymacros.database.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Created by Tomas on 29/07/2016.
@@ -16,10 +18,12 @@ public class DailyEntity implements Serializable
     private MacrosEntity macrosEntity;
     private int caloriesConsumed;
     private Timestamp time;
+    private LocalDate localDate;
 
 
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public long getId()
     {
         return id;
@@ -52,6 +56,18 @@ public class DailyEntity implements Serializable
     public void setTime(Timestamp time)
     {
         this.time = time;
+    }
+
+    @Basic
+    @Column(name = "date", nullable = false)
+    public LocalDate getLocalDate()
+    {
+        return localDate;
+    }
+
+    public void setLocalDate(LocalDate localDate)
+    {
+        this.localDate = localDate;
     }
 
     @Override

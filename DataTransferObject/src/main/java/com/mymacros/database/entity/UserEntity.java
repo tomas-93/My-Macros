@@ -1,5 +1,10 @@
 package com.mymacros.database.entity;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import javax.servlet.http.HttpSession;
 import java.io.Serializable;
@@ -27,6 +32,7 @@ public class UserEntity implements Serializable,Principal
 
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public long getId()
     {
         return id;
@@ -172,7 +178,7 @@ public class UserEntity implements Serializable,Principal
     @Transient
     public String getName()
     {
-        return this.getUserName();
+        return String.valueOf(this.getId());
     }
 
 

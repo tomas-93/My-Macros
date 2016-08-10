@@ -21,6 +21,7 @@ public class FoodEntity implements Serializable
 
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getId()
     {
         return id;
@@ -80,7 +81,7 @@ public class FoodEntity implements Serializable
     }
 
     @Basic
-    @Column(name = "type", nullable = false, length = 50)
+    @Column(name = "type", nullable = true, length = 50)
     public String getType()
     {
         return type;
@@ -120,12 +121,14 @@ public class FoodEntity implements Serializable
         result = 31 * result + (type != null ? type.hashCode() : 0);
         return result;
     }
+
     @ManyToOne
     @JoinColumn(name = "idUser", referencedColumnName = "id")
     public UserEntity getUserByIdUser()
     {
         return userByIdUser;
     }
+
     public void setUserByIdUser(UserEntity userByIdUser)
     {
         this.userByIdUser = userByIdUser;
