@@ -11,8 +11,8 @@
          Inicio***
      -->
     <tlib-version>1.0</tlib-version>
-    <short-name>wrox</short-name>
-    <uri>http://www.mymacros/jsp/tld/wrox</uri>
+    <short-name>tag</short-name>
+    <uri>http://www.mymacros/jsp/tld/fn</uri>
 
     <tag>
         <description><![CDATA[
@@ -152,7 +152,6 @@
             java.lang.String abbreviate(java.lang.String,int)
         </function-signature>
     </function>
-
 <!--
     Foma de agregar funciones
      <function>
