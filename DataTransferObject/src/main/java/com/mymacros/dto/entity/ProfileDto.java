@@ -12,90 +12,51 @@ import javax.validation.constraints.Size;
  */
 public class ProfileDto
 {
-     private long id, idUser;
-     @NotNull
-     @Min(0)
-     @Valid
-     private Integer carbs, fat, protein, fiber, totalCalories;
+    private long id, idUser;
+    private UserDto userDto;
+    private MacronutrientsDto macronutrientsDto;
 
-     @NotNull
-     @NotEmpty
-     @Size(min = 5, max = 50)
-     @Valid
-     private String name;
+    @NotNull
+    @NotEmpty
+    @Size(min = 5, max = 50)
+    @Valid
+    private String name;
 
-     public ProfileDto()
-     {
-     }
+    public ProfileDto()
+    {
+        macronutrientsDto = new MacronutrientsDto();
+    }
 
-     public ProfileDto(long id, long idUser, int carbs, int fat, int protein,
-                       int fiber, int totalCalories, String name)
-     {
-          this.id = id;
-          this.idUser = idUser;
-          this.carbs = carbs;
-          this.fat = fat;
-          this.protein = protein;
-          this.fiber = fiber;
-          this.totalCalories = totalCalories;
-         this.name = name;
-     }
+    public ProfileDto(long id,
+                      UserDto userDto,
+                      MacronutrientsDto macronutrientsDto,
+                      String name)
+    {
+        this.id = id;
+        this.userDto = userDto;
+        this.macronutrientsDto = macronutrientsDto;
+        this.name = name;
+    }
 
-     public long getId() {
-          return id;
-     }
+    public long getId()
+    {
+        return id;
+    }
 
-     public void setId(long id) {
-          this.id = id;
-     }
+    public void setId(long id)
+    {
+        this.id = id;
+    }
 
-     public long getIdUser() {
-          return idUser;
-     }
+    public long getIdUser()
+    {
+        return idUser;
+    }
 
-     public void setIdUser(long idUser) {
-          this.idUser = idUser;
-     }
-
-     public Integer getCarbs() {
-          return carbs;
-     }
-
-     public void setCarbs(int carbs) {
-          this.carbs = carbs;
-     }
-
-     public Integer getFat() {
-          return fat;
-     }
-
-     public void setFat(int fat) {
-          this.fat = fat;
-     }
-
-     public Integer getProtein() {
-          return protein;
-     }
-
-     public void setProtein(int protein) {
-          this.protein = protein;
-     }
-
-     public Integer getFiber() {
-          return fiber;
-     }
-
-     public void setFiber(int fiber) {
-          this.fiber = fiber;
-     }
-
-     public Integer getTotalCalories() {
-          return totalCalories;
-     }
-
-     public void setTotalCalories(int totalCalories) {
-          this.totalCalories = totalCalories;
-     }
+    public void setIdUser(long idUser)
+    {
+        this.idUser = idUser;
+    }
 
     public String getName()
     {
@@ -105,5 +66,25 @@ public class ProfileDto
     public void setName(String name)
     {
         this.name = name;
+    }
+
+    public UserDto getUserDto()
+    {
+        return userDto;
+    }
+
+    public void setUserDto(UserDto userDto)
+    {
+        this.userDto = userDto;
+    }
+
+    public MacronutrientsDto getMacronutrientsDto()
+    {
+        return macronutrientsDto;
+    }
+
+    public void setMacronutrientsDto(MacronutrientsDto macronutrientsDto)
+    {
+        this.macronutrientsDto = macronutrientsDto;
     }
 }

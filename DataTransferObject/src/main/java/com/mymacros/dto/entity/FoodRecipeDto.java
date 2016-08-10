@@ -5,39 +5,48 @@ package com.mymacros.dto.entity;
  */
 public class FoodRecipeDto
 {
-     private long id, idRecipe, idFood;
+    private long id;
+    private RecipeDto recipeDto;
+    private FoodDto foodDto;
 
-     public FoodRecipeDto() {
-     }
+    public FoodRecipeDto()
+    {
+    }
 
-     public FoodRecipeDto(long id, long idRecipe, long idFood) {
-          this.id = id;
-          this.idRecipe = idRecipe;
-          this.idFood = idFood;
-     }
+    public FoodRecipeDto(long id, RecipeDto recipeDto, FoodDto foodDto)
+    {
+        this.id = id;
+        this.recipeDto = recipeDto;
+        this.foodDto = foodDto;
+    }
 
-     public long getId() {
-          return id;
-     }
+    public long getId()
+    {
+        return id;
+    }
 
-     public void setId(long id) {
-          this.id = id;
-     }
+    public void setId(long id)
+    {
+        this.id = id;
+    }
 
-     public long getIdRecipe() {
-          return idRecipe;
-     }
+    public RecipeDto getRecipeDto()
+    {
+        return recipeDto;
+    }
 
-     public void setIdRecipe(long idRecipe) {
-          this.idRecipe = idRecipe;
-     }
+    public void setRecipeDto(RecipeDto recipeDto)
+    {
+        this.recipeDto = recipeDto;
+    }
 
-     public long getIdFood() {
-          return idFood;
-     }
+    public FoodDto getFoodDto()
+    {
+        return foodDto;
+    }
 
-     public void setIdFood(long idFood) {
-          this.idFood = idFood;
-     }
-
+    public void setFoodDto(FoodDto foodDto)
+    {
+        this.foodDto = foodDto;
+    }
 }

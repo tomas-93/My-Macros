@@ -9,51 +9,82 @@ import javax.validation.constraints.NotNull;
  */
 public class RecipeDto
 {
-     private long id, idUser, idMacros;
-     @NotNull
-     @NotEmpty
-     private String name;
+    private long id, idUser, idMacros;
+    private UserDto userDto;
+    private MacronutrientsDto macronutrientsDto;
+    @NotNull
+    @NotEmpty
+    private String name;
 
-     public RecipeDto() {
-     }
+    public RecipeDto()
+    {
+    }
 
-     public RecipeDto(long id, long idUser, long idMacros, String name) {
-          this.id = id;
-          this.idUser = idUser;
-          this.idMacros = idMacros;
-          this.name = name;
-     }
+    public RecipeDto(long id, long idUser, long idMacros, String name)
+    {
+        this.id = id;
+        this.idUser = idUser;
+        this.idMacros = idMacros;
+        this.name = name;
+    }
 
-     public long getId() {
-          return id;
-     }
+    public long getId()
+    {
+        return id;
+    }
 
-     public void setId(long id) {
-          this.id = id;
-     }
+    public void setId(long id)
+    {
+        this.id = id;
+    }
 
-     public long getIdUser() {
-          return idUser;
-     }
+    public long getIdUser()
+    {
+        return idUser;
+    }
 
-     public void setIdUser(long idUser) {
-          this.idUser = idUser;
-     }
+    public void setIdUser(long idUser)
+    {
+        this.idUser = idUser;
+    }
 
-     public long getIdMacros() {
-          return idMacros;
-     }
+    public long getIdMacros()
+    {
+        return idMacros;
+    }
 
-     public void setIdMacros(long idMacros) {
-          this.idMacros = idMacros;
-     }
+    public void setIdMacros(long idMacros)
+    {
+        this.idMacros = idMacros;
+    }
 
-     public String getName() {
-          return name;
-     }
+    public String getName()
+    {
+        return name;
+    }
 
-     public void setName(String name) {
-          this.name = name;
-     }
+    public void setName(String name)
+    {
+        this.name = name;
+    }
 
+    public MacronutrientsDto getMacronutrientsDto()
+    {
+        return macronutrientsDto;
+    }
+
+    public void setMacronutrientsDto(MacronutrientsDto macronutrientsDto)
+    {
+        this.macronutrientsDto = macronutrientsDto;
+    }
+
+    public UserDto getUserDto()
+    {
+        return userDto;
+    }
+
+    public void setUserDto(UserDto userDto)
+    {
+        this.userDto = userDto;
+    }
 }

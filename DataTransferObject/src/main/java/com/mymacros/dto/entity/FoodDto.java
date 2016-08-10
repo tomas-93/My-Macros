@@ -11,11 +11,13 @@ import javax.validation.constraints.NotNull;
  */
 public class FoodDto
 {
-    private long id, idMacronutrients, idUser;
+    private long id;
+    private UserDto userDto;
+    private MacronutrientsDto macronutrientsDto;
     @NotNull
     @NotEmpty
     @Valid
-    private String name, brand, unit, type;
+    private String name, brand, unit;
     @NotNull
     @Min(0)
     @Valid
@@ -23,28 +25,18 @@ public class FoodDto
 
     public FoodDto()
     {
+        this.macronutrientsDto = new MacronutrientsDto();
     }
 
-    public FoodDto(long id, long idMacronutrients, long idUser, String name, String brand, String unit, String type, Integer quantity)
+    public FoodDto(long id, UserDto userDto, MacronutrientsDto macronutrientsDto, String name, String brand, String unit, String type, Integer quantity)
     {
         this.id = id;
-        this.idMacronutrients = idMacronutrients;
-        this.idUser = idUser;
+        this.userDto = userDto;
+        this.macronutrientsDto = macronutrientsDto;
         this.name = name;
         this.brand = brand;
         this.unit = unit;
-        this.type = type;
         this.quantity = quantity;
-    }
-
-    public String getType()
-    {
-        return type;
-    }
-
-    public void setType(String type)
-    {
-        this.type = type;
     }
 
     public long getId()
@@ -55,16 +47,6 @@ public class FoodDto
     public void setId(long id)
     {
         this.id = id;
-    }
-
-    public long getIdMacronutrients()
-    {
-        return idMacronutrients;
-    }
-
-    public void setIdMacronutrients(long idMacronutrients)
-    {
-        this.idMacronutrients = idMacronutrients;
     }
 
     public String getName()
@@ -107,13 +89,23 @@ public class FoodDto
         this.quantity = quantity;
     }
 
-    public long getIdUser()
+    public UserDto getUserDto()
     {
-        return idUser;
+        return userDto;
     }
 
-    public void setIdUser(long idUser)
+    public void setUserDto(UserDto userDto)
     {
-        this.idUser = idUser;
+        this.userDto = userDto;
+    }
+
+    public MacronutrientsDto getMacronutrientsDto()
+    {
+        return macronutrientsDto;
+    }
+
+    public void setMacronutrientsDto(MacronutrientsDto macronutrientsDto)
+    {
+        this.macronutrientsDto = macronutrientsDto;
     }
 }

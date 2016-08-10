@@ -1,7 +1,6 @@
 package com.mymacros.dto.entity;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -10,7 +9,9 @@ import javax.validation.constraints.NotNull;
  */
 public class DailyDto
 {
-     private long id, idUser , idMacros;
+     private long id;
+     private UserDto userDto;
+     private MacronutrientsDto macronutrientsDto;
      @NotNull
      @Min(0)
      @Valid
@@ -19,11 +20,11 @@ public class DailyDto
      public DailyDto() {
      }
 
-    public DailyDto(long id, long idUser, long idMacros, Integer totalCaloriesConsumed)
+    public DailyDto(long id, UserDto userDto, MacronutrientsDto macronutrientsDto, Integer totalCaloriesConsumed)
     {
         this.id = id;
-        this.idUser = idUser;
-        this.idMacros = idMacros;
+        this.userDto = userDto;
+        this.macronutrientsDto = macronutrientsDto;
         this.totalCaloriesConsumed = totalCaloriesConsumed;
     }
 
@@ -35,14 +36,6 @@ public class DailyDto
           this.id = id;
      }
 
-     public long getIdUser() {
-          return idUser;
-     }
-
-     public void setIdUser(long idUser) {
-          this.idUser = idUser;
-     }
-
      public Integer getTotalCaloriesConsumed() {
           return totalCaloriesConsumed;
      }
@@ -51,13 +44,23 @@ public class DailyDto
           this.totalCaloriesConsumed = totalCaloriesConsumed;
      }
 
-    public long getIdMacros()
+    public MacronutrientsDto getMacronutrientsDto()
     {
-        return idMacros;
+        return macronutrientsDto;
     }
 
-    public void setIdMacros(long idMacros)
+    public void setMacronutrientsDto(MacronutrientsDto macronutrientsDto)
     {
-        this.idMacros = idMacros;
+        this.macronutrientsDto = macronutrientsDto;
+    }
+
+    public UserDto getUserDto()
+    {
+        return userDto;
+    }
+
+    public void setUserDto(UserDto userDto)
+    {
+        this.userDto = userDto;
     }
 }

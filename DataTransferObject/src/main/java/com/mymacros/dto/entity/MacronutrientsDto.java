@@ -11,17 +11,18 @@ public class MacronutrientsDto
 {
      private long id;
      @NotNull
-     @Min(0)
+     @Min(50)
      @Valid
      private Integer totalCarbohydrates,
                     totalProtein,
                     totalFats,
                     fiber,
-                    sugar,
-                    saturated,
-                    monounsaturated,
-                    polyunsaturated;
+                    totalCal;
 
+    private Integer sugar,
+            saturated,
+            monounsaturated,
+            polyunsaturated;
      public MacronutrientsDto() {
      }
 
@@ -112,4 +113,13 @@ public class MacronutrientsDto
           this.polyunsaturated = polyunsaturated;
      }
 
+    public Integer getTotalCal()
+    {
+        return totalCal;
+    }
+
+    public void setTotalCal(Integer totalCal)
+    {
+        this.totalCal = totalCal;
+    }
 }
