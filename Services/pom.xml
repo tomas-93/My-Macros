@@ -16,8 +16,8 @@
     </parent>
     <dependencies>
         <dependency>
-            <groupId>DataAccessObjectServices</groupId>
-            <artifactId>DataAccessObjectServices</artifactId>
+            <groupId>InterfacesServices</groupId>
+            <artifactId>InterfacesServices</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>

@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>DataAccessObjectServices</module>
+        <module>InterfacesServices</module>
         <module>DataAccessObjectRepository</module>
         <module>DataTransferObject</module>
         <module>Repository</module>
