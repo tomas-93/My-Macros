@@ -17,8 +17,8 @@
 <head>
     <title><c:out value="${htmlTitle}"/></title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.light_blue-pink.min.css" />
-    <link rel="stylesheet" href="/resource/css/app.css">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.cyan-amber.min.css" />    <!-- Compiled and minified JavaScript --->
+    <link rel="stylesheet" href="/resource/css/app.css" />
     <!-- Compiled and minified JavaScript --->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
