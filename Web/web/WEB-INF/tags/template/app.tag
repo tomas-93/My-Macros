@@ -1,3 +1,4 @@
+<%@ tag import="com.mymacros.database.entity.UserEntity" %>
 <%--
   Created by IntelliJ IDEA.
   User: Tomas
@@ -11,6 +12,7 @@
 <%@ attribute name="bodyTitle" type="java.lang.String" rtexprvalue="true"
               required="true" %>
 <%@ include file="/WEB-INF/jsp/base.jspf" %>
+
 <template:my-macros htmlTitle="${htmlTitle}" bodyTitle="${htmlTitle}">
     <jsp:body>
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header ">
@@ -23,11 +25,11 @@
             <div class="mdl-layout__drawer">
                 <span class="mdl-layout-title">My-Macros</span>
                 <nav class="mdl-navigation">
-                    <a class="mdl-navigation__link" href="/app/daily/list/${idUser}">Diario</a>
-                    <a class="mdl-navigation__link" href="/app/food/list/${idUser}">Alimentos</a>
-                    <a class="mdl-navigation__link" href="/app/recipe/list/${idUser}">Receta</a>
-                    <a class="mdl-navigation__link" href="/app/profile/view/${idUser}">Perfil</a>
-                    <a class="mdl-navigation__link" href="/app/user/view/${idUser}">Usurio</a>
+                    <a class="mdl-navigation__link" href="/app/daily/list">Diario</a>
+                    <a class="mdl-navigation__link" href="/app/food/list">Alimentos</a>
+                    <a class="mdl-navigation__link" href="/app/recipe/list">Receta</a>
+                    <a class="mdl-navigation__link" href="/app/profile/list">Perfil</a>
+                    <a class="mdl-navigation__link" href="/app/user/view">Usurio</a>
                 </nav>
             </div>
             <main class="mdl-layout__content">
