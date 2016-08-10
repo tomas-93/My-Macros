@@ -9,7 +9,7 @@
 <c:set var="title" value="Vista de Usuario"/>
 <template:app htmlTitle="${title}" bodyTitle="${title}">
     <jsp:body>
-        <div class="mdl-card mdl-shadow--4dp" style="weight: 50%; margin: 1% auto;">
+        <div class="mdl-card mdl-shadow--4dp" style="width: 60%; margin: 5% auto;">
             <div class="mdl-card__title">
                 <h3>${userDto.name} ${userDto.surname}</h3>
             </div>
@@ -24,7 +24,7 @@
             </div>
             <div class="mdl-card__actions mdl-card--border">
                 <a style="float: right" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
-                        href="<c:url value="/app/user/edit/${userDto.id}"/> ">
+                   href="<c:url value="/app/user/edit"/> ">
                     <i class="material-icons">edit</i>
                 </a>
                 <h3 style="float: right; margin: 1% 3% 0 3%;">Edit</h3>

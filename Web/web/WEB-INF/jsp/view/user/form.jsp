@@ -72,14 +72,14 @@
                         </form:label>
                     </div>
 
-                    <input type="submit"
-                           value="Registrarse"
-                           class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                           style="weight: 30%; margin-bottom: 5%; margin-top: 10%;">
 
+                    <input type="submit"
+                           value="Enviar"
+                           class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                           style="width: 30%; margin-bottom: 5%; margin-top: 5%;">
                 </div>
             </form:form>
         </div>
-        <div style="height: 5%; weight: 5%;"></div>
+        <div style="height: 5%; width: 5%;"></div>
     </jsp:body>
 </template:app>
