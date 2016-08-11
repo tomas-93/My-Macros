@@ -2,12 +2,15 @@ package com.mymacros.repository.dao.implement.database;
 
 import com.mymacros.database.entity.FoodEntity;
 import com.mymacros.repository.dao.entity.FoodRepositoryDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
+import javax.persistence.Query;
 import java.util.List;
 
 /**
@@ -22,6 +25,8 @@ public class FoodDataBaseImplementDao extends HibernateTemplate implements FoodR
         super(sessionFactory);
     }
 
+    public final Logger message = LogManager.getLogger();
+
     /**
      * <h1>getAllFood</h1>
      * <p>Obtiene una lista de food de la base de datos</p>
@@ -32,8 +37,11 @@ public class FoodDataBaseImplementDao extends HibernateTemplate implements FoodR
     @SuppressWarnings("unchecked")
     public List<FoodEntity> getAllFood(long idUser)
     {
-        return (List<FoodEntity>)
-                this.find("from FoodEntity inner join UserEntity where  FoodEntity.userByIdUser=:idUser", idUser);
+        Query query = this.getSessionFactory()
+                .getCurrentSession()
+                .createQuery("from FoodEntity where  userByIdUser.id=:idUser")
+                .setParameter("idUser",idUser);
+        return query.getResultList();
     }
 
     /**
@@ -58,6 +66,8 @@ public class FoodDataBaseImplementDao extends HibernateTemplate implements FoodR
     @Override
     public void createFood(FoodEntity foodDto)
     {
+        message.info("\n\n idUser:" +foodDto.getUserByIdUser().getId()+"\n\n");
+        this.save(foodDto.getMacrosEntity());
         this.save(foodDto);
     }
 
@@ -71,7 +81,10 @@ public class FoodDataBaseImplementDao extends HibernateTemplate implements FoodR
     public void updateFood(FoodEntity foodDto)
     {
         if (this.load(FoodEntity.class, foodDto.getId()) != null)
+        {
+            this.update(foodDto.getMacrosEntity());
             this.update(foodDto);
+        }
     }
 
     /**

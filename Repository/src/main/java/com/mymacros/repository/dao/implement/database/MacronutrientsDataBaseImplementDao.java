@@ -84,7 +84,7 @@ public class MacronutrientsDataBaseImplementDao extends HibernateTemplate implem
     {
         MacrosEntity macrosEntity =this.load(MacrosEntity.class, id);
         if (macrosEntity != null)
-            this.delete(id);
+            this.delete(macrosEntity);
     }
 
 }
