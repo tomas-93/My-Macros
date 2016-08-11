@@ -3,8 +3,10 @@ package com.mymacros.web.controller;
 import com.mymacros.dto.entity.LoginDto;
 import com.mymacros.dto.entity.UserDto;
 import com.mymacros.database.entity.UserEntity;
-import com.mymacros.services.dao.entity.UserAndProfileServiceDao;
+import com.mymacros.services.dao.entity.UserAndProfileService;
 import com.mymacros.web.config.RootContextConfig;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,18 +20,19 @@ import javax.servlet.http.HttpSession;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.Arrays;
 import java.util.Map;
 
 /**
- * Created by Tomas on 26/07/2016.
+ * @author Tomas Yussef Galicia Guzman
  */
 @Controller
 @RequestMapping(value = "/login")
 public class LoginController
 {
+    private final Logger message = LogManager.getLogger();
+
     @Inject
-    private UserAndProfileServiceDao userAndProfileServiceDao;
+    private UserAndProfileService userAndProfileServiceDao;
 
     /**
      * Obtiene el formulario de login
@@ -38,7 +41,7 @@ public class LoginController
      * @return retorna la url de la vista.
      */
     @RequestMapping(value = "/form", method = RequestMethod.GET)
-    public String getLogin(Model model)
+    public String getLogin(Model model, HttpSession session)
     {
         RootContextConfig.message.info("\n\nUrl: /formn\n\n");
         model.addAttribute("loginDto", new LoginDto());
@@ -60,7 +63,13 @@ public class LoginController
                           BindingResult bindingResult, Map<String, Object> model, HttpSession session, HttpServletRequest request)
     {
         if (UserEntity.getPrincipal(session) != null)
+        {
+            UserEntity userEntity = (UserEntity) UserEntity.getPrincipal(session);
+            message.info("\n\n Name: "+userEntity.getName()+"\n\n");
+            message.info("\n\n Id: "+userEntity.getId()+"\n\n");
+
             return "redirect:/app/daily/list";
+        }
 
         if (bindingResult.hasErrors())
         {
@@ -116,35 +125,18 @@ public class LoginController
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addUser(@Valid @ModelAttribute("userDto")UserDto userDto, BindingResult bindingResult, Model model)
     {
-        RootContextConfig.message.info("\n\n URL: /login/add:POST \n\n");
-        RootContextConfig.message.info("\n\nuser: " + userDto.getEmail());
-        RootContextConfig.message.info("\n\nPass: " + userDto.getPassword());
-        RootContextConfig.message.info("\n\nPass: " + userDto.getRepeatPassword());
         if (bindingResult.hasErrors())
         {
-            RootContextConfig.message.info("\n\n Error en la validacion \n\n");
-            RootContextConfig.message.info("\n\n "+userDto.getRepeatPassword()+" \n\n");
-            RootContextConfig.message.info("\n\n "+userDto.getPassword()+" \n\n");
-            RootContextConfig.message.info("\n\n "+userDto.getHeight()+" \n\n");
-            RootContextConfig.message.info("\n\n "+userDto.getWeight()+" \n\n");
-            RootContextConfig.message.info("\n\n "+userDto.getName()+" \n\n");
-            RootContextConfig.message.info("\n\n "+userDto.getSurname()+" \n\n");
-            RootContextConfig.message.info("\n\n "+userDto.getBirthday()+" \n\n");
-
             model.addAttribute("userDto", userDto);
             return "login/add";
         }
 
         if (!userDto.getPassword().equals(userDto.getRepeatPassword()))
         {
-            RootContextConfig.message.info("\n\n Pass Incorrecto \n\n");
             model.addAttribute("userDto", userDto);
             model.addAttribute("passErr", 1);
             return "login/add";
         }
-        RootContextConfig.message.info("\n\nuser: " + userDto.getEmail());
-        RootContextConfig.message.info("\n\nPass: " + userDto.getPassword());
-        RootContextConfig.message.info("\n\nPass: " + userDto.getRepeatPassword());
         this.userAndProfileServiceDao.addUser(userDto);
         return "redirect:/login/form";
     }
