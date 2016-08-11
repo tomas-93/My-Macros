@@ -1,6 +1,5 @@
 package com.mymacros.web.controller;
 
-import com.mymacros.database.entity.UserEntity;
 import com.mymacros.services.dao.entity.UserAndProfileService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
